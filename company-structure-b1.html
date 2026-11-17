@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B1 Business English Worksheet: Company Structure & Subsidiaries</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --primary-light: #eff6ff;
+    --secondary: #0f766e;
+    --text-dark: #1f2937;
+    --text-muted: #4b5563;
+    --border: #d1d5db;
+    --bg-page: #f9fafb;
+    --correct-bg: #dcfce7;
+    --correct-border: #16a34a;
+    --wrong-bg: #fee2e2;
+    --wrong-border: #dc2626;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-page);
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 36px 42px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  header {
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  h1 {
+    font-size: 1.65rem;
+    color: var(--primary);
+  }
+
+  .badge {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid #bfdbfe;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    color: var(--secondary);
+    margin-top: 16px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    margin-bottom: 12px;
+  }
+
+  ul.reading-list {
+    margin: 8px 0 14px 24px;
+  }
+
+  ul.reading-list li {
+    margin-bottom: 6px;
+  }
+
+  .reading-box {
+    background-color: #fafafa;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    padding: 20px 24px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+
+  .instructions {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+  }
+
+  /* Comprehension Questions */
+  .question-item {
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+  }
+
+  .question-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .options label {
+    display: block;
+    margin-bottom: 6px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+
+  .options label:hover {
+    background-color: #f3f4f6;
+  }
+
+  .options input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  /* Matching Section */
+  .matching-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .match-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    flex-wrap: wrap;
+  }
+
+  .match-def {
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .match-select {
+    padding: 6px 10px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    min-width: 210px;
+    background-color: #fff;
+  }
+
+  /* Fill-in-the-blank */
+  .word-bank {
+    background-color: var(--primary-light);
+    border: 1px solid #bfdbfe;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--primary);
+  }
+
+  .word-bank span {
+    background: #ffffff;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid #dbeafe;
+  }
+
+  .fill-list {
+    list-style-position: inside;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .fill-list li {
+    padding: 10px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+  }
+
+  .fill-select {
+    padding: 4px 8px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 0 4px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  /* Feedback states */
+  .correct {
+    background-color: var(--correct-bg) !important;
+    border-color: var(--correct-border) !important;
+  }
+
+  .wrong {
+    background-color: var(--wrong-bg) !important;
+    border-color: var(--wrong-border) !important;
+  }
+
+  .feedback-tag {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .controls {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  button {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  .btn-check {
+    background-color: var(--primary);
+    color: #ffffff;
+  }
+
+  .btn-reset {
+    background-color: #e5e7eb;
+    color: var(--text-dark);
+  }
+
+  .btn-print {
+    background-color: var(--secondary);
+    color: #ffffff;
+  }
+
+  #score-banner {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: none;
+    background-color: var(--primary-light);
+    border: 1px solid #93c5fd;
+    color: var(--primary);
+  }
+
+  .answer-key-box {
+    display: none;
+    margin-top: 24px;
+    padding: 18px 22px;
+    background-color: #f3f4f6;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.92rem;
+  }
+
+  .answer-key-box h3 {
+    margin-top: 0;
+    color: var(--primary);
+  }
+
+  @media print {
+    body {
+      background: #ffffff;
+      padding: 0;
+    }
+    .container {
+      box-shadow: none;
+      padding: 0;
+      max-width: 100%;
+    }
+    .controls, #score-banner {
+      display: none !important;
+    }
+    select {
+      border: none;
+      border-bottom: 1px solid #000;
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 150px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div>
+      <h1>Company Structure &amp; Subsidiaries</h1>
+      <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.95rem;">Business English Reading &amp; Vocabulary Worksheet</p>
+    </div>
+    <span class="badge">CEFR Level: B1</span>
+  </header>
+
+  <!-- PART 1: READING TEXT -->
+  <h2>Part 1: Reading Text</h2>
+  <p class="instructions">Read the article carefully before answering the comprehension and vocabulary exercises below.</p>
+
+  <div class="reading-box">
+    <h3>Understanding How Large Companies Are Organized</h3>
+    <p>When a small business becomes very successful, it often grows too big to work as just one single unit. To stay organized, save on taxes, and manage financial risks, business owners create a corporate group. Understanding how these large businesses are built requires looking at their leadership, their different locations, and how they grow.</p>
+
+    <h3>Leadership and the Parent Company</h3>
+    <p>At the very top of a large corporate group is the <strong>parent company</strong>, which is sometimes called a holding company. This main organization owns most or all of the shares (parts of ownership) in the smaller companies below it. Because the parent company holds the majority of the shares, it has the power to control the whole group.</p>
+    <p>The main office where the top leaders work is called the <strong>headquarters (HQ)</strong>. Inside the headquarters, the <strong>Chief Executive Officer (CEO)</strong> is the highest-ranking manager who leads the business every day. However, the CEO does not make every major choice alone. They report to the <strong>board of directors</strong>, a group of experienced people chosen by the <strong>shareholders</strong> (the people or groups who own shares in the company) to make the biggest long-term decisions.</p>
+
+    <h3>Subsidiaries and Affiliates</h3>
+    <p>Below the parent company, you will often find several <strong>subsidiaries</strong>. A subsidiary is a smaller company that is owned and controlled by the parent company. Even though the parent company is the boss, a subsidiary is a separate legal business. It has its own name, its own bank accounts, and its own local managers.</p>
+    <p>Companies create subsidiaries for several practical reasons:</p>
+    <ul class="reading-list">
+      <li><strong>Entering new countries:</strong> When a business expands abroad, creating a local subsidiary makes it easier to follow local laws and hire local workers.</li>
+      <li><strong>Protecting the main business:</strong> If a subsidiary loses money or faces a lawsuit, the parent company is usually protected from paying those debts.</li>
+      <li><strong>Managing different brands:</strong> One parent company might own a luxury clothing brand and a budget shoe brand, keeping them separate through different subsidiaries.</li>
+    </ul>
+    <p>Sometimes, a parent company only buys a small part of another business—usually less than 50 percent of the shares. In this case, the smaller business is called an <strong>affiliate</strong> or an associate company. The parent company has some influence over an affiliate, but it does not have full control.</p>
+
+    <h3>Branches, Divisions, and Departments</h3>
+    <p>Not every office or store is a separate company. A <strong>branch</strong> is simply a local office, bank, or shop in a different city or country. Unlike a subsidiary, a branch is not a separate legal business. It uses the exact same name and legal identity as the main company, and the main company is directly responsible for everything the branch does.</p>
+    <p>Inside both parent companies and subsidiaries, workers are organized into smaller teams so everyone knows their exact job:</p>
+    <ul class="reading-list">
+      <li><strong>Divisions:</strong> Large sections of a company that focus on one specific product line (like the Mobile Phone Division) or one geographic area (like the European Division).</li>
+      <li><strong>Departments:</strong> Smaller teams inside a division that handle specific functions, such as Marketing, Finance, Sales, or Human Resources (HR).</li>
+    </ul>
+
+    <h3>Growing Through Mergers, Acquisitions, and Joint Ventures</h3>
+    <p>Large companies do not always build new subsidiaries from zero. Often, they grow faster by working with or buying other businesses. When a parent company buys an existing business, it is called an <strong>acquisition</strong>, and the bought company usually becomes a new subsidiary. Other times, two companies of a similar size agree to join together to form one completely new, stronger business. This is called a <strong>merger</strong>.</p>
+    <p>Finally, two separate companies might want to work together on just one big project without merging forever. To do this, they create a <strong>joint venture</strong>. Both companies put money and workers into this temporary new business, share the profits, and close it down once the project is finished.</p>
+  </div>
+
+  <!-- PART 2: COMPREHENSION QUESTIONS -->
+  <h2>Part 2: Reading Comprehension</h2>
+  <p class="instructions">Choose the best answer (A, B, or C) based on the text.</p>
+
+  <div class="question-item" id="q1">
+    <div class="question-title">1. Who chooses the board of directors in a large company?</div>
+    <div class="options">
+      <label><input type="radio" name="q1" value="A"> A) The local branch managers</label>
+      <label><input type="radio" name="q1" value="B"> B) The shareholders</label>
+      <label><input type="radio" name="q1" value="C"> C) The Chief Executive Officer (CEO)</label>
+    </div>
+  </div>
+
+  <div class="question-item" id="q2">
+    <div class="question-title">2. How does a parent company protect itself from financial risk?</div>
+    <div class="options">
+      <label><input type="radio" name="q2" value="A"> A) By opening local branches instead of separate companies</label>
+      <label><input type="radio" name="q2" value="B"> B) By creating separate legal subsidiaries so the parent company is usually not responsible for their debts</label>
+      <label><input type="radio" name="q2" value="C"> C) By selling all of its shares to an affiliate</label>
+    </div>
+  </div>
+
+  <div class="question-item" id="q3">
+    <div class="question-title">3. What is the main difference between a subsidiary and an affiliate?</div>
+    <div class="options">
+      <label><input type="radio" name="q3" value="A"> A) A parent company owns more than 50% of a subsidiary, but less than 50% of an affiliate.</label>
+      <label><input type="radio" name="q3" value="B"> B) An affiliate is located abroad, while a subsidiary is always in the home country.</label>
+      <label><input type="radio" name="q3" value="C"> C) A subsidiary has no managers, while an affiliate has a full board of directors.</label>
+    </div>
+  </div>
+
+  <div class="question-item" id="q4">
+    <div class="question-title">4. Which statement about a branch is TRUE according to the text?</div>
+    <div class="options">
+      <label><input type="radio" name="q4" value="A"> A) It is a completely independent legal business with its own name.</label>
+      <label><input type="radio" name="q4" value="B"> B) It shares the same legal identity as the main company.</label>
+      <label><input type="radio" name="q4" value="C"> C) It is created when two large companies join together forever.</label>
+    </div>
+  </div>
+
+  <div class="question-item" id="q5">
+    <div class="question-title">5. Why do two companies create a joint venture?</div>
+    <div class="options">
+      <label><input type="radio" name="q5" value="A"> A) Because one company wants to buy the other company completely</label>
+      <label><input type="radio" name="q5" value="B"> B) Because they want to close down their headquarters</label>
+      <label><input type="radio" name="q5" value="C"> C) Because they want to cooperate on one specific project and share the profits</label>
+    </div>
+  </div>
+
+  <!-- PART 3: VOCABULARY MATCHING -->
+  <h2>Part 3: Vocabulary Matching (12 Items)</h2>
+  <p class="instructions">Match each definition on the left with the correct business term from the dropdown list on the right.</p>
+
+  <div class="matching-grid" id="matching-section">
+    <!-- Populated cleanly via HTML -->
+    <div class="match-row" data-answer="Parent company">
+      <div class="match-def"><strong>1.</strong> The main company at the top of a group that owns and controls smaller companies.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Subsidiary">
+      <div class="match-def"><strong>2.</strong> A separate legal company owned and controlled (over 50%) by a parent company.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Affiliate">
+      <div class="match-def"><strong>3.</strong> A company in which a parent company owns less than 50% of the shares.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Headquarters (HQ)">
+      <div class="match-def"><strong>4.</strong> The central main office where a company's top leaders work.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Chief Executive Officer (CEO)">
+      <div class="match-def"><strong>5.</strong> The highest-ranking manager responsible for running daily business operations.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Board of directors">
+      <div class="match-def"><strong>6.</strong> A group of people elected to represent owners and make major long-term decisions.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Shareholder">
+      <div class="match-def"><strong>7.</strong> A person, company, or institution that owns at least one share of a company's stock.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Branch">
+      <div class="match-def"><strong>8.</strong> A local office, shop, or bank that is legally part of the main company.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Division">
+      <div class="match-def"><strong>9.</strong> A large section of a company handling a specific product line or geographic area.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Acquisition">
+      <div class="match-def"><strong>10.</strong> The act of one company buying another existing company to take control of it.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Merger">
+      <div class="match-def"><strong>11.</strong> When two separate companies of similar size join together to form one new company.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+    <div class="match-row" data-answer="Joint venture">
+      <div class="match-def"><strong>12.</strong> A temporary business project where two or more companies share resources for a specific goal.</div>
+      <select class="match-select"><option value="">-- Select a term --</option></select>
+    </div>
+  </div>
+
+  <!-- PART 4: FILL IN THE BLANKS -->
+  <h2>Part 4: Fill in the Blanks</h2>
+  <p class="instructions">Complete each sentence using the correct word from the word bank. Each word is used once.</p>
+
+  <div class="word-bank">
+    <span>acquisition</span>
+    <span>affiliate</span>
+    <span>board of directors</span>
+    <span>branch</span>
+    <span>CEO</span>
+    <span>division</span>
+    <span>headquarters</span>
+    <span>joint venture</span>
+    <span>merger</span>
+    <span>parent company</span>
+    <span>shareholders</span>
+    <span>subsidiary</span>
+  </div>
+
+  <ol class="fill-list" id="fill-section">
+    <li data-answer="headquarters">
+      Our company's global <select class="fill-select"><option value="">---</option></select> is located in London, where all the top executives work.
+    </li>
+    <li data-answer="branch">
+      I don't need to travel to the capital city to open an account because the bank has a local <select class="fill-select"><option value="">---</option></select> right on my street.
+    </li>
+    <li data-answer="parent company">
+      Alphabet Inc. is the <select class="fill-select"><option value="">---</option></select> that owns Google and several other technology businesses.
+    </li>
+    <li data-answer="subsidiary">
+      When the German carmaker expanded to Brazil, it registered a local <select class="fill-select"><option value="">---</option></select> to follow Brazilian tax laws.
+    </li>
+    <li data-answer="CEO">
+      As the new <select class="fill-select"><option value="">---</option></select>, Maria is responsible for leading the company's daily operations and strategy.
+    </li>
+    <li data-answer="merger">
+      The two rival airlines announced a <select class="fill-select"><option value="">---</option></select> to combine their fleets and become one single company.
+    </li>
+    <li data-answer="acquisition">
+      TechGiant's $2 billion <select class="fill-select"><option value="">---</option></select> of the small software startup surprised the entire industry.
+    </li>
+    <li data-answer="joint venture">
+      The two construction firms formed a temporary <select class="fill-select"><option value="">---</option></select> to build the new underwater tunnel together.
+    </li>
+    <li data-answer="division">
+      Carlos works in the Gaming <select class="fill-select"><option value="">---</option></select>, which focuses only on video consoles rather than smartphones.
+    </li>
+    <li data-answer="shareholders">
+      At the annual meeting, the <select class="fill-select"><option value="">---</option></select> voted on how much dividend money they would receive this year.
+    </li>
+    <li data-answer="affiliate">
+      We only own 25% of that logistics firm, so it is an <select class="fill-select"><option value="">---</option></select> rather than a company we fully control.
+    </li>
+    <li data-answer="board of directors">
+      Before launching the expensive new product, the manager had to get approval from the <select class="fill-select"><option value="">---</option></select>.
+    </li>
+  </ol>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button type="button" class="btn-check" onclick="checkAllAnswers()">Check My Answers</button>
+    <button type="button" class="btn-reset" onclick="resetWorksheet()">Reset Worksheet</button>
+    <button type="button" class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+    <button type="button" class="btn-reset" onclick="toggleAnswerKey()">Show / Hide Answer Key</button>
+  </div>
+
+  <div id="score-banner"></div>
+
+  <div class="answer-key-box" id="answer-key">
+    <h3>Teacher / Self-Study Answer Key</h3>
+    <p><strong>Part 2 (Comprehension):</strong> 1. B &nbsp;|&nbsp; 2. B &nbsp;|&nbsp; 3. A &nbsp;|&nbsp; 4. B &nbsp;|&nbsp; 5. C</p>
+    <p><strong>Part 3 (Matching):</strong> 1. Parent company &nbsp;|&nbsp; 2. Subsidiary &nbsp;|&nbsp; 3. Affiliate &nbsp;|&nbsp; 4. Headquarters (HQ) &nbsp;|&nbsp; 5. Chief Executive Officer (CEO) &nbsp;|&nbsp; 6. Board of directors &nbsp;|&nbsp; 7. Shareholder &nbsp;|&nbsp; 8. Branch &nbsp;|&nbsp; 9. Division &nbsp;|&nbsp; 10. Acquisition &nbsp;|&nbsp; 11. Merger &nbsp;|&nbsp; 12. Joint venture</p>
+    <p style="margin-bottom:0;"><strong>Part 4 (Fill in the Blanks):</strong> 1. headquarters &nbsp;|&nbsp; 2. branch &nbsp;|&nbsp; 3. parent company &nbsp;|&nbsp; 4. subsidiary &nbsp;|&nbsp; 5. CEO &nbsp;|&nbsp; 6. merger &nbsp;|&nbsp; 7. acquisition &nbsp;|&nbsp; 8. joint venture &nbsp;|&nbsp; 9. division &nbsp;|&nbsp; 10. shareholders &nbsp;|&nbsp; 11. affiliate &nbsp;|&nbsp; 12. board of directors</p>
+  </div>
+</div>
+
+<script>
+  const vocabTerms = [
+    "Acquisition",
+    "Affiliate",
+    "Board of directors",
+    "Branch",
+    "Chief Executive Officer (CEO)",
+    "Division",
+    "Headquarters (HQ)",
+    "Joint venture",
+    "Merger",
+    "Parent company",
+    "Shareholder",
+    "Subsidiary"
+  ];
+
+  const fillTerms = [
+    "acquisition",
+    "affiliate",
+    "board of directors",
+    "branch",
+    "CEO",
+    "division",
+    "headquarters",
+    "joint venture",
+    "merger",
+    "parent company",
+    "shareholders",
+    "subsidiary"
+  ];
+
+  // Populate dropdowns on load
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".match-select").forEach(select => {
+      vocabTerms.forEach(term => {
+        const opt = document.createElement("option");
+        opt.value = term;
+        opt.textContent = term;
+        select.appendChild(opt);
+      });
+    });
+
+    document.querySelectorAll(".fill-select").forEach(select => {
+      fillTerms.forEach(term => {
+        const opt = document.createElement("option");
+        opt.value = term;
+        opt.textContent = term;
+        select.appendChild(opt);
+      });
+    });
+  });
+
+  function checkAllAnswers() {
+    let score = 0;
+    let total = 29; // 5 comprehension + 12 matching + 12 fill-in-the-blank
+
+    // Check Part 2
+    const compAnswers = { q1: "B", q2: "B", q3: "A", q4: "B", q5: "C" };
+    for (const [qId, correctVal] of Object.entries(compAnswers)) {
+      const box = document.getElementById(qId);
+      box.classList.remove("correct", "wrong");
+      const selected = box.querySelector(`input[name="${qId}"]:checked`);
+      if (selected && selected.value === correctVal) {
+        box.classList.add("correct");
+        score++;
+      } else {
+        box.classList.add("wrong");
+      }
+    }
+
+    // Check Part 3
+    document.querySelectorAll("#matching-section .match-row").forEach(row => {
+      row.classList.remove("correct", "wrong");
+      const expected = row.getAttribute("data-answer");
+      const actual = row.querySelector("select").value;
+      if (actual === expected) {
+        row.classList.add("correct");
+        score++;
+      } else {
+        row.classList.add("wrong");
+      }
+    });
+
+    // Check Part 4
+    document.querySelectorAll("#fill-section li").forEach(item => {
+      item.classList.remove("correct", "wrong");
+      const expected = item.getAttribute("data-answer");
+      const actual = item.querySelector("select").value;
+      if (actual === expected) {
+        item.classList.add("correct");
+        score++;
+      } else {
+        item.classList.add("wrong");
+      }
+    });
+
+    const banner = document.getElementById("score-banner");
+    const percentage = Math.round((score / total) * 100);
+    banner.style.display = "block";
+    banner.textContent = `Your Score: ${score} out of ${total} (${percentage}%) — Green items are correct; red items need another look.`;
+  }
+
+  function resetWorksheet() {
+    document.querySelectorAll("input[type='radio']").forEach(r => r.checked = false);
+    document.querySelectorAll("select").forEach(s => s.value = "");
+    document.querySelectorAll(".correct, .wrong").forEach(el => {
+      el.classList.remove("correct", "wrong");
+    });
+    document.getElementById("score-banner").style.display = "none";
+  }
+
+  function toggleAnswerKey() {
+    const keyBox = document.getElementById("answer-key");
+    keyBox.style.display = keyBox.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>
