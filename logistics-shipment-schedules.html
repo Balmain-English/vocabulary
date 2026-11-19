@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worksheet 1 – Shipment Schedules and Polite Updates (B2)</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm; }
+  :root {
+    --ink: #1f2a37;
+    --muted: #52606d;
+    --accent: #1d4e89;
+    --accent-soft: #eef3f9;
+    --accent-tint: #f5f9ff;
+    --warm: #fff7e6;
+    --warm-border: #e0a526;
+    --line: #9aa5b1;
+    --border: #cbd2d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    font-size: 10.5pt;
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+    background: #f4f6f8;
+  }
+  .sheet {
+    background: #fff;
+    padding: 28px 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.07);
+  }
+  .toolbar {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #1f2a37;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 9.5pt;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .toolbar-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 9pt;
+  }
+  .save-status { color: #cbd2d9; font-size: 8.8pt; }
+  .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    font: inherit;
+    font-size: 9pt;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-primary { background: #2b6cb0; color: #fff; }
+  .btn-primary:hover { background: #1d4e89; }
+  .btn-secondary { background: transparent; color: #e4e7eb; border-color: #616e7c; }
+  .btn-secondary:hover { background: #323f4b; }
+  .btn-danger { background: #9b2c2c; color: #fff; border-color: #9b2c2c; }
+
+  h2 {
+    font-size: 15.5pt;
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 5px;
+    margin: 0 0 8px;
+  }
+  h3 {
+    font-size: 11.5pt;
+    margin: 18px 0 6px;
+    color: #fff;
+    background: var(--accent);
+    padding: 5px 11px;
+    border-radius: 4px;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h3 .t { float: right; font-weight: normal; font-size: 9.5pt; opacity: 0.92; }
+  h4 { margin: 12px 0 5px; font-size: 10.5pt; color: var(--ink); }
+  p { margin: 5px 0; }
+  .meta {
+    display: flex;
+    gap: 18px;
+    font-size: 9.8pt;
+    margin: 8px 0 10px;
+    flex-wrap: wrap;
+  }
+  .meta label {
+    flex: 1;
+    min-width: 170px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+  }
+  .meta input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font: inherit;
+    color: var(--ink);
+    padding: 1px 4px;
+    outline: none;
+    min-width: 80px;
+  }
+  .meta input:focus { background: var(--accent-tint); border-radius: 2px; }
+
+  .box {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 3px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .warm { background: var(--warm); border-left-color: var(--warm-border); }
+  .teams-box {
+    background: #f0f4ff;
+    border: 1px solid #c3d4f7;
+    border-left: 4px solid #4f52b2;
+    padding: 9px 12px;
+    margin: 8px 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .teams-tag {
+    display: inline-block;
+    background: #4f52b2;
+    color: #fff;
+    font-size: 8.5pt;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .ex { break-inside: avoid; page-break-inside: avoid; margin-bottom: 8px; }
+  ol, ul { margin: 4px 0 6px; padding-left: 22px; }
+  li { margin: 4px 0; }
+
+  /* Interactive inputs */
+  .gap-input {
+    display: inline-block;
+    width: 130px;
+    border: none;
+    border-bottom: 1.5px solid var(--accent);
+    background: var(--accent-tint);
+    font: inherit;
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 2px 2px 0 0;
+    outline: none;
+    vertical-align: baseline;
+  }
+  .gap-input.long { width: 175px; }
+  .gap-input:focus { background: #e3effd; border-bottom-color: #0f294a; }
+
+  .match-list { list-style: none; padding-left: 0; margin: 4px 0; }
+  .match-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 3px 6px;
+    border-bottom: 1px dashed #e4e7eb;
+  }
+  .match-select {
+    font: inherit;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-tint);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    min-width: 54px;
+    cursor: pointer;
+  }
+  .match-select:focus { outline: 2px solid var(--accent); }
+
+  .write-area {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--accent-tint);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 6px 9px;
+    margin-top: 4px;
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .write-area:focus { outline: none; background: #ebf3fc; border-color: var(--accent); }
+  .print-mirror { display: none; }
+
+  table { border-collapse: collapse; width: 100%; margin: 6px 0; break-inside: avoid; page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 8px; vertical-align: top; text-align: left; }
+  th { background: var(--accent-soft); }
+  .two { display: flex; gap: 20px; }
+  .two > div { flex: 1; }
+  .wordbox {
+    border: 1.5px dashed var(--accent);
+    background: var(--accent-tint);
+    padding: 6px 10px;
+    text-align: center;
+    margin: 6px 0;
+    font-weight: 600;
+    border-radius: 4px;
+    break-inside: avoid;
+  }
+  .email {
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .email .hdr {
+    font-size: 9.8pt;
+    color: var(--muted);
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+  }
+  .email-compose {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 6px 0;
+    break-inside: avoid;
+  }
+  .email-compose-hdr {
+    background: var(--accent-soft);
+    padding: 6px 10px;
+    font-size: 9.5pt;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .word-pill {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1px 9px;
+    font-size: 8.8pt;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .word-pill.in-range { background: #e6fffa; border-color: #38b2ac; color: #234e52; }
+  .email-compose textarea {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    background: #fff;
+  }
+  .small { font-size: 9.2pt; color: var(--muted); }
+  .check-group { display: flex; flex-wrap: wrap; gap: 14px; margin: 6px 0; }
+  .check-item { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+  .radio-cell { text-align: center; vertical-align: middle; }
+  .radio-cell input[type="radio"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+
+  @media (max-width: 680px) {
+    body { padding: 10px; }
+    .sheet { padding: 16px; }
+    .two { flex-direction: column; gap: 8px; }
+  }
+
+  @media print {
+    body {
+      background: #fff;
+      padding: 0;
+      margin: 0;
+      max-width: none;
+      font-size: 10pt;
+    }
+    .sheet {
+      box-shadow: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .toolbar, .word-pill, .no-print { display: none !important; }
+    .gap-input {
+      background: transparent !important;
+      border-bottom: 1px solid #333;
+      border-radius: 0;
+      padding: 0 3px;
+    }
+    .match-select {
+      border: none;
+      border-bottom: 1px solid #333;
+      border-radius: 0;
+      background: transparent !important;
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 0 4px;
+      min-width: 28px;
+      text-align: center;
+    }
+    .write-area { display: none !important; }
+    .print-mirror {
+      display: block;
+      margin-top: 4px;
+      font-size: 10pt;
+      color: var(--ink);
+      white-space: pre-wrap;
+    }
+    .print-mirror.empty-lines {
+      min-height: 1.8em;
+      border-bottom: 1px dotted var(--line);
+    }
+    .print-mirror.empty-lines.tall {
+      min-height: 5.4em;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.75em,
+        var(--line) 1.75em,
+        var(--line) calc(1.75em + 1px)
+      );
+      border-bottom: none;
+    }
+    .email-compose { border: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body data-storage-key="supply_chain_ws1_v1">
+
+<div class="toolbar">
+  <div class="toolbar-left">
+    <span class="badge">Worksheet 1 of 3</span>
+    <span>Interactive Worksheet · Microsoft Teams Session</span>
+    <span class="save-status" id="saveStatus">Ready</span>
+  </div>
+  <div class="toolbar-actions">
+    <button type="button" class="btn btn-secondary" id="clearBtn">Clear Inputs</button>
+    <button type="button" class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+</div>
+
+<main class="sheet">
+
+  <h2>Worksheet 1 – Shipment schedules and polite updates</h2>
+  <div class="meta">
+    <label>Name: <input type="text" data-field="w1_name" placeholder="Participant name"></label>
+    <label>Date: <input type="text" data-field="w1_date" placeholder="DD/MM/YYYY"></label>
+    <label>Trainer: <input type="text" data-field="w1_trainer" placeholder="Trainer name"></label>
+  </div>
+  <p><strong>Objectives:</strong> talk about shipping and documents · give schedule updates and bad news politely · review future forms and time clauses.</p>
+
+  <h3>A. Warm-up – live discussion with your trainer <span class="t">5 min</span></h3>
+  <ol>
+    <li>What is the most frequent cause of delays in your shipments? How do you usually inform your customer?</li>
+    <li>When you have to give a date you are not sure about, what do you say?</li>
+    <li>Do you prefer to send updates by email, chat or call? Why?</li>
+  </ol>
+  <div class="ex">
+    <label class="small" for="w1_warmup_notes"><strong>Discussion notes (optional):</strong></label>
+    <textarea id="w1_warmup_notes" class="write-area" rows="2" data-field="w1_warmup_notes" placeholder="Jot down key phrases or ideas from your discussion..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h3>B. Vocabulary – shipping and orders <span class="t">10 min</span></h3>
+  <p>Match each term (1–8) with its definition (a–h).</p>
+  <div class="two ex">
+    <div>
+      <ul class="match-list">
+        <li><span>1. booking</span> <select class="match-select" data-field="w1_m1" aria-label="Answer for w1_m1"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>2. pick-up</span> <select class="match-select" data-field="w1_m2" aria-label="Answer for w1_m2"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>3. PO (purchase order)</span> <select class="match-select" data-field="w1_m3" aria-label="Answer for w1_m3"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>4. allocation file</span> <select class="match-select" data-field="w1_m4" aria-label="Answer for w1_m4"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>5. SKU</span> <select class="match-select" data-field="w1_m5" aria-label="Answer for w1_m5"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>6. invoice summary</span> <select class="match-select" data-field="w1_m6" aria-label="Answer for w1_m6"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>7. container</span> <select class="match-select" data-field="w1_m7" aria-label="Answer for w1_m7"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>8. priority item</span> <select class="match-select" data-field="w1_m8" aria-label="Answer for w1_m8"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+      </ul>
+    </div>
+    <div>
+      <ol type="a">
+        <li>a unique code that identifies a specific product reference</li>
+        <li>a document showing which quantities of which products are assigned to an order</li>
+        <li>reserving space with a carrier so goods can be transported</li>
+        <li>the collection of goods from a warehouse by the transport company</li>
+        <li>a document listing the amounts invoiced for goods that were shipped</li>
+        <li>a formal order sent by the buyer to the supplier</li>
+        <li>a large metal box used to transport goods by sea</li>
+        <li>an article that must be dealt with before the others</li>
+      </ol>
+    </div>
+  </div>
+
+  <h4>Collocations – complete each sentence with a verb from the box (one verb is used once only).</h4>
+  <div class="wordbox">add · book · confirm · put · receive · request · send · share</div>
+  <ol class="ex">
+    <li>We need to <input type="text" class="gap-input" data-field="w1_col1" aria-label="Collocation 1"> the trucks at least two weeks before the goods are ready.</li>
+    <li>Could you <input type="text" class="gap-input" data-field="w1_col2" aria-label="Collocation 2"> me the packing list by Friday?</li>
+    <li>Please <input type="text" class="gap-input" data-field="w1_col3" aria-label="Collocation 3"> your list of priority items with the planning team.</li>
+    <li>We expect to <input type="text" class="gap-input" data-field="w1_col4" aria-label="Collocation 4"> the allocation file on Monday.</li>
+    <li>If you have no preference, I will <input type="text" class="gap-input" data-field="w1_col5" aria-label="Collocation 5"> the SKUs without a switch in the first containers.</li>
+    <li>Can you <input type="text" class="gap-input" data-field="w1_col6" aria-label="Collocation 6"> the pick-up date as soon as possible?</li>
+    <li>The customer would like to <input type="text" class="gap-input" data-field="w1_col7" aria-label="Collocation 7"> 5,000 units to the order.</li>
+    <li>I will <input type="text" class="gap-input" data-field="w1_col8" aria-label="Collocation 8"> extra stock from the factory, but I cannot promise anything.</li>
+  </ol>
+
+  <h3>C. Language focus – sounding polite and natural <span class="t">8 min</span></h3>
+  <div class="box warm">
+    <strong>“Kindly note…” and “pls kindly”.</strong> <em>Kindly</em> is common in international email, but it can sound formal or even slightly bossy to native speakers, and <em>pls kindly</em> doubles the politeness. Better options:<br>
+    • Giving information: <em>Please note that… / Just to let you know… / I wanted to flag that…</em><br>
+    • Making a request: <em>Could you please… ? / It would be great if you could… / I’d be grateful if you could…</em><br>
+    • Bad news: <em>Unfortunately… / I’m afraid that… / Sadly, we won’t be able to…</em>
+  </div>
+  <p><strong>Rewrite these blunt sentences in a polite, professional way.</strong></p>
+  <ol class="ex">
+    <li>Send me the list by Monday.<textarea class="write-area" rows="1" data-field="w1_pol1" placeholder="Write a polite version..."></textarea><div class="print-mirror"></div></li>
+    <li>I can’t send the invoice before the pick-up.<textarea class="write-area" rows="1" data-field="w1_pol2" placeholder="Write a polite version..."></textarea><div class="print-mirror"></div></li>
+    <li>The pick-up is on 1st December.<textarea class="write-area" rows="1" data-field="w1_pol3" placeholder="Write a polite version..."></textarea><div class="print-mirror"></div></li>
+    <li>Tell me your priorities now.<textarea class="write-area" rows="1" data-field="w1_pol4" placeholder="Write a polite version..."></textarea><div class="print-mirror"></div></li>
+    <li>You didn’t answer my last email.<textarea class="write-area" rows="1" data-field="w1_pol5" placeholder="Write a polite version..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <h3>D. Grammar review – future forms and time clauses <span class="t">12 min</span></h3>
+  <div class="box">
+    <table>
+      <tr><th>Use</th><th>Form</th><th>Example</th></tr>
+      <tr><td>Fixed arrangement or timetable</td><td>present continuous / present simple</td><td>I’m sending the file tomorrow. The vessel leaves on 2 December.</td></tr>
+      <tr><td>Decision made now, promise, offer</td><td>will</td><td>I’ll check with the factory and come back to you.</td></tr>
+      <tr><td>Finished before a future point</td><td>future perfect</td><td>By Friday we will have shipped six containers.</td></tr>
+      <tr><td>After <em>when, after, before, once, as soon as, until</em></td><td><strong>present</strong> (simple or perfect) – <strong>not</strong> “will”</td><td>I’ll send the summary after the pick-up <strong>takes place / has taken place</strong>.</td></tr>
+    </table>
+  </div>
+  <h4>Exercise 1 – Put the verb in brackets into the correct form.</h4>
+  <ol class="ex">
+    <li>I will send the summary after the pick-up <input type="text" class="gap-input long" data-field="w1_g1_1" aria-label="Grammar 1-1"> (take place).</li>
+    <li>We <input type="text" class="gap-input" data-field="w1_g1_2a" aria-label="Grammar 1-2a"> (receive) the file on Monday, so I <input type="text" class="gap-input" data-field="w1_g1_2b" aria-label="Grammar 1-2b"> (contact) you the same day.</li>
+    <li>Once the containers <input type="text" class="gap-input" data-field="w1_g1_3a" aria-label="Grammar 1-3a"> (leave) the port, I <input type="text" class="gap-input" data-field="w1_g1_3b" aria-label="Grammar 1-3b"> (let) you know.</li>
+    <li>I <input type="text" class="gap-input" data-field="w1_g1_4a" aria-label="Grammar 1-4a"> (not / be) able to send the invoice until the goods <input type="text" class="gap-input long" data-field="w1_g1_4b" aria-label="Grammar 1-4b"> (collect).</li>
+    <li>According to the schedule, the truck <input type="text" class="gap-input" data-field="w1_g1_5" aria-label="Grammar 1-5"> (arrive) at 9 a.m. tomorrow.</li>
+    <li>“We don’t have the list yet.” – “OK, I <input type="text" class="gap-input" data-field="w1_g1_6" aria-label="Grammar 1-6"> (call) the planning team now.”</li>
+    <li>By the end of next week, we <input type="text" class="gap-input long" data-field="w1_g1_7" aria-label="Grammar 1-7"> (ship) six containers.</li>
+    <li>Please wait until I <input type="text" class="gap-input" data-field="w1_g1_8a" aria-label="Grammar 1-8a"> (confirm) the date before you <input type="text" class="gap-input" data-field="w1_g1_8b" aria-label="Grammar 1-8b"> (inform) the customer.</li>
+  </ol>
+  <h4>Exercise 2 – Find and correct the errors (there are 2–3 per sentence).</h4>
+  <ol class="ex">
+    <li>The pick up for sea shipment nr 6 to 7bis are booked on 1st and 2nd December.<textarea class="write-area" rows="1" data-field="w1_g2_1" placeholder="Write corrected sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>I will send you the summary of the Nov PO after the pick up of booking nr 4 and 5.<textarea class="write-area" rows="1" data-field="w1_g2_2" placeholder="Write corrected sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>I will receive the allocation file for your Dec PO on Monday 23.<textarea class="write-area" rows="1" data-field="w1_g2_3" placeholder="Write corrected sentence..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <h3>E. Fluency – update the distributor <span class="t">15 min</span></h3>
+  <h4>Task 1 – Write (8 min)</h4>
+  <p>Write an email of <strong>80–100 words</strong> to your distributor. Say that: (1) three sea shipments are booked for pick-up on two dates in December; (2) so you cannot send the invoice summary for them yet; (3) you will send the November PO summary after two other pick-ups; (4) you are receiving the allocation file on Monday and ask for a list of 3–4 priority SKUs by then. Use at least <strong>two polite phrases</strong> and <strong>two time clauses</strong> from this worksheet.</p>
+  <div class="email-compose">
+    <div class="email-compose-hdr">
+      <span><strong>Draft Email:</strong> December Shipments &amp; Allocation Update</span>
+      <span class="word-pill" id="w1_email_wc">0 words · Target: 80–100</span>
+    </div>
+    <textarea class="write-area" rows="6" data-field="w1_email" data-word-target="w1_email_wc" data-min-words="80" data-max-words="100" placeholder="Dear ..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h4>Task 2 – Live Teams Role-Play: the “4-3-2” fluency drill (7 min)</h4>
+  <div class="teams-box">
+    <span class="teams-tag">Teams Live Task</span>
+    Present the same update <strong>live to your trainer</strong> as if you were on a call with your distributor. Start with a <strong>4-minute</strong> version (using your notes below), then repeat in <strong>3 minutes</strong>, and finally deliver a sharp <strong>2-minute</strong> version with the same content and fewer pauses. Your trainer will give brief feedback between rounds.
+  </div>
+  <div class="ex">
+    <label class="small" for="w1_speak_notes"><strong>Key bullet notes for your live call (optional):</strong></label>
+    <textarea id="w1_speak_notes" class="write-area" rows="2" data-field="w1_speak_notes" placeholder="• 3 sea shipments booked for 1 & 2 Dec..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h3>F. Session wrap-up &amp; reflection <span class="t">2 min</span></h3>
+  <div class="check-group">
+    <label class="check-item"><input type="checkbox" data-field="w1_c1"> I can use “after / once / when” + present tense correctly.</label>
+    <label class="check-item"><input type="checkbox" data-field="w1_c2"> I can give a schedule update in a polite way.</label>
+    <label class="check-item"><input type="checkbox" data-field="w1_c3"> I know 5 new shipping words.</label>
+  </div>
+  <p>My three most useful new expressions: <input type="text" class="gap-input" style="width: 62%;" data-field="w1_takeaway" placeholder="Type your 3 expressions..."></p>
+
+</main>
+
+<script>
+(function() {
+  const STORAGE_KEY = document.body.dataset.storageKey;
+  const statusEl = document.getElementById('saveStatus');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function updateMirrors() {
+    document.querySelectorAll('textarea.write-area').forEach(ta => {
+      const mirror = ta.nextElementSibling;
+      if (mirror && mirror.classList.contains('print-mirror')) {
+        const val = ta.value.trim();
+        if (val) {
+          mirror.textContent = ta.value;
+          mirror.classList.remove('empty-lines', 'tall');
+        } else {
+          mirror.textContent = '';
+          mirror.classList.add('empty-lines');
+          if (parseInt(ta.getAttribute('rows') || '2', 10) >= 4) {
+            mirror.classList.add('tall');
+          }
+        }
+      }
+    });
+  }
+
+  function updateWordCounts() {
+    document.querySelectorAll('textarea[data-word-target]').forEach(ta => {
+      const pill = document.getElementById(ta.dataset.wordTarget);
+      if (!pill) return;
+      const min = parseInt(ta.dataset.minWords || '0', 10);
+      const max = parseInt(ta.dataset.maxWords || '9999', 10);
+      const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+      pill.textContent = words + ' word' + (words === 1 ? '' : 's') + ' · Target: ' + min + '–' + max;
+      if (words >= min && words <= max) {
+        pill.classList.add('in-range');
+      } else {
+        pill.classList.remove('in-range');
+      }
+    });
+  }
+
+  function saveState() {
+    if (!STORAGE_KEY) return;
+    const data = {};
+    document.querySelectorAll('[data-field]').forEach(el => {
+      const key = el.dataset.field;
+      if (el.type === 'checkbox') {
+        data[key] = el.checked;
+      } else if (el.type === 'radio') {
+        if (el.checked) data[key] = el.value;
+      } else {
+        data[key] = el.value;
+      }
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (statusEl) statusEl.textContent = 'Saved in browser';
+    } catch (e) {}
+    updateMirrors();
+    updateWordCounts();
+  }
+
+  function loadState() {
+    if (!STORAGE_KEY) return;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      document.querySelectorAll('[data-field]').forEach(el => {
+        const key = el.dataset.field;
+        if (!(key in data)) return;
+        if (el.type === 'checkbox') {
+          el.checked = Boolean(data[key]);
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === data[key]);
+        } else {
+          el.value = data[key];
+        }
+      });
+    } catch (e) {}
+    updateMirrors();
+    updateWordCounts();
+  }
+
+  document.addEventListener('input', saveState);
+  document.addEventListener('change', saveState);
+  window.addEventListener('beforeprint', updateMirrors);
+
+  if (clearBtn) {
+    let confirmPending = false;
+    let resetTimer = null;
+    clearBtn.addEventListener('click', () => {
+      if (!confirmPending) {
+        confirmPending = true;
+        clearBtn.textContent = 'Confirm Clear?';
+        clearBtn.classList.remove('btn-secondary');
+        clearBtn.classList.add('btn-danger');
+        resetTimer = setTimeout(() => {
+          confirmPending = false;
+          clearBtn.textContent = 'Clear Inputs';
+          clearBtn.classList.remove('btn-danger');
+          clearBtn.classList.add('btn-secondary');
+        }, 3500);
+      } else {
+        clearTimeout(resetTimer);
+        confirmPending = false;
+        clearBtn.textContent = 'Clear Inputs';
+        clearBtn.classList.remove('btn-danger');
+        clearBtn.classList.add('btn-secondary');
+        document.querySelectorAll('[data-field]').forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = false;
+          } else {
+            el.value = '';
+          }
+        });
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        if (statusEl) statusEl.textContent = 'Cleared';
+        updateMirrors();
+        updateWordCounts();
+      }
+    });
+  }
+
+  loadState();
+  updateMirrors();
+  updateWordCounts();
+})();
+</script>
+</body>
+</html>

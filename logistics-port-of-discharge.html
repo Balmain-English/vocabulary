@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worksheet 3 – Changing the Port of Discharge (B2)</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm; }
+  :root {
+    --ink: #1f2a37;
+    --muted: #52606d;
+    --accent: #1d4e89;
+    --accent-soft: #eef3f9;
+    --accent-tint: #f5f9ff;
+    --warm: #fff7e6;
+    --warm-border: #e0a526;
+    --line: #9aa5b1;
+    --border: #cbd2d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    font-size: 10.5pt;
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+    background: #f4f6f8;
+  }
+  .sheet {
+    background: #fff;
+    padding: 28px 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.07);
+  }
+  .toolbar {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #1f2a37;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 9.5pt;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .toolbar-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 9pt;
+  }
+  .save-status { color: #cbd2d9; font-size: 8.8pt; }
+  .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    font: inherit;
+    font-size: 9pt;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-primary { background: #2b6cb0; color: #fff; }
+  .btn-primary:hover { background: #1d4e89; }
+  .btn-secondary { background: transparent; color: #e4e7eb; border-color: #616e7c; }
+  .btn-secondary:hover { background: #323f4b; }
+  .btn-danger { background: #9b2c2c; color: #fff; border-color: #9b2c2c; }
+
+  h2 {
+    font-size: 15.5pt;
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 5px;
+    margin: 0 0 8px;
+  }
+  h3 {
+    font-size: 11.5pt;
+    margin: 18px 0 6px;
+    color: #fff;
+    background: var(--accent);
+    padding: 5px 11px;
+    border-radius: 4px;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h3 .t { float: right; font-weight: normal; font-size: 9.5pt; opacity: 0.92; }
+  h4 { margin: 12px 0 5px; font-size: 10.5pt; color: var(--ink); }
+  p { margin: 5px 0; }
+  .meta {
+    display: flex;
+    gap: 18px;
+    font-size: 9.8pt;
+    margin: 8px 0 10px;
+    flex-wrap: wrap;
+  }
+  .meta label {
+    flex: 1;
+    min-width: 170px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+  }
+  .meta input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font: inherit;
+    color: var(--ink);
+    padding: 1px 4px;
+    outline: none;
+    min-width: 80px;
+  }
+  .meta input:focus { background: var(--accent-tint); border-radius: 2px; }
+
+  .box {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 3px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .warm { background: var(--warm); border-left-color: var(--warm-border); }
+  .teams-box {
+    background: #f0f4ff;
+    border: 1px solid #c3d4f7;
+    border-left: 4px solid #4f52b2;
+    padding: 9px 12px;
+    margin: 8px 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .teams-tag {
+    display: inline-block;
+    background: #4f52b2;
+    color: #fff;
+    font-size: 8.5pt;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .ex { break-inside: avoid; page-break-inside: avoid; margin-bottom: 8px; }
+  ol, ul { margin: 4px 0 6px; padding-left: 22px; }
+  li { margin: 4px 0; }
+
+  /* Interactive inputs */
+  .gap-input {
+    display: inline-block;
+    width: 130px;
+    border: none;
+    border-bottom: 1.5px solid var(--accent);
+    background: var(--accent-tint);
+    font: inherit;
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 2px 2px 0 0;
+    outline: none;
+    vertical-align: baseline;
+  }
+  .gap-input.long { width: 175px; }
+  .gap-input:focus { background: #e3effd; border-bottom-color: #0f294a; }
+
+  .match-list { list-style: none; padding-left: 0; margin: 4px 0; }
+  .match-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 3px 6px;
+    border-bottom: 1px dashed #e4e7eb;
+  }
+  .match-select {
+    font: inherit;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-tint);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    min-width: 54px;
+    cursor: pointer;
+  }
+  .match-select:focus { outline: 2px solid var(--accent); }
+
+  .write-area {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--accent-tint);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 6px 9px;
+    margin-top: 4px;
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .write-area:focus { outline: none; background: #ebf3fc; border-color: var(--accent); }
+  .print-mirror { display: none; }
+
+  table { border-collapse: collapse; width: 100%; margin: 6px 0; break-inside: avoid; page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 8px; vertical-align: top; text-align: left; }
+  th { background: var(--accent-soft); }
+  .two { display: flex; gap: 20px; }
+  .two > div { flex: 1; }
+  .wordbox {
+    border: 1.5px dashed var(--accent);
+    background: var(--accent-tint);
+    padding: 6px 10px;
+    text-align: center;
+    margin: 6px 0;
+    font-weight: 600;
+    border-radius: 4px;
+    break-inside: avoid;
+  }
+  .email {
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .email .hdr {
+    font-size: 9.8pt;
+    color: var(--muted);
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+  }
+  .email-compose {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 6px 0;
+    break-inside: avoid;
+  }
+  .email-compose-hdr {
+    background: var(--accent-soft);
+    padding: 6px 10px;
+    font-size: 9.5pt;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .word-pill {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1px 9px;
+    font-size: 8.8pt;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .word-pill.in-range { background: #e6fffa; border-color: #38b2ac; color: #234e52; }
+  .email-compose textarea {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    background: #fff;
+  }
+  .small { font-size: 9.2pt; color: var(--muted); }
+  .check-group { display: flex; flex-wrap: wrap; gap: 14px; margin: 6px 0; }
+  .check-item { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+  .radio-cell { text-align: center; vertical-align: middle; }
+  .radio-cell input[type="radio"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+
+  @media (max-width: 680px) {
+    body { padding: 10px; }
+    .sheet { padding: 16px; }
+    .two { flex-direction: column; gap: 8px; }
+  }
+
+  @media print {
+    body {
+      background: #fff;
+      padding: 0;
+      margin: 0;
+      max-width: none;
+      font-size: 10pt;
+    }
+    .sheet {
+      box-shadow: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .toolbar, .word-pill, .no-print { display: none !important; }
+    .gap-input {
+      background: transparent !important;
+      border-bottom: 1px solid #333;
+      border-radius: 0;
+      padding: 0 3px;
+    }
+    .match-select {
+      border: none;
+      border-bottom: 1px solid #333;
+      border-radius: 0;
+      background: transparent !important;
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 0 4px;
+      min-width: 28px;
+      text-align: center;
+    }
+    .write-area { display: none !important; }
+    .print-mirror {
+      display: block;
+      margin-top: 4px;
+      font-size: 10pt;
+      color: var(--ink);
+      white-space: pre-wrap;
+    }
+    .print-mirror.empty-lines {
+      min-height: 1.8em;
+      border-bottom: 1px dotted var(--line);
+    }
+    .print-mirror.empty-lines.tall {
+      min-height: 5.4em;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.75em,
+        var(--line) 1.75em,
+        var(--line) calc(1.75em + 1px)
+      );
+      border-bottom: none;
+    }
+    .email-compose { border: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body data-storage-key="supply_chain_ws3_v1">
+
+<div class="toolbar">
+  <div class="toolbar-left">
+    <span class="badge">Worksheet 3 of 3</span>
+    <span>Interactive Worksheet · Microsoft Teams Session</span>
+    <span class="save-status" id="saveStatus">Ready</span>
+  </div>
+  <div class="toolbar-actions">
+    <button type="button" class="btn btn-secondary" id="clearBtn">Clear Inputs</button>
+    <button type="button" class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+</div>
+
+<main class="sheet">
+
+  <h2>Worksheet 3 – Changing the port of discharge: asking for clear information</h2>
+  <div class="meta">
+    <label>Name: <input type="text" data-field="w3_name" placeholder="Participant name"></label>
+    <label>Date: <input type="text" data-field="w3_date" placeholder="DD/MM/YYYY"></label>
+    <label>Trainer: <input type="text" data-field="w3_trainer" placeholder="Trainer name"></label>
+  </div>
+  <p><strong>Objectives:</strong> use shipping-document vocabulary · ask polite indirect questions · review the passive voice in formal documents and emails.</p>
+
+  <h3>A. Warm-up – live discussion with your trainer <span class="t">5 min</span></h3>
+  <ol>
+    <li>What can go wrong when the details on a shipping document are incomplete or wrong?</li>
+    <li>How do you ask someone for information you really need without sounding demanding?</li>
+    <li>Which words in this area do you often confuse or forget?</li>
+  </ol>
+  <div class="ex">
+    <label class="small" for="w3_warmup_notes"><strong>Discussion notes (optional):</strong></label>
+    <textarea id="w3_warmup_notes" class="write-area" rows="2" data-field="w3_warmup_notes" placeholder="Jot down key phrases or ideas from your discussion..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h3>B. Vocabulary – ports and documents <span class="t">10 min</span></h3>
+  <p>Match each term (1–10) with its definition (a–j).</p>
+  <div class="two ex">
+    <div>
+      <ul class="match-list">
+        <li><span>1. port of discharge (POD)</span> <select class="match-select" data-field="w3_m1" aria-label="Answer for w3_m1"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>2. port of loading</span> <select class="match-select" data-field="w3_m2" aria-label="Answer for w3_m2"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>3. bill of lading (B/L)</span> <select class="match-select" data-field="w3_m3" aria-label="Answer for w3_m3"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>4. consignee</span> <select class="match-select" data-field="w3_m4" aria-label="Answer for w3_m4"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>5. shipper</span> <select class="match-select" data-field="w3_m5" aria-label="Answer for w3_m5"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>6. notify party</span> <select class="match-select" data-field="w3_m6" aria-label="Answer for w3_m6"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>7. customs clearance</span> <select class="match-select" data-field="w3_m7" aria-label="Answer for w3_m7"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>8. freight forwarder</span> <select class="match-select" data-field="w3_m8" aria-label="Answer for w3_m8"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>9. transit time</span> <select class="match-select" data-field="w3_m9" aria-label="Answer for w3_m9"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+<li><span>10. demurrage</span> <select class="match-select" data-field="w3_m10" aria-label="Answer for w3_m10"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option><option value="i">i</option><option value="j">j</option></select></li>
+      </ul>
+    </div>
+    <div>
+      <ol type="a">
+        <li>a fee charged when containers stay at the port longer than the free time allowed</li>
+        <li>the company that sends the goods</li>
+        <li>the number of days a shipment takes to travel between two points</li>
+        <li>the process of getting goods approved by the customs authorities</li>
+        <li>the person or company to be informed when the cargo arrives</li>
+        <li>the document issued by the carrier that acts as a receipt and a transport contract</li>
+        <li>the port where the goods are unloaded</li>
+        <li>an agent who organises transport on behalf of the shipper</li>
+        <li>the person or company named to receive the goods</li>
+        <li>the port where the goods are put on the vessel</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>C. Reading and language focus <span class="t">13 min</span></h3>
+  <div class="email">
+    <div class="hdr"><strong>Subject:</strong> Change of POD – Hong Kong instead of Shanghai (Product Y)</div>
+    Hi Wei,<br><br>
+    Following your message, I’d like to confirm that the port of discharge for Product Y would be changed from Shanghai to Hong Kong. Before the booking is updated, I need to have a clear picture of a few points. First, who should be named as consignee on the B/L? Second, could you tell me whether a notify party has to be added? Finally, the delivery address must be given in full, as the forwarder will not be able to issue the documents without it.<br><br>
+    Could you also let me know who will arrange the customs clearance and the onward transport? If it is easier, we can have a short call tomorrow to go through everything.<br><br>
+    Best regards,<br>Marie
+  </div>
+  <ol class="ex">
+    <li>List the <strong>four pieces of information</strong> Marie asks for.<textarea class="write-area" rows="2" data-field="w3_rc1" placeholder="1) ... 2) ... 3) ... 4) ..."></textarea><div class="print-mirror"></div></li>
+    <li>Find and write <strong>three passive forms</strong> used in the email.<textarea class="write-area" rows="1" data-field="w3_rc2" placeholder="Write three passive verb forms..."></textarea><div class="print-mirror"></div></li>
+    <li>Why does the forwarder need the delivery address?<textarea class="write-area" rows="1" data-field="w3_rc3" placeholder="Type your answer..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <div class="box warm">
+    <strong>Verbs that are NOT followed by “about”:</strong> <em>discuss</em> (the plan, <s>about</s>), <em>mention</em> (the address), <em>contact</em> (someone), <em>answer</em> (a question), <em>request</em> (information). Compare: <em>talk about</em>, <em>speak about</em>, <em>think about</em> (these do take “about”). Also: <em>information <strong>about</strong>/<strong>on</strong> the consignee</em> or <em>regarding the consignee</em>.
+  </div>
+  <p><strong>Correct the errors in the original agenda sentence:</strong></p>
+  <p class="small"><em>“Can we discuss about the new POD in HK port instead of Shanghai for Neoderm? I need to have a clear view and information regarding the consignee on the B/L and delivery address to be mentionned.”</em></p>
+  <textarea class="write-area" rows="3" data-field="w3_err" placeholder="Write the corrected, natural version..."></textarea>
+  <div class="print-mirror"></div>
+
+  <h4>Indirect questions – more polite than direct questions</h4>
+  <div class="box">
+    Direct: <em>Who is the consignee?</em> → Indirect: <em>Could you tell me who the consignee is?</em> (normal word order – no “is the consignee”, no “do/does”)<br>
+    For yes/no questions use <em>if / whether</em>: <em>Do you know whether a notify party is required?</em><br>
+    Useful openers: <em>Could you tell me… / Do you know… / I’d like to know… / Would you mind letting me know… / Could you confirm…</em>
+  </div>
+  <p><strong>Exercise – Turn these direct questions into polite indirect questions.</strong></p>
+  <ol class="ex">
+    <li>Who is the consignee?<textarea class="write-area" rows="1" data-field="w3_iq1" placeholder="Could you tell me..."></textarea><div class="print-mirror"></div></li>
+    <li>Is a notify party required?<textarea class="write-area" rows="1" data-field="w3_iq2" placeholder="Do you know whether..."></textarea><div class="print-mirror"></div></li>
+    <li>What is the delivery address?<textarea class="write-area" rows="1" data-field="w3_iq3" placeholder="Could you confirm..."></textarea><div class="print-mirror"></div></li>
+    <li>Who will arrange the customs clearance?<textarea class="write-area" rows="1" data-field="w3_iq4" placeholder="I'd like to know..."></textarea><div class="print-mirror"></div></li>
+    <li>When can the booking be changed?<textarea class="write-area" rows="1" data-field="w3_iq5" placeholder="Would you mind letting me know..."></textarea><div class="print-mirror"></div></li>
+    <li>How long will the transit take?<textarea class="write-area" rows="1" data-field="w3_iq6" placeholder="Do you have any idea..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <h3>D. Grammar review – the passive voice <span class="t">12 min</span></h3>
+  <div class="box">
+    <strong>Form:</strong> <em>be</em> (in the right tense) + past participle.<br>
+    present simple: <em>The containers <strong>are booked</strong> for 1 December.</em> · past simple: <em>The address <strong>was not mentioned</strong>.</em> · present perfect: <em>The B/L <strong>has been issued</strong>.</em> · future: <em>The goods <strong>will be delivered</strong> next week.</em> · modals: <em>The consignee <strong>must be stated</strong>.</em> · passive infinitive: <em>…the address <strong>to be mentioned</strong>.</em><br>
+    <strong>Use the passive</strong> when the doer is unknown or unimportant, when the focus is on the process or document, in formal writing, and to soften bad news (<em>The additional quantity cannot be provided</em> sounds less personal than <em>We cannot give you…</em>).
+  </div>
+  <h4>Exercise 1 – Put the verb in brackets into the passive.</h4>
+  <ol class="ex">
+    <li>The containers <input type="text" class="gap-input long" data-field="w3_g1_1" aria-label="Grammar 1-1"> (book) for 1 and 2 December.</li>
+    <li>The consignee <input type="text" class="gap-input long" data-field="w3_g1_2" aria-label="Grammar 1-2"> (must / state) clearly on the B/L.</li>
+    <li>The B/L <input type="text" class="gap-input long" data-field="w3_g1_3" aria-label="Grammar 1-3"> (already / issue) by the carrier.</li>
+    <li>The goods <input type="text" class="gap-input long" data-field="w3_g1_4" aria-label="Grammar 1-4"> (deliver) to the warehouse next week.</li>
+    <li>The documents <input type="text" class="gap-input long" data-field="w3_g1_5" aria-label="Grammar 1-5"> (should / amend) before the vessel arrives.</li>
+    <li>The delivery address <input type="text" class="gap-input long" data-field="w3_g1_6" aria-label="Grammar 1-6"> (not / mention) in your previous email.</li>
+    <li>We <input type="text" class="gap-input long" data-field="w3_g1_7" aria-label="Grammar 1-7"> (inform) by the carrier that the vessel is delayed.</li>
+    <li>When <input type="text" class="gap-input" data-field="w3_g1_8a" aria-label="Grammar 1-8a"> the allocation file <input type="text" class="gap-input long" data-field="w3_g1_8b" aria-label="Grammar 1-8b"> (send)?</li>
+  </ol>
+  <h4>Exercise 2 – Rewrite in the passive. Leave out the doer if it is not important.</h4>
+  <ol class="ex">
+    <li>The forwarder will issue the B/L on Friday.<textarea class="write-area" rows="1" data-field="w3_g2_1" placeholder="Rewrite in passive..."></textarea><div class="print-mirror"></div></li>
+    <li>Someone must confirm the delivery address.<textarea class="write-area" rows="1" data-field="w3_g2_2" placeholder="Rewrite in passive..."></textarea><div class="print-mirror"></div></li>
+    <li>We have changed the port of discharge.<textarea class="write-area" rows="1" data-field="w3_g2_3" placeholder="Rewrite in passive..."></textarea><div class="print-mirror"></div></li>
+    <li>The Demand team cannot provide the additional quantity.<textarea class="write-area" rows="1" data-field="w3_g2_4" placeholder="Rewrite in passive..."></textarea><div class="print-mirror"></div></li>
+    <li>They booked the containers last week.<textarea class="write-area" rows="1" data-field="w3_g2_5" placeholder="Rewrite in passive..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <h3>E. Fluency – the clarification call and email <span class="t">15 min</span></h3>
+  <h4>Task 1 – Live Teams Role-Play: the clarification call (8 min)</h4>
+  <div class="teams-box">
+    <span class="teams-tag">Teams Live Task</span>
+    Role-play a live Teams call with your trainer (acting as your distributor) about changing the POD from Shanghai to Hong Kong. Aim for about <strong>3 minutes</strong>, following the structure below, then debrief with your trainer and run a smoother second round if time allows:
+  </div>
+  <ol>
+    <li><strong>Open</strong> – say why you are calling (<em>I’d like to go through the change of port…</em>)</li>
+    <li><strong>Ask</strong> – at least <strong>four indirect questions</strong> (consignee, notify party, delivery address, customs clearance / onward transport)</li>
+    <li><strong>Check</strong> – confirm what you understood (<em>So, if I understand correctly, …</em>)</li>
+    <li><strong>Close</strong> – summarise next steps and deadlines (<em>The documents will be sent as soon as…</em>)</li>
+  </ol>
+  <div class="ex">
+    <label class="small" for="w3_call_notes"><strong>Call notes / indirect questions checklist (optional):</strong></label>
+    <textarea id="w3_call_notes" class="write-area" rows="2" data-field="w3_call_notes" placeholder="1. Could you tell me... 2. Do you know whether..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h4>Task 2 – Write (7 min)</h4>
+  <p>Write an email of <strong>100–120 words</strong> proposing a call and listing the information you need. Use at least <strong>three passive forms</strong>, <strong>two indirect questions</strong> and <strong>one conditional or time clause</strong> from Worksheets 1–2.</p>
+  <div class="email-compose">
+    <div class="email-compose-hdr">
+      <span><strong>Draft Email:</strong> Change of POD – Information Required</span>
+      <span class="word-pill" id="w3_email_wc">0 words · Target: 100–120</span>
+    </div>
+    <textarea class="write-area" rows="6" data-field="w3_email" data-word-target="w3_email_wc" data-min-words="100" data-max-words="120" placeholder="Hi ..., Following your message..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h3>F. Series review <span class="t">5 min</span></h3>
+  <table>
+    <tr><th>I can now…</th><th style="width:80px; text-align:center;">Not yet</th><th style="width:80px; text-align:center;">Mostly</th><th style="width:80px; text-align:center;">Yes!</th></tr>
+    <tr>
+      <td>give a schedule update using polite phrases and time clauses</td>
+      <td class="radio-cell"><input type="radio" name="sr1" value="not_yet" data-field="w3_sr1"></td>
+      <td class="radio-cell"><input type="radio" name="sr1" value="mostly" data-field="w3_sr1"></td>
+      <td class="radio-cell"><input type="radio" name="sr1" value="yes" data-field="w3_sr1"></td>
+    </tr>
+    <tr>
+      <td>refuse a request diplomatically and offer an alternative</td>
+      <td class="radio-cell"><input type="radio" name="sr2" value="not_yet" data-field="w3_sr2"></td>
+      <td class="radio-cell"><input type="radio" name="sr2" value="mostly" data-field="w3_sr2"></td>
+      <td class="radio-cell"><input type="radio" name="sr2" value="yes" data-field="w3_sr2"></td>
+    </tr>
+    <tr>
+      <td>ask for information with indirect questions</td>
+      <td class="radio-cell"><input type="radio" name="sr3" value="not_yet" data-field="w3_sr3"></td>
+      <td class="radio-cell"><input type="radio" name="sr3" value="mostly" data-field="w3_sr3"></td>
+      <td class="radio-cell"><input type="radio" name="sr3" value="yes" data-field="w3_sr3"></td>
+    </tr>
+    <tr>
+      <td>use the passive in formal emails and documents</td>
+      <td class="radio-cell"><input type="radio" name="sr4" value="not_yet" data-field="w3_sr4"></td>
+      <td class="radio-cell"><input type="radio" name="sr4" value="mostly" data-field="w3_sr4"></td>
+      <td class="radio-cell"><input type="radio" name="sr4" value="yes" data-field="w3_sr4"></td>
+    </tr>
+    <tr>
+      <td>avoid “discuss about”, “pls kindly”, and other typical errors</td>
+      <td class="radio-cell"><input type="radio" name="sr5" value="not_yet" data-field="w3_sr5"></td>
+      <td class="radio-cell"><input type="radio" name="sr5" value="mostly" data-field="w3_sr5"></td>
+      <td class="radio-cell"><input type="radio" name="sr5" value="yes" data-field="w3_sr5"></td>
+    </tr>
+  </table>
+  <p>Next goal for my English at work: <input type="text" class="gap-input" style="width: 65%;" data-field="w3_goal" placeholder="Type your next goal..."></p>
+
+</main>
+
+<script>
+(function() {
+  const STORAGE_KEY = document.body.dataset.storageKey;
+  const statusEl = document.getElementById('saveStatus');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function updateMirrors() {
+    document.querySelectorAll('textarea.write-area').forEach(ta => {
+      const mirror = ta.nextElementSibling;
+      if (mirror && mirror.classList.contains('print-mirror')) {
+        const val = ta.value.trim();
+        if (val) {
+          mirror.textContent = ta.value;
+          mirror.classList.remove('empty-lines', 'tall');
+        } else {
+          mirror.textContent = '';
+          mirror.classList.add('empty-lines');
+          if (parseInt(ta.getAttribute('rows') || '2', 10) >= 4) {
+            mirror.classList.add('tall');
+          }
+        }
+      }
+    });
+  }
+
+  function updateWordCounts() {
+    document.querySelectorAll('textarea[data-word-target]').forEach(ta => {
+      const pill = document.getElementById(ta.dataset.wordTarget);
+      if (!pill) return;
+      const min = parseInt(ta.dataset.minWords || '0', 10);
+      const max = parseInt(ta.dataset.maxWords || '9999', 10);
+      const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+      pill.textContent = words + ' word' + (words === 1 ? '' : 's') + ' · Target: ' + min + '–' + max;
+      if (words >= min && words <= max) {
+        pill.classList.add('in-range');
+      } else {
+        pill.classList.remove('in-range');
+      }
+    });
+  }
+
+  function saveState() {
+    if (!STORAGE_KEY) return;
+    const data = {};
+    document.querySelectorAll('[data-field]').forEach(el => {
+      const key = el.dataset.field;
+      if (el.type === 'checkbox') {
+        data[key] = el.checked;
+      } else if (el.type === 'radio') {
+        if (el.checked) data[key] = el.value;
+      } else {
+        data[key] = el.value;
+      }
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (statusEl) statusEl.textContent = 'Saved in browser';
+    } catch (e) {}
+    updateMirrors();
+    updateWordCounts();
+  }
+
+  function loadState() {
+    if (!STORAGE_KEY) return;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      document.querySelectorAll('[data-field]').forEach(el => {
+        const key = el.dataset.field;
+        if (!(key in data)) return;
+        if (el.type === 'checkbox') {
+          el.checked = Boolean(data[key]);
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === data[key]);
+        } else {
+          el.value = data[key];
+        }
+      });
+    } catch (e) {}
+    updateMirrors();
+    updateWordCounts();
+  }
+
+  document.addEventListener('input', saveState);
+  document.addEventListener('change', saveState);
+  window.addEventListener('beforeprint', updateMirrors);
+
+  if (clearBtn) {
+    let confirmPending = false;
+    let resetTimer = null;
+    clearBtn.addEventListener('click', () => {
+      if (!confirmPending) {
+        confirmPending = true;
+        clearBtn.textContent = 'Confirm Clear?';
+        clearBtn.classList.remove('btn-secondary');
+        clearBtn.classList.add('btn-danger');
+        resetTimer = setTimeout(() => {
+          confirmPending = false;
+          clearBtn.textContent = 'Clear Inputs';
+          clearBtn.classList.remove('btn-danger');
+          clearBtn.classList.add('btn-secondary');
+        }, 3500);
+      } else {
+        clearTimeout(resetTimer);
+        confirmPending = false;
+        clearBtn.textContent = 'Clear Inputs';
+        clearBtn.classList.remove('btn-danger');
+        clearBtn.classList.add('btn-secondary');
+        document.querySelectorAll('[data-field]').forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = false;
+          } else {
+            el.value = '';
+          }
+        });
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        if (statusEl) statusEl.textContent = 'Cleared';
+        updateMirrors();
+        updateWordCounts();
+      }
+    });
+  }
+
+  loadState();
+  updateMirrors();
+  updateWordCounts();
+})();
+</script>
+</body>
+</html>

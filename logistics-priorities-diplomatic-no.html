@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worksheet 2 – Priorities, Extra Quantities and Saying No Diplomatically (B2)</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm; }
+  :root {
+    --ink: #1f2a37;
+    --muted: #52606d;
+    --accent: #1d4e89;
+    --accent-soft: #eef3f9;
+    --accent-tint: #f5f9ff;
+    --warm: #fff7e6;
+    --warm-border: #e0a526;
+    --line: #9aa5b1;
+    --border: #cbd2d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    color: var(--ink);
+    line-height: 1.45;
+    font-size: 10.5pt;
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+    background: #f4f6f8;
+  }
+  .sheet {
+    background: #fff;
+    padding: 28px 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.07);
+  }
+  .toolbar {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #1f2a37;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 9.5pt;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .toolbar-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 9pt;
+  }
+  .save-status { color: #cbd2d9; font-size: 8.8pt; }
+  .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    font: inherit;
+    font-size: 9pt;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn-primary { background: #2b6cb0; color: #fff; }
+  .btn-primary:hover { background: #1d4e89; }
+  .btn-secondary { background: transparent; color: #e4e7eb; border-color: #616e7c; }
+  .btn-secondary:hover { background: #323f4b; }
+  .btn-danger { background: #9b2c2c; color: #fff; border-color: #9b2c2c; }
+
+  h2 {
+    font-size: 15.5pt;
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 5px;
+    margin: 0 0 8px;
+  }
+  h3 {
+    font-size: 11.5pt;
+    margin: 18px 0 6px;
+    color: #fff;
+    background: var(--accent);
+    padding: 5px 11px;
+    border-radius: 4px;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h3 .t { float: right; font-weight: normal; font-size: 9.5pt; opacity: 0.92; }
+  h4 { margin: 12px 0 5px; font-size: 10.5pt; color: var(--ink); }
+  p { margin: 5px 0; }
+  .meta {
+    display: flex;
+    gap: 18px;
+    font-size: 9.8pt;
+    margin: 8px 0 10px;
+    flex-wrap: wrap;
+  }
+  .meta label {
+    flex: 1;
+    min-width: 170px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+  }
+  .meta input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font: inherit;
+    color: var(--ink);
+    padding: 1px 4px;
+    outline: none;
+    min-width: 80px;
+  }
+  .meta input:focus { background: var(--accent-tint); border-radius: 2px; }
+
+  .box {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 3px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .warm { background: var(--warm); border-left-color: var(--warm-border); }
+  .teams-box {
+    background: #f0f4ff;
+    border: 1px solid #c3d4f7;
+    border-left: 4px solid #4f52b2;
+    padding: 9px 12px;
+    margin: 8px 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .teams-tag {
+    display: inline-block;
+    background: #4f52b2;
+    color: #fff;
+    font-size: 8.5pt;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .ex { break-inside: avoid; page-break-inside: avoid; margin-bottom: 8px; }
+  ol, ul { margin: 4px 0 6px; padding-left: 22px; }
+  li { margin: 4px 0; }
+
+  /* Interactive inputs */
+  .gap-input {
+    display: inline-block;
+    width: 130px;
+    border: none;
+    border-bottom: 1.5px solid var(--accent);
+    background: var(--accent-tint);
+    font: inherit;
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 2px 2px 0 0;
+    outline: none;
+    vertical-align: baseline;
+  }
+  .gap-input.long { width: 175px; }
+  .gap-input:focus { background: #e3effd; border-bottom-color: #0f294a; }
+
+  .match-list { list-style: none; padding-left: 0; margin: 4px 0; }
+  .match-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 3px 6px;
+    border-bottom: 1px dashed #e4e7eb;
+  }
+  .match-select {
+    font: inherit;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-tint);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    min-width: 54px;
+    cursor: pointer;
+  }
+  .match-select:focus { outline: 2px solid var(--accent); }
+
+  .write-area {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--accent-tint);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 6px 9px;
+    margin-top: 4px;
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .write-area:focus { outline: none; background: #ebf3fc; border-color: var(--accent); }
+  .print-mirror { display: none; }
+
+  table { border-collapse: collapse; width: 100%; margin: 6px 0; break-inside: avoid; page-break-inside: avoid; }
+  th, td { border: 1px solid var(--line); padding: 5px 8px; vertical-align: top; text-align: left; }
+  th { background: var(--accent-soft); }
+  .two { display: flex; gap: 20px; }
+  .two > div { flex: 1; }
+  .wordbox {
+    border: 1.5px dashed var(--accent);
+    background: var(--accent-tint);
+    padding: 6px 10px;
+    text-align: center;
+    margin: 6px 0;
+    font-weight: 600;
+    border-radius: 4px;
+    break-inside: avoid;
+  }
+  .email {
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .email .hdr {
+    font-size: 9.8pt;
+    color: var(--muted);
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+  }
+  .email-compose {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 6px 0;
+    break-inside: avoid;
+  }
+  .email-compose-hdr {
+    background: var(--accent-soft);
+    padding: 6px 10px;
+    font-size: 9.5pt;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .word-pill {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1px 9px;
+    font-size: 8.8pt;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .word-pill.in-range { background: #e6fffa; border-color: #38b2ac; color: #234e52; }
+  .email-compose textarea {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    background: #fff;
+  }
+  .small { font-size: 9.2pt; color: var(--muted); }
+  .check-group { display: flex; flex-wrap: wrap; gap: 14px; margin: 6px 0; }
+  .check-item { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+  .radio-cell { text-align: center; vertical-align: middle; }
+  .radio-cell input[type="radio"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+
+  @media (max-width: 680px) {
+    body { padding: 10px; }
+    .sheet { padding: 16px; }
+    .two { flex-direction: column; gap: 8px; }
+  }
+
+  @media print {
+    body {
+      background: #fff;
+      padding: 0;
+      margin: 0;
+      max-width: none;
+      font-size: 10pt;
+    }
+    .sheet {
+      box-shadow: none;
+      padding: 0;
+      border-radius: 0;
+    }
+    .toolbar, .word-pill, .no-print { display: none !important; }
+    .gap-input {
+      background: transparent !important;
+      border-bottom: 1px solid #333;
+      border-radius: 0;
+      padding: 0 3px;
+    }
+    .match-select {
+      border: none;
+      border-bottom: 1px solid #333;
+      border-radius: 0;
+      background: transparent !important;
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 0 4px;
+      min-width: 28px;
+      text-align: center;
+    }
+    .write-area { display: none !important; }
+    .print-mirror {
+      display: block;
+      margin-top: 4px;
+      font-size: 10pt;
+      color: var(--ink);
+      white-space: pre-wrap;
+    }
+    .print-mirror.empty-lines {
+      min-height: 1.8em;
+      border-bottom: 1px dotted var(--line);
+    }
+    .print-mirror.empty-lines.tall {
+      min-height: 5.4em;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.75em,
+        var(--line) 1.75em,
+        var(--line) calc(1.75em + 1px)
+      );
+      border-bottom: none;
+    }
+    .email-compose { border: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body data-storage-key="supply_chain_ws2_v1">
+
+<div class="toolbar">
+  <div class="toolbar-left">
+    <span class="badge">Worksheet 2 of 3</span>
+    <span>Interactive Worksheet · Microsoft Teams Session</span>
+    <span class="save-status" id="saveStatus">Ready</span>
+  </div>
+  <div class="toolbar-actions">
+    <button type="button" class="btn btn-secondary" id="clearBtn">Clear Inputs</button>
+    <button type="button" class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+</div>
+
+<main class="sheet">
+
+  <h2>Worksheet 2 – Priorities, extra quantities and saying “no” diplomatically</h2>
+  <div class="meta">
+    <label>Name: <input type="text" data-field="w2_name" placeholder="Participant name"></label>
+    <label>Date: <input type="text" data-field="w2_date" placeholder="DD/MM/YYYY"></label>
+    <label>Trainer: <input type="text" data-field="w2_trainer" placeholder="Trainer name"></label>
+  </div>
+  <p><strong>Objectives:</strong> talk about stock, allocation and replenishment · decline a request while staying helpful · review conditionals.</p>
+
+  <h3>A. Warm-up – live discussion with your trainer <span class="t">5 min</span></h3>
+  <ol>
+    <li>Describe a time when a customer asked for more product than you could supply. What did you say?</li>
+    <li>What is more important in a refusal: a clear “no” or a positive alternative? Why?</li>
+    <li>How do you decide which products to deliver first when stock is limited?</li>
+  </ol>
+  <div class="ex">
+    <label class="small" for="w2_warmup_notes"><strong>Discussion notes (optional):</strong></label>
+    <textarea id="w2_warmup_notes" class="write-area" rows="2" data-field="w2_warmup_notes" placeholder="Jot down key phrases or ideas from your discussion..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h3>B. Vocabulary – stock and supply <span class="t">10 min</span></h3>
+  <p>Match each term (1–8) with its definition (a–h).</p>
+  <div class="two ex">
+    <div>
+      <ul class="match-list">
+        <li><span>1. replenishment</span> <select class="match-select" data-field="w2_m1" aria-label="Answer for w2_m1"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>2. forecast</span> <select class="match-select" data-field="w2_m2" aria-label="Answer for w2_m2"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>3. stock-out</span> <select class="match-select" data-field="w2_m3" aria-label="Answer for w2_m3"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>4. lead time</span> <select class="match-select" data-field="w2_m4" aria-label="Answer for w2_m4"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>5. shortfall</span> <select class="match-select" data-field="w2_m5" aria-label="Answer for w2_m5"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>6. MOQ (minimum order quantity)</span> <select class="match-select" data-field="w2_m6" aria-label="Answer for w2_m6"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>7. backorder</span> <select class="match-select" data-field="w2_m7" aria-label="Answer for w2_m7"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+<li><span>8. allocation</span> <select class="match-select" data-field="w2_m8" aria-label="Answer for w2_m8"><option value="">—</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option><option value="e">e</option><option value="f">f</option><option value="g">g</option><option value="h">h</option></select></li>
+      </ul>
+    </div>
+    <div>
+      <ol type="a">
+        <li>the time between placing an order and receiving the goods</li>
+        <li>an estimate of future demand</li>
+        <li>a situation where a product is no longer available in stock</li>
+        <li>the amount by which supply is lower than demand</li>
+        <li>new goods arriving to refill the stock</li>
+        <li>the smallest quantity a supplier will accept in one order</li>
+        <li>the share of limited stock assigned to a customer or an order</li>
+        <li>an order that cannot be filled now and will be delivered later</li>
+      </ol>
+    </div>
+  </div>
+
+  <h4>How diplomatic is it? Rank these refusals from 1 (most blunt) to 5 (most diplomatic).</h4>
+  <ol type="a" class="ex">
+    <li>We can’t. &nbsp; <select class="match-select" data-field="w2_r1" aria-label="Answer for w2_r1"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></li>
+    <li>That’s impossible. &nbsp; <select class="match-select" data-field="w2_r2" aria-label="Answer for w2_r2"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></li>
+    <li>It’s not possible this month. &nbsp; <select class="match-select" data-field="w2_r3" aria-label="Answer for w2_r3"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></li>
+    <li>Unfortunately, we cannot supply the extra quantity this month. &nbsp; <select class="match-select" data-field="w2_r4" aria-label="Answer for w2_r4"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></li>
+    <li>I’m afraid we won’t be able to supply the extra quantity this month, but here is what I can offer. &nbsp; <select class="match-select" data-field="w2_r5" aria-label="Answer for w2_r5"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></li>
+  </ol>
+
+  <h3>C. Reading and language focus <span class="t">12 min</span></h3>
+  <div class="email">
+    <div class="hdr"><strong>Subject:</strong> Extra quantity request – Product X, 850 ml (Nov PO)</div>
+    Dear Li,<br><br>
+    Thank you for flagging this business opportunity. I forwarded your request to add 30,000 units to the November PO to our Demand team straight away. Unfortunately, they have come back to me with a negative answer: the current stock is fully allocated, so we cannot supply any additional quantity this month. The next replenishment is expected around 10 December.<br><br>
+    If you can accept a later delivery, I can reserve part of the new batch for you as soon as it is confirmed. Alternatively, if some of the customer demand can be covered by another size, I would be happy to check availability. Would you be able to let me know which option you prefer by Friday?<br><br>
+    Best regards,<br>Marie
+  </div>
+  <ol class="ex">
+    <li>Why was the request refused?<textarea class="write-area" rows="1" data-field="w2_rc1" placeholder="Type your answer..."></textarea><div class="print-mirror"></div></li>
+    <li>When is the next replenishment?<textarea class="write-area" rows="1" data-field="w2_rc2" placeholder="Type your answer..."></textarea><div class="print-mirror"></div></li>
+    <li>What two alternatives does Marie offer?<textarea class="write-area" rows="2" data-field="w2_rc3" placeholder="Type your answer..."></textarea><div class="print-mirror"></div></li>
+    <li>What does she ask Li to do, and by when?<textarea class="write-area" rows="1" data-field="w2_rc4" placeholder="Type your answer..."></textarea><div class="print-mirror"></div></li>
+    <li>Find words or phrases in the email that mean: (a) replied · (b) immediately · (c) set aside for you · (d) another possibility.<textarea class="write-area" rows="1" data-field="w2_rc5" placeholder="(a) ... (b) ... (c) ... (d) ..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+  <div class="box warm">
+    <strong>A good refusal in four steps:</strong> ① Acknowledge (<em>Thank you for…</em>) → ② Explain briefly (<em>the stock is fully allocated…</em>) → ③ Offer an alternative (<em>I can reserve… / Alternatively…</em>) → ④ Agree the next step (<em>Would you be able to let me know… by…?</em>)
+  </div>
+  <h4>Correct the errors in these note-style sentences from the original agenda.</h4>
+  <ol class="ex">
+    <li>Business opp for Skin Care Product 42 850ml: request to add 30k on your Nov PO.<textarea class="write-area" rows="1" data-field="w2_err1" placeholder="Write corrected sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>We cannot provide you the additional qty.<textarea class="write-area" rows="1" data-field="w2_err2" placeholder="Write corrected sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>If not, I will put the sku without switch in the first containers.<textarea class="write-area" rows="1" data-field="w2_err3" placeholder="Write corrected sentence..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <h3>D. Grammar review – conditionals and their alternatives <span class="t">12 min</span></h3>
+  <div class="box">
+    <table>
+      <tr><th>Form</th><th>Structure</th><th>Example</th></tr>
+      <tr><td>Zero conditional (general rules)</td><td>if + present, present</td><td>If an order arrives after the cut-off, it goes into the next allocation.</td></tr>
+      <tr><td>First conditional (real future possibility)</td><td>if + present, will + verb</td><td>If you send your list by Monday, I will load those SKUs first.</td></tr>
+      <tr><td>Alternatives to <em>if</em></td><td colspan="2"><strong>unless</strong> (= if … not) · <strong>provided (that) / as long as</strong> (only if) · <strong>in case</strong> (as a precaution) · <strong>otherwise</strong> (or else, at the start of a clause) · <strong>If not,</strong> (replaces the whole condition) · <strong>Should you…</strong> (formal)</td></tr>
+    </table>
+    <p class="small">Remember: no <em>will</em> after <em>if / unless / as long as / in case</em> in the condition part.</p>
+  </div>
+  <h4>Exercise 1 – Complete the sentences.</h4>
+  <ol class="ex">
+    <li>If you <input type="text" class="gap-input" data-field="w2_g1_1a" aria-label="Grammar 1-1a"> (send) your priority list by Monday, we <input type="text" class="gap-input" data-field="w2_g1_1b" aria-label="Grammar 1-1b"> (load) those SKUs first.</li>
+    <li><input type="text" class="gap-input" data-field="w2_g1_2a" aria-label="Grammar 1-2a"> we receive written confirmation, we <input type="text" class="gap-input" data-field="w2_g1_2b" aria-label="Grammar 1-2b"> (not / release) the goods.</li>
+    <li>We can reserve the stock <input type="text" class="gap-input long" data-field="w2_g1_3" aria-label="Grammar 1-3"> you confirm today.</li>
+    <li>I’ll send a reminder on Friday <input type="text" class="gap-input" data-field="w2_g1_4" aria-label="Grammar 1-4"> you forget.</li>
+    <li>If the Demand team <input type="text" class="gap-input" data-field="w2_g1_5a" aria-label="Grammar 1-5a"> (not / have) extra stock, we <input type="text" class="gap-input" data-field="w2_g1_5b" aria-label="Grammar 1-5b"> (offer) another size.</li>
+    <li>Book the trucks now. <input type="text" class="gap-input" data-field="w2_g1_6" aria-label="Grammar 1-6">, you may not find any space later.</li>
+    <li>If an order <input type="text" class="gap-input" data-field="w2_g1_7a" aria-label="Grammar 1-7a"> (arrive) after the cut-off, it always <input type="text" class="gap-input" data-field="w2_g1_7b" aria-label="Grammar 1-7b"> (go) into the next allocation.</li>
+    <li><input type="text" class="gap-input" data-field="w2_g1_8" aria-label="Grammar 1-8"> you have any questions, please do not hesitate to contact me. (formal)</li>
+  </ol>
+  <h4>Exercise 2 – Join each pair of sentences using the word in brackets.</h4>
+  <ol class="ex">
+    <li>You send the list by Monday. I will use your priorities. (provided that)<textarea class="write-area" rows="1" data-field="w2_g2_1" placeholder="Write combined sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>You don’t send the list. I will keep the original order. (unless)<textarea class="write-area" rows="1" data-field="w2_g2_2" placeholder="Write combined sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>There might be a delay. Please warn the customer. (in case)<textarea class="write-area" rows="1" data-field="w2_g2_3" placeholder="Write combined sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>Reserve the quantity now. The stock will go to another customer. (otherwise)<textarea class="write-area" rows="1" data-field="w2_g2_4" placeholder="Write combined sentence..."></textarea><div class="print-mirror"></div></li>
+    <li>You accept a later delivery. I can reserve part of the new batch. (as long as)<textarea class="write-area" rows="1" data-field="w2_g2_5" placeholder="Write combined sentence..."></textarea><div class="print-mirror"></div></li>
+  </ol>
+
+  <h3>E. Fluency – the diplomatic “no” <span class="t">15 min</span></h3>
+  <h4>Task 1 – Prepare (5 min)</h4>
+  <p>Situation: your distributor asks for 30,000 extra units that you cannot supply. The next replenishment is in three weeks. Make notes using the 4-step model (acknowledge – explain – alternative – next step). Include <strong>one conditional sentence</strong> and <strong>one word from Part B</strong>.</p>
+  <textarea class="write-area" rows="3" data-field="w2_prep" placeholder="1. Acknowledge: ...&#10;2. Explain: ...&#10;3. Alternative: ...&#10;4. Next step: ..."></textarea>
+  <div class="print-mirror"></div>
+
+  <h4>Task 2 – Live Teams Role-Play (6 min)</h4>
+  <div class="teams-box">
+    <span class="teams-tag">Teams Live Task</span>
+    Deliver your refusal <strong>live to your trainer</strong> in 60–90 seconds, as if on a Teams call. Your trainer will play the distributor and <strong>push back</strong> (e.g., <em>“But this customer is very important…”</em>). Respond diplomatically, hold your position while staying constructive, and reach agreement on an alternative. Then switch roles if time permits.<br>
+    <strong>Useful phrases:</strong> <em>I understand your position, but… / That is a fair point; however… / Let me see what I can do. / That works for us.</em>
+  </div>
+
+  <h4>Task 3 – Write (4 min)</h4>
+  <p>Write the follow-up message (40–60 words) confirming what was agreed.</p>
+  <div class="email-compose">
+    <div class="email-compose-hdr">
+      <span><strong>Follow-up Message:</strong> Agreed Alternative</span>
+      <span class="word-pill" id="w2_email_wc">0 words · Target: 40–60</span>
+    </div>
+    <textarea class="write-area" rows="4" data-field="w2_email" data-word-target="w2_email_wc" data-min-words="40" data-max-words="60" placeholder="Hi ..., Following our call today..."></textarea>
+    <div class="print-mirror"></div>
+  </div>
+
+  <h3>F. Session wrap-up &amp; reflection <span class="t">2 min</span></h3>
+  <div class="check-group">
+    <label class="check-item"><input type="checkbox" data-field="w2_c1"> I can make a refusal sound diplomatic.</label>
+    <label class="check-item"><input type="checkbox" data-field="w2_c2"> I can use unless / provided that / in case / otherwise correctly.</label>
+    <label class="check-item"><input type="checkbox" data-field="w2_c3"> I did not use “will” after “if”.</label>
+  </div>
+  <p>One thing I will do differently next time I have to say no: <input type="text" class="gap-input" style="width: 52%;" data-field="w2_takeaway" placeholder="Type your reflection..."></p>
+
+</main>
+
+<script>
+(function() {
+  const STORAGE_KEY = document.body.dataset.storageKey;
+  const statusEl = document.getElementById('saveStatus');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function updateMirrors() {
+    document.querySelectorAll('textarea.write-area').forEach(ta => {
+      const mirror = ta.nextElementSibling;
+      if (mirror && mirror.classList.contains('print-mirror')) {
+        const val = ta.value.trim();
+        if (val) {
+          mirror.textContent = ta.value;
+          mirror.classList.remove('empty-lines', 'tall');
+        } else {
+          mirror.textContent = '';
+          mirror.classList.add('empty-lines');
+          if (parseInt(ta.getAttribute('rows') || '2', 10) >= 4) {
+            mirror.classList.add('tall');
+          }
+        }
+      }
+    });
+  }
+
+  function updateWordCounts() {
+    document.querySelectorAll('textarea[data-word-target]').forEach(ta => {
+      const pill = document.getElementById(ta.dataset.wordTarget);
+      if (!pill) return;
+      const min = parseInt(ta.dataset.minWords || '0', 10);
+      const max = parseInt(ta.dataset.maxWords || '9999', 10);
+      const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+      pill.textContent = words + ' word' + (words === 1 ? '' : 's') + ' · Target: ' + min + '–' + max;
+      if (words >= min && words <= max) {
+        pill.classList.add('in-range');
+      } else {
+        pill.classList.remove('in-range');
+      }
+    });
+  }
+
+  function saveState() {
+    if (!STORAGE_KEY) return;
+    const data = {};
+    document.querySelectorAll('[data-field]').forEach(el => {
+      const key = el.dataset.field;
+      if (el.type === 'checkbox') {
+        data[key] = el.checked;
+      } else if (el.type === 'radio') {
+        if (el.checked) data[key] = el.value;
+      } else {
+        data[key] = el.value;
+      }
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (statusEl) statusEl.textContent = 'Saved in browser';
+    } catch (e) {}
+    updateMirrors();
+    updateWordCounts();
+  }
+
+  function loadState() {
+    if (!STORAGE_KEY) return;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      document.querySelectorAll('[data-field]').forEach(el => {
+        const key = el.dataset.field;
+        if (!(key in data)) return;
+        if (el.type === 'checkbox') {
+          el.checked = Boolean(data[key]);
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === data[key]);
+        } else {
+          el.value = data[key];
+        }
+      });
+    } catch (e) {}
+    updateMirrors();
+    updateWordCounts();
+  }
+
+  document.addEventListener('input', saveState);
+  document.addEventListener('change', saveState);
+  window.addEventListener('beforeprint', updateMirrors);
+
+  if (clearBtn) {
+    let confirmPending = false;
+    let resetTimer = null;
+    clearBtn.addEventListener('click', () => {
+      if (!confirmPending) {
+        confirmPending = true;
+        clearBtn.textContent = 'Confirm Clear?';
+        clearBtn.classList.remove('btn-secondary');
+        clearBtn.classList.add('btn-danger');
+        resetTimer = setTimeout(() => {
+          confirmPending = false;
+          clearBtn.textContent = 'Clear Inputs';
+          clearBtn.classList.remove('btn-danger');
+          clearBtn.classList.add('btn-secondary');
+        }, 3500);
+      } else {
+        clearTimeout(resetTimer);
+        confirmPending = false;
+        clearBtn.textContent = 'Clear Inputs';
+        clearBtn.classList.remove('btn-danger');
+        clearBtn.classList.add('btn-secondary');
+        document.querySelectorAll('[data-field]').forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = false;
+          } else {
+            el.value = '';
+          }
+        });
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        if (statusEl) statusEl.textContent = 'Cleared';
+        updateMirrors();
+        updateWordCounts();
+      }
+    });
+  }
+
+  loadState();
+  updateMirrors();
+  updateWordCounts();
+})();
+</script>
+</body>
+</html>
