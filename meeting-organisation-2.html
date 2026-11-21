@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Organization Exercise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .scenario {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #2196f3;
+        }
+        .conversation {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .message {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .person-a {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+        .person-b {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+        }
+        .person-c {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+        }
+        .options {
+            margin: 15px 0;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 15px;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f5f5f5;
+            border-color: #2196f3;
+        }
+        .option-btn.correct {
+            background: #c8e6c9 !important;
+            border-color: #4caf50 !important;
+            color: #2e7d32;
+        }
+        .option-btn.incorrect {
+            background: #ffcdd2 !important;
+            border-color: #f44336 !important;
+            color: #c62828;
+        }
+        .feedback {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .feedback.correct {
+            background: #c8e6c9;
+            color: #2e7d32;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #ffcdd2;
+            color: #c62828;
+            display: block;
+        }
+        .expressions {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        .expressions h3 {
+            color: #f57c00;
+            margin-top: 0;
+        }
+        .expression-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+        }
+        .expression {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #e65100;
+            font-size: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .next-btn {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            display: none;
+        }
+        .next-btn:hover {
+            background: #1976d2;
+        }
+        .score {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+            color: #1976d2;
+            font-weight: bold;
+        }
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #2196f3);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .hidden {
+            display: none;
+        }
+        .question-header {
+            color: #1976d2;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📅 Meeting Organization Exercise</h1>
+        
+        <div class="expressions">
+            <h3>Key Target Expressions (12):</h3>
+            <div class="expression-grid">
+                <div class="expression">1. "Are you free on...?"</div>
+                <div class="expression">2. "I'm afraid I can't"</div>
+                <div class="expression">3. "Can we reschedule?"</div>
+                <div class="expression">4. "How about...?"</div>
+                <div class="expression">5. "...is fine with me"</div>
+                <div class="expression">6. "I can make it at..."</div>
+                <div class="expression">7. "Does... work for you?"</div>
+                <div class="expression">8. "I'm sorry, I'm busy"</div>
+                <div class="expression">9. "Shall we meet at...?"</div>
+                <div class="expression">10. "Sounds good to me"</div>
+                <div class="expression">11. "Let's meet at..."</div>
+                <div class="expression">12. "See you then!"</div>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <strong>Scenario:</strong> Practice organizing meetings, study sessions, client calls, and social get-togethers using natural, polite English expressions (A1-A2 level).
+        </div>
+
+        <div class="score">Score: <span id="score">0</span>/12</div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Dynamic Question Area -->
+        <div id="quizContainer" class="conversation">
+            <div id="questionHeader" class="question-header"></div>
+            <div id="conversationBox"></div>
+            <div class="message person-a">
+                <strong>You:</strong> <em id="promptText">Choose the best response:</em>
+            </div>
+            <div id="optionsContainer" class="options"></div>
+            <div id="feedbackBox" class="feedback"></div>
+            <button id="nextBtn" class="next-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results" class="hidden">
+            <div class="conversation">
+                <h2 style="color: #1976d2; text-align: center;">🎉 Exercise Complete!</h2>
+                <div id="finalScore" class="score" style="font-size: 24px;"></div>
+                
+                <div class="message" style="background: #e8f5e8; border-left: 4px solid #4caf50;">
+                    <strong>Core Skills Reviewed:</strong><br><br>
+                    • <strong>Asking availability:</strong> "Are you free on...?", "Does... work for you?"<br>
+                    • <strong>Declining politely:</strong> "I'm sorry, I'm busy", "I'm afraid I can't"<br>
+                    • <strong>Proposing & Rescheduling:</strong> "How about...?", "Can we reschedule?", "Shall we meet at...?"<br>
+                    • <strong>Confirming & Agreeing:</strong> "...is fine with me", "Sounds good to me", "I can make it at...", "Let's meet at...", "See you then!"
+                </div>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="next-btn" onclick="restartExercise()" style="display: inline-block;">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = [
+            {
+                title: "Question 1/12 - Planning a Study Session",
+                target: "Are you free on...?",
+                dialogue: [
+                    { speaker: "Mark", class: "person-b", text: "Hi! We need to prepare for our English exam this week." }
+                ],
+                prompt: "Check Mark's availability for Tuesday:",
+                options: [
+                    { text: "Are you free on Tuesday afternoon?", correct: true, expl: "Perfect! 'Are you free on...?' is a natural way to check availability." },
+                    { text: "Do you must study Tuesday?", correct: false, expl: "Incorrect grammar for checking availability." },
+                    { text: "You have time on Tuesday, yes?", correct: false, expl: "This sounds too direct and unnatural." }
+                ]
+            },
+            {
+                title: "Question 2/12 - Declining a Dinner Invitation",
+                target: "I'm afraid I can't",
+                dialogue: [
+                    { speaker: "Chloe", class: "person-b", text: "Would you like to get dinner together this Saturday evening?" }
+                ],
+                prompt: "Politely decline because you already have plans:",
+                options: [
+                    { text: "I'm afraid I can't. I'm visiting my parents this weekend.", correct: true, expl: "Great! 'I'm afraid I can't' is a polite way to turn down an invitation." },
+                    { text: "No, Saturday is bad.", correct: false, expl: "Too abrupt and direct." },
+                    { text: "I don't want to go.", correct: false, expl: "This can sound rude." }
+                ]
+            },
+            {
+                title: "Question 3/12 - Rescheduling a Medical Appointment",
+                target: "Can we reschedule?",
+                dialogue: [
+                    { speaker: "Receptionist", class: "person-c", text: "Dental Clinic, how can I help you today?" }
+                ],
+                prompt: "Ask to change your appointment time due to work:",
+                options: [
+                    { text: "Hello, I have an appointment at 3 PM today. Can we reschedule?", correct: true, expl: "Spot on! 'Can we reschedule?' is the standard polite request." },
+                    { text: "Hello, change my time now please.", correct: false, expl: "Too demanding for professional communication." },
+                    { text: "Hello, I don't like my appointment time.", correct: false, expl: "Does not clearly ask for a new time." }
+                ]
+            },
+            {
+                title: "Question 4/12 - Proposing an Alternative Time",
+                target: "How about...?",
+                dialogue: [
+                    { speaker: "Sam", class: "person-b", text: "I have a budget meeting on Thursday morning, so I can't make it then." }
+                ],
+                prompt: "Suggest meeting in the afternoon instead:",
+                options: [
+                    { text: "How about Thursday at 2 PM instead?", correct: true, expl: "Excellent! 'How about...?' is widely used to propose alternate times." },
+                    { text: "Why not you change your meeting?", correct: false, expl: "Too pushy and natural." },
+                    { text: "So Thursday is dead.", correct: false, expl: "Incorrect idiom." }
+                ]
+            },
+            {
+                title: "Question 5/12 - Agreeing to a Meeting Spot",
+                target: "...is fine with me",
+                dialogue: [
+                    { speaker: "Partner", class: "person-c", text: "Should we meet at 10 AM in the main library?" }
+                ],
+                prompt: "Agree politely to the suggested location and time:",
+                options: [
+                    { text: "10 AM at the library is fine with me. See you there!", correct: true, expl: "Well done! '...is fine with me' expresses polite agreement." },
+                    { text: "I accept your time.", correct: false, expl: "Unnatural and overly formal." },
+                    { text: "If I must.", correct: false, expl: "Sounds reluctant or unenthusiastic." }
+                ]
+            },
+            {
+                title: "Question 6/12 - Confirming Specific Time Slot",
+                target: "I can make it at...",
+                dialogue: [
+                    { speaker: "Supervisor", class: "person-b", text: "When are you available for our monthly review on Friday?" }
+                ],
+                prompt: "State your specific free time slot clearly:",
+                options: [
+                    { text: "I can make it at 11 AM.", correct: true, expl: "Perfect! 'I can make it at...' indicates specific availability." },
+                    { text: "I am arriving at 11 AM.", correct: false, expl: "'Arriving' refers to travel, not availability." },
+                    { text: "11 AM is possible for my existence.", correct: false, expl: "Unnatural phrasing." }
+                ]
+            },
+            {
+                title: "Question 7/12 - Checking Suitability for a Team Sync",
+                target: "Does... work for you?",
+                dialogue: [
+                    { speaker: "You", class: "person-a", text: "I looked at our project schedule for this week." }
+                ],
+                prompt: "Ask your colleague if Wednesday afternoon is convenient:",
+                options: [
+                    { text: "Does Wednesday at 3 PM work for you?", correct: true, expl: "Awesome! 'Does... work for you?' checks convenience politely." },
+                    { text: "Is Wednesday 3 PM working your job?", correct: false, expl: "Incorrect phrasing." },
+                    { text: "You must come Wednesday at 3 PM, ok?", correct: false, expl: "Too aggressive." }
+                ]
+            },
+            {
+                title: "Question 8/12 - Polite Refusal Due to Schedule",
+                target: "I'm sorry, I'm busy",
+                dialogue: [
+                    { speaker: "Client", class: "person-c", text: "Can we have a short call today at 4 PM?" }
+                ],
+                prompt: "Politely inform the client that your schedule is full:",
+                options: [
+                    { text: "I'm sorry, I'm busy at 4 PM. Could we do tomorrow morning?", correct: true, expl: "Great! 'I'm sorry, I'm busy' is courteous and clear." },
+                    { text: "No, my calendar is closed.", correct: false, expl: "Too harsh." },
+                    { text: "I refuse 4 PM.", correct: false, expl: "Incorrect and impolite." }
+                ]
+            },
+            {
+                title: "Question 9/12 - Proposing a Meeting Place",
+                target: "Shall we meet at...?",
+                dialogue: [
+                    { speaker: "Coworker", class: "person-b", text: "I really need a coffee break! Where should we go?" }
+                ],
+                prompt: "Suggest going to the ground floor cafe:",
+                options: [
+                    { text: "Shall we meet at the cafeteria downstairs in 10 minutes?", correct: true, expl: "Spot on! 'Shall we meet at...?' suggests locations nicely." },
+                    { text: "Go to cafe downstairs now.", correct: false, expl: "Sounds like a command rather than a polite invitation." },
+                    { text: "Are we going cafe down?", correct: false, expl: "Grammatically incomplete." }
+                ]
+            },
+            {
+                title: "Question 10/12 - Expressing Enthusiastic Agreement",
+                target: "Sounds good to me",
+                dialogue: [
+                    { speaker: "Manager", class: "person-c", text: "How about taking the team out for lunch next Friday at 1 PM?" }
+                ],
+                prompt: "Agree enthusiastically to the manager's proposal:",
+                options: [
+                    { text: "Sounds good to me! Count me in.", correct: true, expl: "Perfect! 'Sounds good to me' expresses clear agreement." },
+                    { text: "It hears well to me.", correct: false, expl: "Incorrect literal translation." },
+                    { text: "I have no objection.", correct: false, expl: "Too formal for a casual lunch proposal." }
+                ]
+            },
+            {
+                title: "Question 11/12 - Setting a Specific Place",
+                target: "Let's meet at...",
+                dialogue: [
+                    { speaker: "Teammate", class: "person-b", text: "Where is the best place to prepare our presentation?" }
+                ],
+                prompt: "Decide on Meeting Room B:",
+                options: [
+                    { text: "Let's meet at Meeting Room B at 2 PM.", correct: true, expl: "Great! 'Let's meet at...' is clear and direct for setting a venue." },
+                    { text: "Let us to meet Room B.", correct: false, expl: "Grammar mistake with 'to meet'." },
+                    { text: "We go Room B at 2 PM.", correct: false, expl: "Incomplete phrase structure." }
+                ]
+            },
+            {
+                title: "Question 12/12 - Finalizing and Closing Plans",
+                target: "See you then!",
+                dialogue: [
+                    { speaker: "Client", class: "person-c", text: "Great! Everything is set for our call tomorrow at 10 AM." }
+                ],
+                prompt: "Confirm and end the arrangement warmly:",
+                options: [
+                    { text: "Perfect! See you then!", correct: true, expl: "Excellent! 'See you then!' is the ideal closing phrase." },
+                    { text: "Perfect! I look at you there!", correct: false, expl: "Incorrect phrase." },
+                    { text: "Okay, meeting finished.", correct: false, expl: "Awkward closing." }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let activeQuestions = [];
+
+        // Fisher-Yates Shuffle Algorithm
+        function fisherYatesShuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            score = 0;
+            currentQuestion = 0;
+            document.getElementById('score').textContent = score;
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+
+            // Deep clone questions and shuffle options for each question using Fisher-Yates
+            activeQuestions = JSON.parse(JSON.stringify(questionsData));
+            activeQuestions.forEach(q => {
+                fisherYatesShuffle(q.options);
+            });
+
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = activeQuestions[currentQuestion];
+            document.getElementById('questionHeader').textContent = q.title;
+            
+            // Build conversation HTML
+            let dialogueHtml = '';
+            q.dialogue.forEach(d => {
+                dialogueHtml += `
+                    <div class="message ${d.class}">
+                        <strong>${d.speaker}:</strong> ${d.text}
+                    </div>`;
+            });
+            document.getElementById('conversationBox').innerHTML = dialogueHtml;
+            document.getElementById('promptText').textContent = q.prompt;
+
+            // Build options HTML with dynamic A/B/C labels
+            const labels = ['A', 'B', 'C'];
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <button class="option-btn" onclick="checkAnswer(${idx})">
+                        ${labels[idx]}) ${opt.text}
+                    </button>`;
+            });
+            document.getElementById('optionsContainer').innerHTML = optionsHtml;
+
+            // Reset UI states
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.className = 'feedback';
+            feedbackBox.style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+
+            updateProgressBar();
+        }
+
+        function checkAnswer(selectedIndex) {
+            const q = activeQuestions[currentQuestion];
+            const buttons = document.querySelectorAll('#optionsContainer .option-btn');
+            const feedbackBox = document.getElementById('feedbackBox');
+            const nextBtn = document.getElementById('nextBtn');
+
+            buttons.forEach(btn => btn.disabled = true);
+
+            const selectedOption = q.options[selectedIndex];
+
+            if (selectedOption.correct) {
+                score++;
+                buttons[selectedIndex].classList.add('correct');
+                feedbackBox.className = 'feedback correct';
+                feedbackBox.innerHTML = `<strong>Correct!</strong> ${selectedOption.expl}`;
+            } else {
+                buttons[selectedIndex].classList.add('incorrect');
+                
+                // Highlight correct option
+                q.options.forEach((opt, idx) => {
+                    if (opt.correct) {
+                        buttons[idx].classList.add('correct');
+                    }
+                });
+
+                feedbackBox.className = 'feedback incorrect';
+                feedbackBox.innerHTML = `<strong>Not quite!</strong> ${selectedOption.expl}`;
+            }
+
+            document.getElementById('score').textContent = score;
+            feedbackBox.style.display = 'block';
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < activeQuestions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / activeQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+            
+            const total = activeQuestions.length;
+            const percentage = Math.round((score / total) * 100);
+            let message = '';
+            
+            if (percentage >= 90) {
+                message = `Outstanding! ${score}/${total} (${percentage}%) 🌟`;
+            } else if (percentage >= 70) {
+                message = `Great job! ${score}/${total} (${percentage}%) 👏`;
+            } else if (percentage >= 50) {
+                message = `Good effort! ${score}/${total} (${percentage}%) 👍`;
+            } else {
+                message = `Keep practicing! ${score}/${total} (${percentage}%) 📚`;
+            }
+            
+            document.getElementById('finalScore').innerHTML = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercise() {
+            initQuiz();
+        }
+
+        // Initialize quiz on page load
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
