@@ -1,0 +1,678 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>SAP Finance English</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout concept: a consulting war room. Sticky toolbar with XP, one focused card at a time, client cases arrive as ticket cards. */
+:root{
+ --bg:#E9EDF0;--dot:rgba(46,94,126,.17);--panel:#fff;--panel2:#F2F5F7;--ink:#16242E;--muted:#51636F;--line:#C9D4DB;
+ --steel:#2E5E7E;--steel-soft:#DCE9F1;--head-bg:#234B66;--head-ink:#fff;
+ --accent:#C9490B;--accent-soft:#FDE7DA;--on-accent:#fff;
+ --good:#1B7A3D;--good-soft:#DDF3E4;--bad:#B42318;--bad-soft:#FCE2DF;--star:#F0A81B;
+ --f-display:'Barlow Condensed','Arial Narrow',sans-serif;--f-body:'Atkinson Hyperlegible',system-ui,sans-serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#11191F;--dot:rgba(127,180,214,.13);--panel:#1A252D;--panel2:#222F39;--ink:#E8EFF3;--muted:#9DB0BC;--line:#34444F;
+ --steel:#7FB4D6;--steel-soft:#213644;--head-bg:#2B4A5E;--head-ink:#E8EFF3;
+ --accent:#FF8A4C;--accent-soft:#3F2415;--on-accent:#1B0E05;
+ --good:#5FD08A;--good-soft:#17382A;--bad:#FF8A80;--bad-soft:#3E1E1C;--star:#F5B83A;color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#11191F;--dot:rgba(127,180,214,.13);--panel:#1A252D;--panel2:#222F39;--ink:#E8EFF3;--muted:#9DB0BC;--line:#34444F;
+ --steel:#7FB4D6;--steel-soft:#213644;--head-bg:#2B4A5E;--head-ink:#E8EFF3;
+ --accent:#FF8A4C;--accent-soft:#3F2415;--on-accent:#1B0E05;
+ --good:#5FD08A;--good-soft:#17382A;--bad:#FF8A80;--bad-soft:#3E1E1C;--star:#F5B83A;color-scheme:dark}
+*{box-sizing:border-box}
+body{background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.4px,transparent 1.7px);background-size:22px 22px;color:var(--ink);font:17px/1.5 var(--f-body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+.inner{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.02em;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:2.3rem}h2{font-size:1.7rem}h3{font-size:1.3rem}
+p{margin:0}
+button{font-family:inherit;color:inherit}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--panel);border-bottom:1px solid var(--line)}
+.topbar .inner{padding-block:8px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;font:700 1.35rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--steel)}
+.hud{display:flex;gap:6px;flex-wrap:wrap}
+.chip-h{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font-weight:700;font-size:14px;white-space:nowrap}
+.chip-h svg{color:var(--accent)}
+.xprow{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:var(--muted)}
+.xpbar{flex:1;height:7px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
+.xpfill{height:100%;width:0;background:var(--accent);transition:width .5s}
+.main{padding-block:20px 90px}
+.tabs{display:flex;gap:6px;margin-bottom:16px}
+.tab{flex:1;min-width:0;padding:10px 6px;border:2px solid var(--line);border-radius:12px;background:var(--panel);font:700 1.05rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;cursor:pointer}
+.tab.on{background:var(--steel);border-color:var(--steel);color:var(--panel)}
+.tab small{font:500 11px var(--f-mono);display:block;opacity:.8}
+.intro{margin-bottom:14px;display:grid;gap:6px}
+.intro p{color:var(--muted)}
+.subnav{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.sub{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid var(--line);background:var(--panel);font-weight:700;font-size:14px;cursor:pointer}
+.sub.on{border-color:var(--accent);background:var(--accent-soft)}
+.subn{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--steel-soft);color:var(--steel);font:700 12px var(--f-mono)}
+.sub.done .subn{background:var(--good);color:var(--panel)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 20px -14px rgba(22,36,46,.5);display:grid;gap:14px}
+.lead{color:var(--muted)}
+.btn{font:700 16px/1 var(--f-body);padding:13px 18px;min-height:46px;border-radius:10px;border:2px solid var(--ink);background:var(--panel);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.small{padding:8px 12px;min-height:36px;font-size:14px}
+.btn.ghost{border-color:var(--line);color:var(--muted)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--steel);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.ico{display:block}
+/* word wall */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;align-items:start}
+.wcard{border:2px solid var(--line);border-radius:14px;background:var(--panel2);min-width:0}
+.wcard.open{grid-column:1/-1;background:var(--panel);border-color:var(--steel)}
+.wcard.verb.open{border-color:var(--accent)}
+.whead{width:100%;display:flex;align-items:center;gap:10px;padding:10px;background:none;border:0;cursor:pointer;text-align:left;color:var(--steel)}
+.wcard.verb .whead{color:var(--accent)}
+.wword{font:700 1.2rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink);overflow-wrap:anywhere}
+.vtag{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;border:2px dashed currentColor;font:500 11px var(--f-mono);text-transform:uppercase}
+.seen-dot{margin-left:auto;width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
+.wcard.seen .seen-dot{background:var(--good)}
+.wbody{padding:0 12px 12px;display:grid;gap:6px}
+.wex{font-style:italic;color:var(--muted)}.walt{font:500 12px var(--f-mono);color:var(--muted)}
+/* match */
+.mgrid{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
+.mcol{display:grid;gap:8px;align-content:start;min-width:0}
+.mitem,.mdef{text-align:left;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer;font-size:15.5px;min-width:0;overflow-wrap:anywhere}
+.mitem{font-weight:700}
+.mitem.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mitem.ok,.mdef.ok{border-color:var(--good);background:var(--good-soft);cursor:default}
+/* gap fill */
+.bank{display:flex;gap:8px;flex-wrap:wrap;padding:12px;border-radius:12px;background:var(--panel2);border:1px dashed var(--line)}
+.chip{padding:8px 14px;border-radius:999px;border:2px solid var(--steel);background:var(--panel);font-weight:700;cursor:pointer}
+.chip.sel{background:var(--steel);color:var(--panel)}
+.chip.used{opacity:.3;cursor:default}
+.sents{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.sent{line-height:2.3}
+.gap{min-width:96px;padding:3px 10px;margin:0 3px;border-radius:8px;border:2px dashed var(--steel);background:var(--steel-soft);font-weight:700;cursor:pointer;min-height:34px}
+.gap.filled{border-style:solid}.gap.active{border-color:var(--accent);background:var(--accent-soft)}
+.gap.ok{border-color:var(--good);background:var(--good-soft);cursor:default}
+.gap.bad,.oslot.bad{border-color:var(--bad);background:var(--bad-soft)}
+.msg{font-weight:700;color:var(--muted)}
+/* spell */
+.clue{display:flex;gap:14px;align-items:center;padding:14px;border-radius:12px;background:var(--panel2);color:var(--steel)}
+.clue p{color:var(--ink)}
+.slots,.tiles{display:flex;gap:6px;flex-wrap:wrap}
+.slotgrp{display:flex;gap:5px;margin-right:14px}
+.slot,.tile{width:40px;height:46px;border-radius:9px;border:2px solid var(--steel);background:var(--panel);font:700 1.4rem var(--f-display);text-transform:uppercase;cursor:pointer;padding:0}
+.slot{background:var(--panel2);border-style:dashed}.slot.f{border-style:solid;background:var(--panel)}
+.slot.lock{border-color:var(--accent);cursor:default}.slot.bad{border-color:var(--bad);background:var(--bad-soft)}
+.slot.ok{border-color:var(--good);background:var(--good-soft)}
+.tile.used{opacity:.2;cursor:default}
+/* jobs */
+.rail{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;margin-bottom:14px}
+.rn{height:34px;border-radius:8px;border:2px solid var(--line);background:var(--panel);font:700 13px var(--f-mono);cursor:pointer;padding:0}
+.rn.done{background:var(--steel);border-color:var(--steel);color:var(--panel)}
+.rn.cur{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.stack{display:grid;gap:14px}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 20px -14px rgba(22,36,46,.5)}
+.jobhead{display:flex;justify-content:space-between;padding:8px 16px;background:var(--head-bg);color:var(--head-ink)}
+.jobbody{padding:16px;display:grid;gap:12px;border-bottom:2px dashed var(--line)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:0}
+.fields dt{font:500 11px var(--f-mono);text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
+.fields dd{margin:0;font-weight:700}
+.pri{padding:2px 10px;border-radius:999px;font-size:13px;background:var(--steel-soft);color:var(--steel)}
+.pri.Urgent{background:var(--accent-soft);color:var(--accent)}.pri.Compliance{background:var(--bad-soft);color:var(--bad)}.pri.Safety{background:var(--bad-soft);color:var(--bad)}
+.quote{margin:0;padding:10px 14px;border-radius:12px;background:var(--panel2);font-style:italic}
+.quote::before{content:"“";font:700 2rem/0 var(--f-display);color:var(--accent);margin-right:4px;vertical-align:-8px}
+.think{padding:12px 16px;display:flex;gap:10px;align-items:baseline;background:var(--accent-soft);border-radius:0 0 14px 14px}
+.think b{font:500 12px var(--f-mono);text-transform:uppercase;color:var(--accent);letter-spacing:.08em;white-space:nowrap}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.stepn{display:block;font:500 12px var(--f-mono);color:var(--accent);letter-spacing:.08em}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;background:var(--panel);border:2px solid var(--line);border-radius:14px;cursor:pointer;text-align:center;color:var(--steel)}
+.opt b{color:var(--ink);font:700 1.1rem var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.opt.good,.copt.good{border-color:var(--good);background:var(--good-soft)}
+.opt.bad,.copt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.why{font-size:14.5px;color:var(--ink);text-align:left;font-style:normal;display:block;margin-top:4px}
+.copt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:12px;border:2px solid var(--line);border-radius:12px;background:var(--panel);cursor:pointer}
+.cl{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--steel-soft);color:var(--steel);font:700 13px var(--f-mono)}
+.ct{min-width:0}
+.hint{padding:10px 14px;border-radius:10px;background:var(--steel-soft);font-size:15px}
+.olist{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.oslot,.ostep{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:11px 12px;border-radius:12px;border:2px dashed var(--line);background:var(--panel2);cursor:pointer;color:var(--muted)}
+.oslot.filled{border-style:solid;border-color:var(--steel);background:var(--panel);color:var(--ink)}
+.oslot.ok{border-color:var(--good);background:var(--good-soft);color:var(--ink);cursor:default}
+.onum{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--steel);color:var(--panel);font:700 13px var(--f-mono)}
+.ostep{border:2px solid var(--steel);border-style:solid;background:var(--panel);color:var(--ink)}
+.pool{display:grid;gap:8px}
+.explain{padding:12px 14px;border-radius:12px;background:var(--good-soft);border:1px solid var(--good)}
+.debrief{background:var(--panel);border:2px solid var(--good);border-radius:16px;padding:18px;display:grid;gap:12px}
+.stars{display:flex;gap:4px}.stars svg{width:30px;height:30px}
+.star{fill:none;stroke:var(--line);stroke-width:2}.star.on{fill:var(--star);stroke:var(--ink);animation:pop .5s both}
+.say{padding:12px 14px;border-radius:12px;background:var(--steel-soft);display:grid;gap:8px}
+/* results */
+.rank{text-align:center;display:grid;gap:8px;padding:10px 0}
+.rank h2{font-size:2.6rem;color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{padding:12px;border-radius:12px;background:var(--panel2);text-align:center}
+.stat b{display:block;font:700 1.8rem var(--f-display)}
+.pegs{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px}
+.peg{display:grid;justify-items:center;gap:4px;padding:10px 4px;border-radius:12px;border:2px dashed var(--line);color:var(--muted);font-size:12px;text-align:center}
+.peg.on{border:2px solid var(--steel);color:var(--steel);background:var(--panel)}
+.peg .stars svg{width:14px;height:14px}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.badge{padding:12px;border-radius:12px;border:2px dashed var(--line);color:var(--muted);display:grid;gap:2px}
+.badge b{font:700 1.1rem var(--f-display);text-transform:uppercase}
+.badge.on{border:2px solid var(--accent);background:var(--accent-soft);color:var(--ink)}
+.badge.on b{color:var(--accent)}
+.talk{margin:0;padding-left:20px;display:grid;gap:6px}
+#toasts{position:fixed;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom,0px));display:grid;gap:6px;justify-items:center;pointer-events:none;z-index:20}
+.toast{padding:8px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:700;animation:rise .3s both}
+.toast.level{background:var(--accent);color:var(--on-accent)}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:420px){h1{font-size:1.9rem}.mgrid{grid-template-columns:1fr 1.3fr}.slot,.tile{width:34px;height:42px}}
+</style>
+<header class="topbar"><div class="inner">
+ <div class="toprow">
+  <div class="brand"><svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><path d="M24 4l17 10v20L24 44 7 34V14z"/><circle cx="24" cy="24" r="7"/></svg>SAP Finance English</div>
+  <div class="hud" aria-label="Your score">
+   <span class="chip-h" id="hud-level">Analyst</span>
+   <span class="chip-h"><span id="hud-xp">0</span> XP</span>
+   <span class="chip-h"><svg width="16" height="16" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M24 4c2 8 12 12 12 24a12 12 0 0 1-24 0c0-6 4-8 5-13 3 2 4 5 4 7 4-4 4-12 3-18z"/></svg><span id="hud-streak">0</span></span>
+  </div>
+ </div>
+ <div class="xprow"><div class="xpbar"><div class="xpfill" id="xpfill"></div></div><span id="xpnext"></span></div>
+</div></header>
+<main class="main"><div class="inner">
+ <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+ <div id="app"></div>
+</div></main>
+<div id="toasts" aria-live="polite"></div>
+<script>
+(function(){
+
+'use strict';
+var $=function(s,el){return (el||document).querySelector(s)};
+var $$=function(s,el){return Array.prototype.slice.call((el||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var SPEAK='speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined';
+function speak(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+
+function icon(k,s){s=s||44;return '<svg class="ico" width="'+s+'" height="'+s+'" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[k]+'</svg>'}
+var CHECK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+function starsHTML(n){var o='';for(var i=0;i<3;i++)o+='<svg viewBox="0 0 48 48" aria-hidden="true"><polygon class="star '+(i<n?'on':'')+'" points="24,4 30,18 45,19 33,29 37,44 24,36 11,44 15,29 3,19 18,18"/></svg>';return '<div class="stars" role="img" aria-label="'+n+' of 3 stars">'+o+'</div>'}
+
+var IC={
+costcenter:'<rect x="8" y="14" width="32" height="28" rx="2"/><path d="M8 14l16-9 16 9"/><path d="M16 22h4M28 22h4M16 30h4M28 30h4"/>',
+profitcenter:'<path d="M6 6v36h38"/><rect x="13" y="26" width="7" height="12"/><rect x="24" y="19" width="7" height="19"/><rect x="35" y="10" width="7" height="28"/>',
+ledger:'<path d="M10 6h24a4 4 0 0 1 4 4v32H14a4 4 0 0 1-4-4z"/><path d="M10 38a4 4 0 0 1 4-4h24"/><path d="M18 14h14M18 20h10"/>',
+order:'<path d="M12 5h18l8 8v30H12z"/><path d="M30 5v8h8"/><path d="M18 22h14M18 29h14M18 36h8"/>',
+allocation:'<circle cx="9" cy="24" r="4"/><path d="M13 24h11M24 24l12.5-13M24 24h12.5M24 24l12.5 13"/><circle cx="40" cy="10" r="3.5"/><circle cx="40" cy="24" r="3.5"/><circle cx="40" cy="38" r="3.5"/>',
+variance:'<rect x="8" y="18" width="12" height="24"/><rect x="28" y="7" width="12" height="35"/><path d="M4 18h22M24 18V7" stroke-dasharray="3 3"/>',
+accrual:'<circle cx="22" cy="24" r="15"/><path d="M22 14v10l7 4"/><circle cx="38" cy="38" r="6"/>',
+recon:'<rect x="4" y="8" width="14" height="32" rx="2"/><rect x="30" y="8" width="14" height="32" rx="2"/><path d="M21 18h6M24 15l3 3-3 3M27 30h-6M24 27l-3 3 3 3"/>',
+chart:'<rect x="17" y="4" width="14" height="8" rx="1.5"/><rect x="4" y="34" width="12" height="8" rx="1.5"/><rect x="18" y="34" width="12" height="8" rx="1.5"/><rect x="32" y="34" width="12" height="8" rx="1.5"/><path d="M24 12v22M10 34V22h28v12"/>',
+close:'<rect x="6" y="9" width="36" height="33" rx="3"/><path d="M6 19h36M15 5v8M33 5v8"/><rect x="18" y="27" width="12" height="10" rx="1.5"/><path d="M20 27v-3a4 4 0 0 1 8 0v3"/>'
+};
+//DATA
+var V=[
+{w:'cost center',t:'tool',k:'costcenter',d:'An organizational unit, such as a department, where costs are collected and monitored.',e:'Salaries are posted to each department’s cost center.'},
+{w:'profit center',t:'tool',k:'profitcenter',d:'A unit for which you can measure profit, used to judge business performance.',e:'The CEO wants a profit center report by product line.'},
+{w:'ledger account',t:'tool',k:'ledger',alt:'also: G/L account',d:'An account in the general ledger where business transactions are recorded.',e:'The invoice was posted to the wrong ledger account.'},
+{w:'internal order',t:'tool',k:'order',d:'A temporary object used to plan and collect the costs of a specific project or event.',e:'We created an internal order for the trade show.'},
+{w:'allocation',t:'tool',k:'allocation',d:'The distribution of costs from one object to others, using a rule such as headcount.',e:'The monthly IT allocation runs automatically.'},
+{w:'variance',t:'tool',k:'variance',d:'The difference between planned (or budgeted) figures and actual figures.',e:'We must explain the variance on logistics costs.'},
+{w:'accrual',t:'tool',k:'accrual',d:'An estimated cost or revenue recorded before the invoice arrives, so it appears in the right period.',e:'We booked an accrual for December services.'},
+{w:'reconciliation',t:'tool',k:'recon',d:'The process of comparing two sets of figures to make sure they agree.',e:'The reconciliation showed a difference of 500 euros.'},
+{w:'chart of accounts',t:'tool',k:'chart',d:'The structured list of all the ledger accounts a company uses.',e:'After the merger, we need one group chart of accounts.'},
+{w:'period close',t:'tool',k:'close',d:'The steps that finish a month or year, after which no more postings are allowed.',e:'The period close starts on the last working day.'},
+{w:'post',t:'verb',d:'To record a transaction in the accounting system.',e:'Please post the invoice before the close.'},
+{w:'allocate',t:'verb',d:'To distribute an amount between several objects according to a rule.',e:'We allocate the IT costs by headcount.'},
+{w:'reverse',t:'verb',d:'To cancel a posting by entering an opposite entry.',e:'We need to reverse the duplicate invoice.'},
+{w:'reconcile',t:'verb',d:'To compare two sets of data and explain any differences.',e:'Reconcile the sub-ledger with the general ledger.'},
+{w:'reclassify',t:'verb',d:'To move an amount from one account or cost object to another.',e:'We reclassified the repair costs to Production.'},
+{w:'validate',t:'verb',d:'To check that data is correct and follows the rules.',e:'Validate the master data before the upload.'},
+{w:'approve',t:'verb',d:'To officially accept a document or a request.',e:'The controller must approve the transfer.'},
+{w:'escalate',t:'verb',d:'To pass a problem to a more senior person.',e:'I escalated the risk to the Finance Director.'},
+{w:'forecast',t:'verb',d:'To estimate future results using the data you have now.',e:'We forecast a 5% overspend for the year.'},
+{w:'drill down',t:'verb',d:'To move from a summary figure to the detailed items behind it.',e:'Drill down to see which invoices cause the variance.'}];
+var VI={};V.forEach(function(v,i){VI[v.w]=i});
+var ROUNDS=[[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19]];
+var FILL=[
+{t:'Each department’s salaries are collected on its own ___.',a:'cost center'},
+{t:'We created an ___ to track the costs of the trade show.',a:'internal order'},
+{t:'The ___ between budget and actual was 12%, so we investigated.',a:'variance'},
+{t:'The invoice has not arrived yet, so we book an ___ for December.',a:'accrual'},
+{t:'The monthly ___ found a 500-euro difference between the two ledgers.',a:'reconciliation'},
+{t:'Please ___ the invoice in the correct period before the close.',a:'post'},
+{t:'At month end, we ___ the IT costs to all departments by headcount.',a:'allocate'},
+{t:'The entry is wrong, so we must ___ it and post it again.',a:'reverse'},
+{t:'Before the upload, ___ the master data to avoid errors in the system.',a:'validate'},
+{t:'The Finance Director must ___ the budget transfer before we can post it.',a:'approve'}];
+var SPELL=['profit center','ledger account','allocation','chart of accounts','period close','reconcile','reclassify','escalate','forecast','drill down'];
+var LEVELS=[{n:'Analyst',at:0},{n:'Consultant',at:200},{n:'Senior Consultant',at:450},{n:'Lead Consultant',at:700}];
+
+var SC=[
+{title:'Launch costs without an owner',car:'Manufacturing group · CO',cust:'Claire, Finance Director',pri:'Normal',tool:'order',
+sit:'Marketing costs for a new product launch are posted to the general marketing cost center. The Finance Director wants to see the launch costs separately. The launch lasts only six months.',quote:'I need to see exactly what this launch costs us.',
+think:'The need is specific and temporary. Which object fits better than creating a permanent unit?',q1:'Which object do you recommend?',
+o:[{k:'order',ok:1,w:'Yes. An internal order collects the costs of one event or project, for a limited time.'},{k:'profitcenter',w:'No. A profit center measures the profit of an ongoing unit, not the costs of a six-month event.'},{k:'chart',w:'No. The chart of accounts is a list of accounts. It does not collect costs by project.'},{k:'close',w:'No. The period close is a process, not a cost object.'}],
+h1:'Think about a temporary object for one event.',t2:'order',q2:'Put the implementation steps in the right order.',
+steps:['Agree the purpose, owner and budget with the client.','Create the internal order.','Post the launch costs to the order.','Settle the order when the launch ends.'],
+why2:'You define the requirement first, then build the object, collect the costs, and settle the order at the end so that no balance remains on it.',
+h2:'Requirements first. Settlement last.',model:'First, I agree the purpose and budget. Then I create the internal order and settle it when the launch ends.'},
+{title:'The unexplained overspend',car:'Logistics client · CO',cust:'Marc, Plant Controller',pri:'Urgent',tool:'variance',
+sit:'Actual logistics costs are 18% over budget. The Plant Controller must explain this at tomorrow’s meeting, but the report only shows one total figure.',quote:'I can’t go to the meeting with just a total.',
+think:'Before you can explain a problem, you need to measure it. What do you open first?',q1:'Which analysis do you start with?',
+o:[{k:'variance',ok:1,w:'Yes. A variance analysis compares plan and actual. It is the right starting point.'},{k:'accrual',w:'No. An accrual is an estimate for invoices not yet received. It does not explain actual costs.'},{k:'allocation',w:'No. An allocation moves costs between objects. It could hide the original source.'},{k:'chart',w:'No. The chart of accounts only lists the accounts.'}],
+h1:'Compare what was planned with what happened.',t2:'choice',q2:'You drill down and find a €40,000 invoice posted twice. What do you recommend?',
+c:[{t:'Reverse the duplicate posting and document the correction.',ok:1,w:'Yes. A reversal keeps a clear audit trail.'},{t:'Delete the invoice from the system.',w:'No. Posted documents are never deleted. Auditors need a trace of every change.'},{t:'Explain the overspend as a market price increase.',w:'No. That is not true. A consultant must never hide the real cause.'}],
+h2:'Fix the real cause, and leave a trace.',model:'I analyze the variance and drill down to the invoices. Then I reverse the duplicate posting.'},
+{title:'Month-end allocation',car:'Services company · CO',cust:'Sofia, Head of Controlling',pri:'Normal',tool:'allocation',
+sit:'The client shares the monthly IT cost (€120,000) between five departments. Today a controller does this in Excel, and it takes two days every month.',quote:'There must be a better way than this spreadsheet.',
+think:'The rule is always the same: for example, headcount. What can run the same rule every month?',q1:'Which SAP concept replaces the Excel work?',
+o:[{k:'allocation',ok:1,w:'Yes. An allocation cycle distributes costs automatically using a defined rule.'},{k:'recon',w:'No. A reconciliation compares figures. It does not distribute them.'},{k:'accrual',w:'No. An accrual estimates costs for a period. It does not share them.'},{k:'variance',w:'No. A variance measures a difference. It does not distribute costs.'}],
+h1:'It distributes costs using a rule.',t2:'gap',q2:'Complete the project plan. Tap a word, then tap a gap.',
+gap:{s:[{t:'We test the cycle in the quality system and ___ the results with the controller.',a:['validate']},{t:'The client must ___ the cycle before it goes to production.',a:['approve']},{t:'Every month, the cycle will ___ the IT costs automatically.',a:['allocate']}],b:['validate','approve','allocate','reverse']},
+why2:'You test and validate first, the client approves, and then the cycle runs in production every month.',h2:'Test, accept, then run.',model:'We validate the results, the client approves the cycle, and then it allocates the costs every month.'},
+{title:'Accrual or not?',car:'Industrial client · FI',cust:'Pierre, Accountant',pri:'Normal',tool:'accrual',
+sit:'It is June 30. A supplier delivered services in June, but the invoice will arrive in July. The accountant wants to leave the cost out until the invoice arrives.',quote:'Why book a cost without an invoice?',
+think:'Costs belong to the period in which the service was received. Which concept follows this principle?',q1:'Which concept do you explain to the accountant?',
+o:[{k:'accrual',ok:1,w:'Yes. An accrual books an estimated cost in the period where it belongs.'},{k:'variance',w:'No. A variance compares plan and actual. It does not book costs.'},{k:'chart',w:'No. The chart of accounts is only a list of accounts.'},{k:'costcenter',w:'No. A cost center collects costs, but it does not decide the period.'}],
+h1:'It is an estimate booked before the invoice.',t2:'choice',q2:'What do you recommend?',
+c:[{t:'Book an accrual in June and reverse it automatically in July when the invoice arrives.',ok:1,w:'Yes. June shows the real cost, and July is not counted twice.'},{t:'Wait for the invoice. June profit will look better.',w:'No. This understates the costs of June and gives a false result.'},{t:'Ask the supplier to date the invoice in June.',w:'No. Changing a date to suit the books is a serious compliance problem.'}],
+h2:'The cost belongs to the month of the service.',model:'I recommend an accrual in June, with an automatic reversal in July.'},
+{title:'Two reports, two numbers',car:'Retail group · FI/CO',cust:'Isabelle, CFO',pri:'Urgent',tool:'recon',
+sit:'The general ledger report shows €1,250,000 for travel costs. The Controlling report shows €1,200,000. The CFO has found the difference and wants an answer today.',quote:'Which number is right? I can’t sign this.',
+think:'Do not guess the cause. What is the method to find a difference between two reports?',q1:'What do you start with?',
+o:[{k:'recon',ok:1,w:'Yes. A reconciliation compares the two reports and finds the €50,000 gap.'},{k:'allocation',w:'Possibly the cause, but you do not know yet. Reconcile first.'},{k:'close',w:'No. Closing the period will not explain a difference.'},{k:'profitcenter',w:'No. A profit center is not needed to compare two cost reports.'}],
+h1:'Compare, then explain.',t2:'order',q2:'Put the reconciliation steps in the right order.',
+steps:['Compare both reports for the same period and scope.','Find the items that appear in only one report.','Explain each difference: timing, wrong assignment or manual posting.','Reclassify or correct the items and document the result.'],
+why2:'You make the comparison fair first, isolate the differences, understand them, and only then correct and document.',h2:'Do not correct before you understand.',model:'First, I compare both reports. Then I find the items in only one report and explain each difference.'},
+{title:'The late invoice',car:'Pharma client · FI',cust:'Thomas, Department Manager',pri:'Compliance',tool:'close',
+sit:'It is day 3 of the month-end close. A manager asks you to post one small late invoice into the previous period. The period was closed yesterday. The audit is next month.',quote:'It’s only one invoice. Nobody will notice.',
+think:'The amount is small, but the principle is big. What does a closed period protect?',q1:'Which principle do you explain to the manager?',
+o:[{k:'close',ok:1,w:'Yes. After the period close, nobody posts without a controlled reopening.'},{k:'accrual',w:'An accrual is a possible solution later, but it is not the principle.'},{k:'costcenter',w:'No. The cost center is not the problem here.'},{k:'variance',w:'No. The problem is the closed period, not a difference.'}],
+h1:'Think about what a closed period means.',t2:'choice',q2:'What do you recommend?',
+c:[{t:'Post it in the current period and document why it was late. Reopen the period only with the controller’s approval.',ok:1,w:'Yes. The process stays clean and auditable.'},{t:'Reopen the period quietly and post it. It is only one invoice.',w:'No. Reopening without approval breaks the controls. Auditors check this.'},{t:'Change the invoice date to last month.',w:'No. Changing a date to fit the books is falsifying a record.'}],
+h2:'Controls matter more than convenience.',model:'I explain that the period is closed. We post in the current period unless the controller approves a reopening.'},
+{title:'A wrong cost center',car:'Industrial client · CO',cust:'Julie, Sales Manager',pri:'Normal',tool:'costcenter',
+sit:'A €30,000 repair invoice was posted to the Sales cost center, but it belongs to Production. The Sales manager’s performance report now looks very bad.',quote:'These costs are not mine! My report is wrong.',
+think:'The account may be fine. Which object holds the wrong assignment?',q1:'Which object must be corrected?',
+o:[{k:'costcenter',ok:1,w:'Yes. The cost is on the wrong cost center. It must move to Production.'},{k:'ledger',w:'No. The ledger account may be correct. The cost assignment is the problem.'},{k:'order',w:'No. An internal order is for temporary projects. This is a normal department cost.'},{k:'profitcenter',w:'No. The profit center will follow after you correct the cost center.'}],
+h1:'Who owns the cost?',t2:'gap',q2:'Complete the correction plan. Tap a word, then tap a gap.',
+gap:{s:[{t:'We ___ the €30,000 from the Sales cost center to Production.',a:['reclassify']},{t:'Before posting, we ___ the new assignment with the Production manager.',a:['validate']},{t:'Then the controller must ___ the correction document.',a:['approve']}],b:['reclassify','validate','approve','escalate']},
+why2:'Move the cost, check the assignment with its owner, then get approval for the correction.',h2:'Move, check, approve.',model:'We reclassify the cost to Production, validate it with the manager, and the controller approves it.'},
+{title:'Budget used up',car:'Consumer goods client · CO',cust:'Nicolas, Marketing Manager',pri:'Compliance',tool:'costcenter',
+sit:'The marketing manager spent his whole annual budget by September. Four months remain. He asks you to move some costs to another cost center that still has budget.',quote:'Just move the invoices. Nobody checks that cost center.',
+think:'Moving costs may solve his problem today. What does it do to the company’s picture of reality?',q1:'Which object shows the overspend by department?',
+o:[{k:'costcenter',ok:1,w:'Yes. Cost center reports show planned and actual costs for each department.'},{k:'profitcenter',w:'No. A profit center shows profit, not each department’s spending.'},{k:'order',w:'No. An internal order tracks a project, not a department budget.'},{k:'accrual',w:'No. An accrual estimates unbilled costs. It does not show overspend.'}],
+h1:'It shows costs for each department.',t2:'choice',q2:'He wants to hide the overspend by moving costs. What do you do?',
+c:[{t:'Explain that this hides the overspend and escalate it to the Finance Director.',ok:1,w:'Yes. You protect the client by being transparent.'},{t:'Move the costs to help him. It is his decision.',w:'No. This misrepresents the real costs of each department.'},{t:'Move only half the costs so nobody notices.',w:'No. A smaller manipulation is still a manipulation.'}],
+h2:'Your duty is to the truth of the numbers.',model:'I explain that moving the costs would hide the overspend, and I escalate it to the Finance Director.'},
+{title:'Profit by product line',car:'Cosmetics group · CO-PA',cust:'Alex, CEO',pri:'Normal',tool:'profitcenter',
+sit:'The CEO wants to know which product line makes money. The system only reports costs by department, so nobody can answer.',quote:'Which of our product lines actually earn a profit?',
+think:'Departments show costs. Which concept shows profit for a business line?',q1:'Which concept gives you profit by business line?',
+o:[{k:'profitcenter',ok:1,w:'Yes. Profit centers measure revenue and costs for a business unit.'},{k:'costcenter',w:'No. A cost center shows costs only.'},{k:'ledger',w:'No. A ledger account records transactions. It does not group results by business line.'},{k:'allocation',w:'No. Allocation distributes costs. It does not create a profit view by itself.'}],
+h1:'It measures profit for a unit.',t2:'order',q2:'Put the design steps in the right order.',
+steps:['Define the product lines with the client.','Create a profit center for each line.','Assign cost centers and revenues to the profit centers.','Validate the profit report with the CEO’s team.'],
+why2:'You define the business view, build the structure, link the data, and then check that the result answers the CEO’s question.',h2:'Business view first. Validation last.',model:'First, I define the product lines. Then I create the profit centers and validate the report with the CEO.'},
+{title:'Two charts of accounts',car:'Merged group · FI',cust:'Léa, Group Controller',pri:'Normal',tool:'chart',
+sit:'After a merger, the group has two charts of accounts with 1,800 and 2,400 accounts. Many accounts mean the same thing. Consolidation takes three weeks every quarter.',quote:'Why does it take three weeks to add up our numbers?',
+think:'The problem is the structure, not the data. What must be common to the whole group?',q1:'What do you propose to simplify reporting?',
+o:[{k:'chart',ok:1,w:'Yes. One group chart of accounts, with a mapping from the old accounts.'},{k:'costcenter',w:'No. Cost centers do not fix the account structure.'},{k:'order',w:'No. Internal orders do not fix the account structure.'},{k:'accrual',w:'No. Accruals are not related to the account structure.'}],
+h1:'One structure for the whole group.',t2:'choice',q2:'What is the best approach?',
+c:[{t:'Design one group chart of accounts, map the old accounts to it, and validate the mapping with the client.',ok:1,w:'Yes. It simplifies the future and keeps the history.'},{t:'Copy all 4,200 accounts into the new system.',w:'No. You would move the old mess into the new system.'},{t:'Delete the accounts that look unused.',w:'No. They may have historical postings. Deleting accounts is risky.'}],
+h2:'Simplify, but keep the history.',model:'I design a group chart of accounts, map the old accounts to it, and validate the mapping with the client.'},
+{title:'Posted to the wrong account',car:'Services client · FI',cust:'Hugo, Accountant',pri:'Normal',tool:'ledger',
+sit:'A tax advisor’s fee of €8,000 was posted to the ledger account for office supplies. The tax report and the cost analysis are now wrong.',quote:'The auditors will see this. How do we correct it properly?',
+think:'The amount is posted and cannot be erased. What is the proper way to correct an accounting mistake?',q1:'Which object must be corrected?',
+o:[{k:'ledger',ok:1,w:'Yes. The cost is on the wrong ledger account.'},{k:'costcenter',w:'No. The cost center may be correct. The account is the error.'},{k:'order',w:'No. An internal order is not the problem.'},{k:'profitcenter',w:'No. Profit centers will follow when the account is correct.'}],
+h1:'Which account is wrong?',t2:'order',q2:'Put the correction steps in the right order.',
+steps:['Check the original document and the correct ledger account.','Reverse the wrong posting.','Post the cost to the correct ledger account.','Reconcile the accounts and document the correction.'],
+why2:'You check the facts, cancel the error with a reversal, post correctly, and then reconcile so the auditors can follow the story.',h2:'Check first. Document last.',model:'I check the document and reverse the wrong posting. Then I post it to the right account and reconcile.'},
+{title:'Go-live on Monday',car:'Automotive client · CO',cust:'Karim, Project Manager',pri:'Compliance',tool:'allocation',
+sit:'Go-live is on Monday. In the last test, the allocation cycle gives a wrong result: the total received by departments is €2,000 lower than the amount sent. The client wants to go live anyway and fix it later.',quote:'It’s only €2,000. Let’s go live and fix it afterwards.',
+think:'A small difference can show a big design error. What would you say to protect the client?',q1:'Which object is the source of the problem?',
+o:[{k:'allocation',ok:1,w:'Yes. The cycle must distribute exactly what it receives. A gap means a design or data error.'},{k:'close',w:'No. The period close is not part of this test.'},{k:'chart',w:'No. The chart of accounts does not cause a gap in a cycle.'},{k:'profitcenter',w:'No. Profit centers are not the source of this gap.'}],
+h1:'Sender total = receiver total.',t2:'choice',q2:'What do you tell the client?',
+c:[{t:'Escalate the risk, explain the €2,000 gap, and recommend a short delay unless it is fixed and retested.',ok:1,w:'Yes. You protect the client and the project, with facts.'},{t:'Go live and fix it later. A €2,000 gap is small.',w:'No. You will not know the cause, and every month the error repeats.'},{t:'Hide the difference in a rounding account.',w:'No. This hides an error and creates an audit problem.'}],
+h2:'A small gap can be a big warning.',model:'I escalate the risk and explain the gap. I recommend a short delay unless it is fixed and retested.'}
+];
+
+var G,W,C,view,pendingScroll=null;
+function newMatch(){return {round:0,sel:null,matched:{},mist:{},roundMist:false,flash:[],orders:ROUNDS.map(function(r){return shuffle(r)})}}
+function reset(){
+ G={xp:0,streak:0,best:0,hints:0};
+ W={step:0,done:[false,false,false,false],opened:{},nOpened:0,open:null,match:newMatch(),
+  fill:gapNew(FILL.map(function(f){return {t:f.t,a:[f.a]}}),FILL.map(function(f){return f.a})),spell:{i:0,cur:null,fin:false}};
+ C={i:0,r:[]};view='warm';
+}
+function lvl(){var k=0;LEVELS.forEach(function(l,j){if(G.xp>=l.at)k=j});return k}
+function renderHUD(){
+ var k=lvl(),L=LEVELS[k],N=LEVELS[k+1];
+ $('#hud-level').textContent=L.n;$('#hud-xp').textContent=G.xp;$('#hud-streak').textContent=G.streak;
+ $('#xpfill').style.width=(N?Math.min(100,(G.xp-L.at)/(N.at-L.at)*100):100)+'%';
+ $('#xpnext').textContent=N?(N.at-G.xp)+' XP to '+N.n:'Top level!';
+}
+function toast(msg,kind){
+ var box=$('#toasts'),d=document.createElement('div');d.className='toast '+(kind||'');d.textContent=msg;box.appendChild(d);
+ while(box.children.length>3)box.removeChild(box.firstChild);
+ setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},1800);
+}
+function addXP(n,silent){
+ var before=lvl();G.xp=Math.max(0,G.xp+n);
+ if(!silent&&n)toast((n>0?'+':'−')+Math.abs(n)+' XP');
+ if(lvl()>before)toast('Level up! You are a '+LEVELS[lvl()].n,'level');
+ renderHUD();
+}
+function tick(){G.streak++;G.best=Math.max(G.best,G.streak);if(G.streak>=3){addXP(3,true);toast('Streak x'+G.streak+'! +3 XP','level')}}
+function brk(){G.streak=0}
+
+/* ---------- gap-fill component ---------- */
+function gapNew(sentences,bank){
+ var gaps=[];sentences.forEach(function(s,si){s.a.forEach(function(a){gaps.push({si:si,a:a,chip:null,locked:false})})});
+ return {sentences:sentences,gaps:gaps,chips:shuffle(bank.map(function(w,id){return {id:id,w:w}})),sel:null,active:null,checks:0,flash:[],msg:'',done:false};
+}
+function gapRender(g,key){
+ var gi=0;
+ var list=g.sentences.map(function(s){
+  var parts=s.t.split('___'),out='';
+  parts.forEach(function(p,pi){
+   out+=esc(p);
+   if(pi<parts.length-1){
+    var idx=gi++,gap=g.gaps[idx],chip=gap.chip!==null?g.chips.filter(function(c){return c.id===gap.chip})[0]:null;
+    out+='<button class="gap'+(gap.locked?' ok':'')+(chip?' filled':'')+(g.active===idx?' active':'')+(g.flash.indexOf(idx)>-1?' shake bad':'')+'" data-act="gapclick" data-g="'+key+'" data-i="'+idx+'">'+(chip?esc(chip.w):'&nbsp;')+'</button>';
+   }
+  });
+  return '<li class="sent">'+out+'</li>';
+ }).join('');
+ var used={};g.gaps.forEach(function(x){if(x.chip!==null)used[x.chip]=1});
+ var bank=g.chips.map(function(c){return '<button class="chip'+(used[c.id]?' used':'')+(g.sel===c.id?' sel':'')+'" data-act="gapchip" data-g="'+key+'" data-id="'+c.id+'"'+(used[c.id]?' disabled':'')+'>'+esc(c.w)+'</button>'}).join('');
+ var full=g.gaps.every(function(x){return x.chip!==null});
+ g.flash=[];
+ return '<div class="bank" aria-label="Word bank">'+bank+'</div><ol class="sents">'+list+'</ol>'+
+  (g.done?'':'<div class="row"><button class="btn primary" data-act="gapcheck" data-g="'+key+'"'+(full?'':' disabled')+'>Check</button><span class="msg">'+esc(g.msg)+'</span></div>');
+}
+function gapCheck(g){
+ var first=g.checks===0,right=0,wrong=0;g.checks++;g.flash=[];g.sel=null;
+ g.gaps.forEach(function(gap,i){
+  if(gap.locked||gap.chip===null)return;
+  var chip=g.chips.filter(function(c){return c.id===gap.chip})[0];
+  if(chip.w===gap.a){gap.locked=true;right++}else{gap.chip=null;wrong++;g.flash.push(i)}
+ });
+ g.done=g.gaps.every(function(x){return x.locked});
+ g.msg=g.done?'All correct!':right+' correct. Fix the red gaps.';
+ return {first:first,right:right,wrong:wrong,done:g.done};
+}
+function gapChip(g,id){
+ if(g.done)return;
+ var a=g.active!==null?g.gaps[g.active]:null;
+ if(a&&a.chip===null&&!a.locked){a.chip=id;g.active=null;g.sel=null}else g.sel=(g.sel===id)?null:id;
+}
+function gapClick(g,i){
+ var gap=g.gaps[i];if(gap.locked||g.done)return;
+ if(g.sel!==null){gap.chip=g.sel;g.sel=null;g.active=null}
+ else if(gap.chip!==null)gap.chip=null;
+ else g.active=(g.active===i)?null:i;
+}
+
+/* ---------- order component ---------- */
+function ordNew(steps){
+ var items=steps.map(function(t,i){return {id:i,t:t}}),sh;
+ do{sh=shuffle(items)}while(sh.every(function(x,i){return x.id===i}));
+ return {items:sh,slots:steps.map(function(){return null}),locked:steps.map(function(){return false}),flash:[],checks:0,done:false,msg:''};
+}
+function ordRender(o){
+ var used={};o.slots.forEach(function(x){if(x!==null)used[x]=1});
+ var slots=o.slots.map(function(id,i){
+  var it=id!==null?o.items.filter(function(x){return x.id===id})[0]:null;
+  return '<li><button class="oslot'+(it?' filled':'')+(o.locked[i]?' ok':'')+(o.flash.indexOf(i)>-1?' shake bad':'')+'" data-act="oslot" data-i="'+i+'"><span class="onum">'+(i+1)+'</span><span>'+(it?esc(it.t):'Tap a step below')+'</span></button></li>';
+ }).join('');
+ var pool=o.items.filter(function(x){return !used[x.id]}).map(function(x){return '<button class="ostep" data-act="ostep" data-id="'+x.id+'">'+esc(x.t)+'</button>'}).join('');
+ var full=o.slots.every(function(x){return x!==null});
+ o.flash=[];
+ return '<ol class="olist">'+slots+'</ol>'+(o.done?'':'<div class="pool">'+pool+'</div><div class="row"><button class="btn primary" data-act="ocheck"'+(full?'':' disabled')+'>Check</button><span class="msg">'+esc(o.msg)+'</span></div>');
+}
+function ordCheck(o){
+ var first=o.checks===0,wrong=0;o.checks++;o.flash=[];
+ o.slots.forEach(function(id,i){
+  if(o.locked[i]||id===null)return;
+  if(id===i)o.locked[i]=true;else{o.slots[i]=null;o.flash.push(i);wrong++}
+ });
+ o.done=o.locked.every(Boolean);
+ o.msg=o.done?'Perfect order!':'Some steps are in the wrong place. Try again.';
+ return {first:first,wrong:wrong,done:o.done};
+}
+
+/* ---------- warm-up views ---------- */
+function panelWords(){
+ var cards=V.map(function(v,i){
+  var open=W.open===i,seen=!!W.opened[i];
+  return '<div class="wcard '+v.t+(open?' open':'')+(seen?' seen':'')+'"><button class="whead" data-act="wopen" data-i="'+i+'" aria-expanded="'+open+'">'+
+   (v.t==='tool'?icon(v.k,40):'<span class="vtag">verb</span>')+'<span class="wword">'+esc(v.w)+'</span><span class="seen-dot"></span></button>'+
+   (open?'<div class="wbody"><p>'+esc(v.d)+'</p><p class="wex">“'+esc(v.e)+'”</p>'+(v.alt?'<p class="walt">'+esc(v.alt)+'</p>':'')+(SPEAK?'<div><button class="btn small" data-act="speak" data-i="'+i+'">Listen</button></div>':'')+'</div>':'')+'</div>';
+ }).join('');
+ return '<p class="lead">Tap a card. Read the meaning. Listen and say the word. <b>'+W.nOpened+' / 20</b> words seen.</p><div class="wgrid">'+cards+'</div>'+
+  '<div class="row"><span></span><button class="btn primary" data-act="wstep" data-i="1">Next: Match</button></div>';
+}
+function panelMatch(){
+ var m=W.match,ids=ROUNDS[m.round],fl=m.flash||[];
+ var left=ids.map(function(i){var ok=m.matched[i];return '<button class="mitem'+(ok?' ok':'')+(m.sel===i?' sel':'')+(fl[0]===i?' shake bad':'')+'" data-act="mL" data-i="'+i+'"'+(ok?' disabled':'')+'>'+esc(V[i].w)+(ok?' '+CHECK:'')+'</button>'}).join('');
+ var right=m.orders[m.round].map(function(i){var ok=m.matched[i];return '<button class="mdef'+(ok?' ok':'')+(fl[1]===i?' shake bad':'')+'" data-act="mR" data-i="'+i+'"'+(ok?' disabled':'')+'>'+esc(V[i].d)+'</button>'}).join('');
+ m.flash=[];
+ var complete=ids.every(function(i){return m.matched[i]});
+ var last=m.round===ROUNDS.length-1;
+ return '<div class="row"><h3>Round '+(m.round+1)+' / 4 · '+(m.round<2?'Concepts':'Verbs')+'</h3></div><p class="lead">Tap a word. Then tap its meaning.</p>'+
+  '<div class="mgrid"><div class="mcol">'+left+'</div><div class="mcol">'+right+'</div></div>'+
+  (complete?'<div class="row"><b>Round complete!</b><button class="btn primary" data-act="mnext">'+(last?'Next: Fill the gaps':'Next round')+'</button></div>':'');
+}
+function panelFill(){
+ var g=W.fill;
+ return '<p class="lead">Tap a word in the bank. Then tap a gap. Press Check.</p>'+gapRender(g,'fill')+
+  (g.done?'<div class="row"><b>All 10 correct!</b><button class="btn primary" data-act="wstep" data-i="3">Next: Spell it</button></div>':'');
+}
+function spellInit(i){
+ var word=SPELL[i],letters=word.replace(/ /g,'').split(''),tiles=letters.map(function(c,id){return {id:id,c:c}}),sh,n=0;
+ do{sh=shuffle(tiles);n++}while(n<20&&sh.map(function(t){return t.c}).join('')===letters.join(''));
+ return {word:word,tiles:sh,slots:letters.map(function(){return null}),locked:letters.map(function(){return false}),tries:0,hint:false,solved:false,flash:false};
+}
+function panelSpell(){
+ var S=W.spell;
+ if(S.fin)return '<div class="rank"><h2>Warm-up complete</h2><p class="lead">You know the 20 words. Now solve 12 client cases.</p></div><div class="row" style="justify-content:center"><button class="btn primary" data-act="tab" data-v="chal">Start the client cases</button></div>';
+ if(!S.cur)S.cur=spellInit(S.i);
+ var c=S.cur,v=V[VI[c.word]],used={};
+ c.slots.forEach(function(x){if(x!==null)used[x]=1});
+ var pos=0,groups=c.word.split(' ').map(function(w){
+  var s='';for(var k=0;k<w.length;k++){var idx=pos++,id=c.slots[idx],t=id!==null?c.tiles.filter(function(x){return x.id===id})[0]:null;
+   s+='<button class="slot'+(t?' f':'')+(c.locked[idx]?' lock':'')+(c.solved?' ok':'')+(c.flash&&!c.locked[idx]?' shake bad':'')+'" data-act="sslot" data-i="'+idx+'" aria-label="Letter '+(idx+1)+'">'+(t?esc(t.c):'')+'</button>'}
+  return '<div class="slotgrp">'+s+'</div>';}).join('');
+ c.flash=false;
+ var tiles=c.tiles.map(function(t){return '<button class="tile'+(used[t.id]?' used':'')+'" data-act="stile" data-id="'+t.id+'"'+(used[t.id]?' disabled':'')+'>'+esc(t.c)+'</button>'}).join('');
+ return '<div class="row"><h3>Word '+(S.i+1)+' / 10</h3><span class="chip-h">'+(v.t==='tool'?'Term':'Verb')+'</span></div>'+
+  '<div class="clue">'+(v.t==='tool'?icon(v.k,52):'')+'<p>'+esc(v.d)+'</p></div>'+
+  '<div class="slots" aria-label="Your answer">'+groups+'</div>'+(c.solved?'':'<div class="tiles">'+tiles+'</div>')+
+  (c.solved?'<div class="row"><b>Yes! '+esc(c.word)+'</b><button class="btn primary" data-act="snext">'+(S.i===9?'Finish warm-up':'Next word')+'</button></div>'
+   :'<div class="row"><button class="btn small ghost" data-act="shint"'+(c.hint?' disabled':'')+'>First letter (less XP)</button><button class="btn small ghost" data-act="sclear">Clear</button></div>');
+}
+function viewWarm(){
+ var names=['Words','Match','Fill the gaps','Spell it'];
+ var nav=names.map(function(n,i){return '<button class="sub'+(W.step===i?' on':'')+(W.done[i]?' done':'')+'" data-act="wstep" data-i="'+i+'"><span class="subn">'+(W.done[i]?CHECK:i+1)+'</span>'+n+'</button>'}).join('');
+ var body=[panelWords,panelMatch,panelFill,panelSpell][W.step]();
+ return '<div class="intro"><h1>Warm up your words</h1><p>20 SAP finance terms and verbs. Then solve 12 client cases. Win XP and become a Lead Consultant.</p></div><nav class="subnav" id="subnav">'+nav+'</nav><section class="panel" id="panel">'+body+'</section>';
+}
+
+/* ---------- repair jobs ---------- */
+function ensureRes(i){
+ if(!C.r[i]){
+  var sc=SC[i];
+  C.r[i]={q1:{wrong:0,hint:false,picked:[],done:false},q2:{wrong:0,hint:false,picked:[],done:false,g:null,o:null,opts:null},xp:0,done:false,stars:0,opts:shuffle(sc.o)};
+  if(sc.t2==='gap')C.r[i].q2.g=gapNew(sc.gap.s,sc.gap.b);
+  if(sc.t2==='order')C.r[i].q2.o=ordNew(sc.steps);
+  if(sc.t2==='choice')C.r[i].q2.opts=shuffle(sc.c);
+ }
+ return C.r[i];
+}
+function curRes(){return ensureRes(C.i)}
+function gain(r,n){addXP(n);r.xp+=n}
+function finishJob(r){
+ r.done=true;
+ var pen=r.q1.wrong+r.q2.wrong+(r.q1.hint?1:0)+(r.q2.hint?1:0);
+ r.stars=pen===0?3:pen<=2?2:1;
+ pendingScroll='#debrief';
+}
+function award(r,q){
+ var w=r[q].wrong,base=w===0?20:w===1?10:5;
+ r[q].done=true;gain(r,base);
+ if(w===0)tick();
+ if(q==='q1')pendingScroll='#q2';else finishJob(r);
+}
+function hintBtn(r,q){
+ if(r[q].done)return '';
+ if(r[q].hint)return '<div class="hint"><b>Hint:</b> '+esc(SC[C.i][q==='q1'?'h1':'h2'])+'</div>';
+ return '<div><button class="btn small ghost" data-act="hint" data-q="'+q+'">Need a hint? −5 XP</button></div>';
+}
+function viewChal(){
+ var i=C.i,sc=SC[i],r=ensureRes(i);
+ var rail=SC.map(function(s,j){var rr=C.r[j];return '<button class="rn'+(j===i?' cur':'')+(rr&&rr.done?' done':'')+'" data-act="goto" data-i="'+j+'" aria-label="Job '+(j+1)+'">'+(j+1)+'</button>'}).join('');
+ var opts=r.opts.map(function(o){
+  var picked=r.q1.picked.indexOf(o.k)>-1,st=picked?(o.ok?' good':' bad'):'',show=picked||r.q1.done;
+  return '<button class="opt'+st+'" data-act="pick1" data-t="'+o.k+'"'+((r.q1.done||picked)?' disabled':'')+'>'+icon(o.k,46)+'<b>'+esc(V.filter(function(v){return v.k===o.k})[0].w)+'</b>'+(show?'<span class="why">'+esc(o.w)+'</span>':'')+'</button>';
+ }).join('');
+ var q2='';
+ if(r.q1.done){
+  var body='';
+  if(sc.t2==='choice'){
+   body='<div class="stack" style="gap:8px">'+r.q2.opts.map(function(o,j){
+    var picked=r.q2.picked.indexOf(j)>-1,st=picked?(o.ok?' good':' bad'):'',show=picked||r.q2.done;
+    return '<button class="copt'+st+'" data-act="pick2" data-i="'+j+'"'+((r.q2.done||picked)?' disabled':'')+'><span class="cl">'+'ABC'.charAt(j)+'</span><span class="ct">'+esc(o.t)+(show?'<span class="why">'+esc(o.w)+'</span>':'')+'</span></button>';
+   }).join('')+'</div>';
+  }else if(sc.t2==='order'){body=ordRender(r.q2.o)}
+  else{body=gapRender(r.q2.g,'sc')}
+  q2='<section class="step" id="q2"><h3><span class="stepn">STEP 2</span>'+esc(sc.q2)+'</h3>'+body+hintBtn(r,'q2')+
+   (r.q2.done&&sc.why2?'<div class="explain"><b>Why?</b> '+esc(sc.why2)+'</div>':'')+'</section>';
+ }
+ var deb='';
+ if(r.done){
+  var last=i===SC.length-1;
+  deb='<section class="debrief" id="debrief"><div class="row"><h3>Case closed!</h3>'+starsHTML(r.stars)+'</div><p><b>'+r.xp+' XP</b> earned on this case.</p>'+
+   '<div class="say"><span class="mono">Say it out loud</span><p>“'+esc(sc.model)+'”</p>'+(SPEAK?'<div><button class="btn small" data-act="speakm">Listen</button></div>':'')+'<p class="lead">Now say it in your own words to your partner.</p></div>'+
+   '<div class="row"><span></span><button class="btn primary" data-act="next">'+(last?'See my results':'Next case')+'</button></div></section>';
+ }
+ return '<div class="rail" role="navigation" aria-label="Jobs">'+rail+'</div>'+
+  '<div class="stack"><article class="job"><header class="jobhead mono"><span>Client case</span><span>#'+(1040+i+1)+(i===SC.length-1?' · Final job':'')+'</span></header>'+
+  '<div class="jobbody"><h2>'+esc(sc.title)+'</h2><dl class="fields"><div><dt>Client</dt><dd>'+esc(sc.car)+'</dd></div><div><dt>Contact</dt><dd>'+esc(sc.cust)+'</dd></div><div><dt>Priority</dt><dd><span class="pri '+sc.pri+'">'+(sc.pri==='Safety'?'Safety first':sc.pri)+'</span></dd></div></dl>'+
+  '<p>'+esc(sc.sit)+'</p><blockquote class="quote">'+esc(sc.quote)+'</blockquote></div>'+
+  '<div class="think"><b>Think first</b><span>'+esc(sc.think)+'</span></div></article>'+
+  '<section class="step" id="q1"><h3><span class="stepn">STEP 1</span>'+esc(sc.q1)+'</h3><div class="opts">'+opts+'</div>'+hintBtn(r,'q1')+'</section>'+
+  q2+deb+'</div>';
+}
+
+/* ---------- results ---------- */
+function viewRes(){
+ var done=C.r.filter(function(r){return r&&r.done}).length;
+ var stars=C.r.reduce(function(a,r){return a+(r&&r.done?r.stars:0)},0);
+ var three=C.r.filter(function(r){return r&&r.done&&r.stars===3}).length;
+ try{var b=+localStorage.getItem('we_best')||0;if(G.xp>b)localStorage.setItem('we_best',G.xp)}catch(e){}
+ function clean(j){var r=C.r[j];return !!(r&&r.done&&r.q1.wrong+r.q2.wrong===0)}
+ var badges=[
+  {n:'Word Wizard',d:'Finish all 4 warm-up steps',ok:W.done.every(Boolean)},
+  {n:'Full Portfolio',d:'Finish all 12 cases',ok:done===12},
+  {n:'Straight Shooter',d:'Cases 6, 8 and 12 right first time',ok:clean(5)&&clean(7)&&clean(11)},
+  {n:'No Hints',d:'All 12 cases without a hint',ok:done===12&&G.hints===0},
+  {n:'Triple Star',d:'3 stars on 8 or more cases',ok:three>=8}];
+ var pegs=SC.map(function(s,j){var r=C.r[j],ok=r&&r.done;
+  return '<div class="peg'+(ok?' on':'')+'">'+(ok?icon(s.tool,34):'<span class="mono">'+(j+1)+'</span>')+'<span>'+esc(s.title)+'</span>'+(ok?starsHTML(r.stars):'')+'</div>'}).join('');
+ return '<div class="panel"><div class="rank"><span class="mono">Your rank</span><h2>'+LEVELS[lvl()].n+'</h2></div>'+
+  '<div class="stats"><div class="stat"><b>'+G.xp+'</b>XP</div><div class="stat"><b>'+done+' / 12</b>Jobs done</div><div class="stat"><b>'+stars+' / 36</b>Stars</div></div>'+
+  '<h3>Your portfolio</h3><div class="pegs">'+pegs+'</div>'+
+  '<h3>Badges</h3><div class="badges">'+badges.map(function(x){return '<div class="badge'+(x.ok?' on':'')+'"><b>'+x.n+'</b><span>'+x.d+'</span></div>'}).join('')+'</div>'+
+  '<h3>Talk to your partner</h3><ol class="talk"><li>Which case had the biggest risk for the client? Why?</li><li>Describe a real problem on one of your projects. What did you recommend?</li><li>How do you explain a variance to a CFO? Use: first, then, after that, finally.</li></ol>'+
+  '<div class="row"><button class="btn" data-act="tab" data-v="chal">Back to cases</button><button class="btn primary" data-act="again">Play again</button></div></div>';
+}
+
+/* ---------- render + events ---------- */
+function keyOf(e){return ['act','i','id','g','t','q'].map(function(k){return e.dataset[k]||''}).join('|')}
+function render(){
+ renderHUD();
+ var tabs=[['warm','Warm-up','20 words'],['chal','Client cases','12 cases'],['res','Results','Your rank']];
+ $('#tabs').innerHTML=tabs.map(function(t,i){return '<button class="tab'+(view===t[0]?' on':'')+'" data-act="tab" data-v="'+t[0]+'"><small>'+(i+1)+'</small>'+t[1]+'</button>'}).join('');
+ var a=document.activeElement,fk=(a&&a.dataset&&a.dataset.act)?keyOf(a):null;
+ $('#app').innerHTML=view==='warm'?viewWarm():view==='chal'?viewChal():viewRes();
+ if(fk){var el=$$('[data-act]').filter(function(e){return keyOf(e)===fk})[0];if(el&&!el.disabled)el.focus({preventScroll:true})}
+ if(pendingScroll){var t=$(pendingScroll);pendingScroll=null;if(t)t.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})}
+}
+function go(v,sel){view=v;pendingScroll=sel||'.tabs';render()}
+function getG(k){return k==='fill'?W.fill:curRes().q2.g}
+function placeTile(c,id){
+ var idx=c.slots.findIndex(function(x,i){return x===null&&!c.locked[i]});
+ if(idx>-1)c.slots[idx]=id;
+}
+function spellCheck(c){
+ var g=c.slots.map(function(id){return c.tiles.filter(function(t){return t.id===id})[0].c}).join('');
+ if(g===c.word.replace(/ /g,'')){
+  c.solved=true;var base=(c.tries===0&&!c.hint)?10:5;addXP(base);if(base===10)tick();
+ }else{c.tries++;c.flash=true;if(c.tries===1)brk();toast('Not yet. Try again.')}
+}
+document.addEventListener('click',function(e){
+ var b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+ var d=b.dataset,i=+d.i,r;
+ switch(d.act){
+ case 'tab':go(d.v);return;
+ case 'again':reset();go('warm');return;
+ case 'wstep':W.step=i;pendingScroll='#subnav';break;
+ case 'wopen':W.open=W.open===i?null:i;
+  if(!W.opened[i]){W.opened[i]=1;W.nOpened++;addXP(1,true);if(W.nOpened===20&&!W.done[0]){W.done[0]=true;toast('All 20 words seen!')}}break;
+ case 'speak':speak(V[i].w+'. '+V[i].e);return;
+ case 'speakm':speak(SC[C.i].model);return;
+ case 'mL':if(!W.match.matched[i])W.match.sel=i;break;
+ case 'mR':{var m=W.match;if(m.matched[i])break;
+  if(m.sel===null){toast('Tap a word first');return}
+  if(m.sel===i){var cl=!m.mist[i];m.matched[i]=1;addXP(cl?5:2);m.sel=null;
+   if(ROUNDS[m.round].every(function(x){return m.matched[x]})){if(!m.roundMist)tick();if(m.round===3)W.done[1]=true}}
+  else{m.mist[m.sel]=(m.mist[m.sel]||0)+1;m.flash=[m.sel,i];if(!m.roundMist)brk();m.roundMist=true;m.sel=null}
+  break}
+ case 'mnext':{var mm=W.match;if(mm.round<3){mm.round++;mm.sel=null;mm.roundMist=false}else{W.step=2}pendingScroll='#subnav';break}
+ case 'gapchip':gapChip(getG(d.g),+d.id);break;
+ case 'gapclick':gapClick(getG(d.g),i);break;
+ case 'gapcheck':{
+  var g=getG(d.g),res=gapCheck(g);
+  if(d.g==='fill'){
+   addXP(res.right*(res.first?10:5));
+   if(res.first){if(res.wrong===0)tick();else brk()}
+   if(res.done)W.done[2]=true;
+  }else{
+   r=curRes();
+   if(res.wrong>0){r.q2.wrong++;brk()}
+   if(res.done)award(r,'q2');
+  }break}
+ case 'ostep':{var o=curRes().q2.o;if(!o.done)placeTile(o,+d.id);break}
+ case 'oslot':{var o2=curRes().q2.o;if(!o2.locked[i]&&o2.slots[i]!==null&&!o2.done)o2.slots[i]=null;break}
+ case 'ocheck':{r=curRes();var rs=ordCheck(r.q2.o);if(rs.wrong>0){r.q2.wrong++;brk()}if(rs.done)award(r,'q2');break}
+ case 'stile':{var S=W.spell,c=S.cur;if(c.solved)break;placeTile(c,+d.id);if(c.slots.every(function(x){return x!==null}))spellCheck(c);break}
+ case 'sslot':{var c2=W.spell.cur;if(c2.solved||c2.locked[i]||c2.slots[i]===null)break;c2.slots[i]=null;break}
+ case 'sclear':{var c3=W.spell.cur;c3.slots=c3.slots.map(function(x,k){return c3.locked[k]?x:null});break}
+ case 'shint':{var c4=W.spell.cur;if(c4.hint||c4.solved)break;c4.hint=true;
+  var first=c4.word.charAt(0),used={};c4.slots.forEach(function(x,k){if(x!==null&&k!==0)used[x]=1});
+  var t=c4.tiles.filter(function(x){return x.c===first&&!used[x.id]})[0];
+  c4.slots[0]=t.id;c4.locked[0]=true;
+  c4.slots=c4.slots.map(function(x,k){return (k>0&&x===t.id)?null:x});break}
+ case 'snext':{var S2=W.spell;if(S2.i===9){S2.fin=true;W.done[3]=true}else{S2.i++;S2.cur=spellInit(S2.i)}pendingScroll='#subnav';break}
+ case 'goto':C.i=i;pendingScroll='.rail';break;
+ case 'next':if(C.i<SC.length-1){C.i++;pendingScroll='.rail'}else{view='res';pendingScroll='.tabs'}break;
+ case 'hint':r=curRes();r[d.q].hint=true;G.hints++;gain(r,-5);break;
+ case 'pick1':{r=curRes();var opt=SC[C.i].o.filter(function(x){return x.k===d.t})[0];
+  r.q1.picked.push(d.t);
+  if(opt.ok)award(r,'q1');else{r.q1.wrong++;brk()}break}
+ case 'pick2':{r=curRes();var op=r.q2.opts[i];r.q2.picked.push(i);
+  if(op.ok)award(r,'q2');else{r.q2.wrong++;brk()}break}
+ }
+ render();
+});
+reset();render();
+})();
+</script>
+
+</body></html>
