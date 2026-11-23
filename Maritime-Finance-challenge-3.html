@@ -63,13 +63,13 @@ button{font-family:inherit;color:inherit}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
 .ico{display:block}
 /* word wall */
-.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;align-items:start}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:10px;align-items:start}
 .wcard{border:2px solid var(--line);border-radius:14px;background:var(--panel2);min-width:0}
 .wcard.open{grid-column:1/-1;background:var(--panel);border-color:var(--steel)}
 .wcard.verb.open{border-color:var(--accent)}
 .whead{width:100%;display:flex;align-items:center;gap:10px;padding:10px;background:none;border:0;cursor:pointer;text-align:left;color:var(--steel)}
 .wcard.verb .whead{color:var(--accent)}
-.wword{font:700 1.2rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink);overflow-wrap:anywhere}
+.wword{font:700 1.2rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink);overflow-wrap:normal;word-break:normal;hyphens:none;min-width:0;line-height:1.15}.whead svg,.whead .vtag{flex:none}
 .vtag{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;border:2px dashed currentColor;font:500 11px var(--f-mono);text-transform:uppercase}
 .seen-dot{margin-left:auto;width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
 .wcard.seen .seen-dot{background:var(--good)}
@@ -78,7 +78,7 @@ button{font-family:inherit;color:inherit}
 /* match */
 .mgrid{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
 .mcol{display:grid;gap:8px;align-content:start;min-width:0}
-.mitem,.mdef{text-align:left;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer;font-size:15.5px;min-width:0;overflow-wrap:anywhere}
+.mitem,.mdef{text-align:left;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer;font-size:15.5px;min-width:0;overflow-wrap:break-word;hyphens:none}
 .mitem{font-weight:700}
 .mitem.sel{border-color:var(--accent);background:var(--accent-soft)}
 .mitem.ok,.mdef.ok{border-color:var(--good);background:var(--good-soft);cursor:default}

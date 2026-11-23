@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Supply Chain Consulting English</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout concept: a supply chain & warehouse consulting dispatch board.
+   Sticky toolbar with XP/rank/streak HUD, blueprint grid backdrop, progressive warm-up modules, and 12 client project tickets. */
+:root{
+ --bg:#E9EDF0;--dot:rgba(46,94,126,.17);--panel:#fff;--panel2:#F2F5F7;--ink:#16242E;--muted:#51636F;--line:#C9D4DB;
+ --steel:#2E5E7E;--steel-soft:#DCE9F1;--head-bg:#234B66;--head-ink:#fff;
+ --accent:#C9490B;--accent-soft:#FDE7DA;--on-accent:#fff;
+ --good:#1B7A3D;--good-soft:#DDF3E4;--bad:#B42318;--bad-soft:#FCE2DF;--star:#F0A81B;
+ --f-display:'Barlow Condensed','Arial Narrow',sans-serif;--f-body:'Atkinson Hyperlegible',system-ui,sans-serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace;
+ color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#11191F;--dot:rgba(127,180,214,.13);--panel:#1A252D;--panel2:#222F39;--ink:#E8EFF3;--muted:#9DB0BC;--line:#34444F;
+ --steel:#7FB4D6;--steel-soft:#213644;--head-bg:#2B4A5E;--head-ink:#E8EFF3;
+ --accent:#FF8A4C;--accent-soft:#3F2415;--on-accent:#1B0E05;
+ --good:#5FD08A;--good-soft:#17382A;--bad:#FF8A80;--bad-soft:#3E1E1C;--star:#F5B83A;
+ color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+ --bg:#11191F;--dot:rgba(127,180,214,.13);--panel:#1A252D;--panel2:#222F39;--ink:#E8EFF3;--muted:#9DB0BC;--line:#34444F;
+ --steel:#7FB4D6;--steel-soft:#213644;--head-bg:#2B4A5E;--head-ink:#E8EFF3;
+ --accent:#FF8A4C;--accent-soft:#3F2415;--on-accent:#1B0E05;
+ --good:#5FD08A;--good-soft:#17382A;--bad:#FF8A80;--bad-soft:#3E1E1C;--star:#F5B83A;
+ color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+ margin:0;
+ padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+ background-color:var(--bg);
+ background-image:radial-gradient(var(--dot) 1.4px,transparent 1.7px);
+ background-size:22px 22px;
+ color:var(--ink);
+ font:17px/1.5 var(--f-body);
+ overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+.inner{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.02em;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:2.3rem}h2{font-size:1.7rem}h3{font-size:1.3rem}
+p{margin:0}
+button{font-family:inherit;color:inherit}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Sticky Top Bar */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--panel);border-bottom:1px solid var(--line)}
+.topbar .inner{padding-block:8px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;font:700 1.35rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--steel)}
+.hud{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip-h{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font-weight:700;font-size:14px;white-space:nowrap}
+.chip-h svg{color:var(--accent)}
+.xprow{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:var(--muted)}
+.xpbar{flex:1;height:7px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
+.xpfill{height:100%;width:0;background:var(--accent);transition:width .5s}
+
+/* Main Navigation & Panels */
+.main{padding-block:20px 90px}
+.tabs{display:flex;gap:6px;margin-bottom:16px}
+.tab{flex:1;min-width:0;padding:10px 6px;border:2px solid var(--line);border-radius:12px;background:var(--panel);font:700 1.05rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;cursor:pointer;transition:border-color .15s,background-color .15s}
+.tab.on{background:var(--steel);border-color:var(--steel);color:var(--panel)}
+.tab small{font:500 11px var(--f-mono);display:block;opacity:.85}
+.intro{margin-bottom:14px;display:grid;gap:6px}
+.intro p{color:var(--muted)}
+.subnav{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.sub{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:2px solid var(--line);background:var(--panel);font-weight:700;font-size:14px;cursor:pointer}
+.sub.on{border-color:var(--accent);background:var(--accent-soft)}
+.subn{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--steel-soft);color:var(--steel);font:700 12px var(--f-mono)}
+.sub.done .subn{background:var(--good);color:var(--panel)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 20px -14px rgba(22,36,46,.5);display:grid;gap:14px}
+.lead{color:var(--muted)}
+.btn{font:700 16px/1 var(--f-body);padding:13px 18px;min-height:46px;border-radius:10px;border:2px solid var(--ink);background:var(--panel);cursor:pointer;transition:transform .1s,opacity .15s}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.small{padding:8px 12px;min-height:36px;font-size:14px}
+.btn.ghost{border-color:var(--line);color:var(--muted)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--steel);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.ico{display:block}
+
+/* Word Wall */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,215px),1fr));gap:10px;align-items:start}
+.wcard{border:2px solid var(--line);border-radius:14px;background:var(--panel2);min-width:0;transition:border-color .15s}
+.wcard.open{grid-column:1/-1;background:var(--panel);border-color:var(--steel)}
+.wcard.verb.open{border-color:var(--accent)}
+.whead{width:100%;display:flex;align-items:center;gap:10px;padding:10px;background:none;border:0;cursor:pointer;text-align:left;color:var(--steel)}
+.wcard.verb .whead{color:var(--accent)}
+.wword{font:700 1.2rem var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink);overflow-wrap:break-word;word-break:normal;hyphens:none;min-width:0;line-height:1.15}
+.whead svg,.whead .vtag{flex:none}
+.vtag{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;border:2px dashed currentColor;font:500 11px var(--f-mono);text-transform:uppercase}
+.seen-dot{margin-left:auto;width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
+.wcard.seen .seen-dot{background:var(--good)}
+.wbody{padding:0 12px 12px;display:grid;gap:8px}
+.wex{font-style:italic;color:var(--muted)}
+
+/* Match */
+.mgrid{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}
+.mcol{display:grid;gap:8px;align-content:start;min-width:0}
+.mitem,.mdef{text-align:left;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer;font-size:15.5px;min-width:0;overflow-wrap:break-word;hyphens:none}
+.mitem{font-weight:700}
+.mitem.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mitem.ok,.mdef.ok{border-color:var(--good);background:var(--good-soft);cursor:default}
+
+/* Gap Fill */
+.bank{display:flex;gap:8px;flex-wrap:wrap;padding:12px;border-radius:12px;background:var(--panel2);border:1px dashed var(--line)}
+.chip{padding:8px 14px;border-radius:999px;border:2px solid var(--steel);background:var(--panel);font-weight:700;cursor:pointer}
+.chip.sel{background:var(--steel);color:var(--panel)}
+.chip.used{opacity:.3;cursor:default}
+.sents{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.sent{line-height:2.3}
+.gap{min-width:108px;padding:3px 10px;margin:0 3px;border-radius:8px;border:2px dashed var(--steel);background:var(--steel-soft);font-weight:700;cursor:pointer;min-height:34px}
+.gap.filled{border-style:solid}.gap.active{border-color:var(--accent);background:var(--accent-soft)}
+.gap.ok{border-color:var(--good);background:var(--good-soft);cursor:default}
+.gap.bad,.oslot.bad{border-color:var(--bad);background:var(--bad-soft)}
+.msg{font-weight:700;color:var(--muted)}
+
+/* Spell */
+.clue{display:flex;gap:14px;align-items:center;padding:14px;border-radius:12px;background:var(--panel2);color:var(--steel)}
+.clue p{color:var(--ink)}
+.slots,.tiles{display:flex;gap:6px;flex-wrap:wrap}
+.slotgrp{display:flex;gap:4px;flex-wrap:wrap;margin-right:14px;margin-bottom:4px}
+.slot,.tile{width:38px;height:44px;border-radius:9px;border:2px solid var(--steel);background:var(--panel);font:700 1.35rem var(--f-display);text-transform:uppercase;cursor:pointer;padding:0}
+.slot{background:var(--panel2);border-style:dashed}.slot.f{border-style:solid;background:var(--panel)}
+.slot.lock{border-color:var(--accent);cursor:default}.slot.bad{border-color:var(--bad);background:var(--bad-soft)}
+.slot.ok{border-color:var(--good);background:var(--good-soft)}
+.tile.used{opacity:.2;cursor:default}
+
+/* Consulting Cases */
+.rail{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;margin-bottom:14px}
+.rn{height:34px;border-radius:8px;border:2px solid var(--line);background:var(--panel);font:700 13px var(--f-mono);cursor:pointer;padding:0}
+.rn.done{background:var(--steel);border-color:var(--steel);color:var(--panel)}
+.rn.cur{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.stack{display:grid;gap:14px}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 20px -14px rgba(22,36,46,.5)}
+.jobhead{display:flex;justify-content:space-between;padding:8px 16px;background:var(--head-bg);color:var(--head-ink)}
+.jobbody{padding:16px;display:grid;gap:12px;border-bottom:2px dashed var(--line)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:0}
+.fields dt{font:500 11px var(--f-mono);text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
+.fields dd{margin:0;font-weight:700}
+.pri{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;background:var(--steel-soft);color:var(--steel)}
+.pri-urgent{background:var(--accent-soft);color:var(--accent)}
+.pri-scope-risk{background:var(--bad-soft);color:var(--bad)}
+.pri-go-live{background:var(--good-soft);color:var(--good)}
+.quote{margin:0;padding:10px 14px;border-radius:12px;background:var(--panel2);font-style:italic}
+.quote::before{content:"“";font:700 2rem/0 var(--f-display);color:var(--accent);margin-right:4px;vertical-align:-8px}
+.think{padding:12px 16px;display:flex;gap:10px;align-items:baseline;background:var(--accent-soft);border-radius:0 0 14px 14px}
+.think b{font:500 12px var(--f-mono);text-transform:uppercase;color:var(--accent);letter-spacing:.08em;white-space:nowrap}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.stepn{display:block;font:500 12px var(--f-mono);color:var(--accent);letter-spacing:.08em}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
+.opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;background:var(--panel);border:2px solid var(--line);border-radius:14px;cursor:pointer;text-align:center;color:var(--steel)}
+.opt b{color:var(--ink);font:700 1.1rem var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.opt.good,.copt.good{border-color:var(--good);background:var(--good-soft)}
+.opt.bad,.copt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.why{font-size:14.5px;color:var(--ink);text-align:left;font-style:normal;display:block;margin-top:4px}
+.copt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;padding:12px;border:2px solid var(--line);border-radius:12px;background:var(--panel);cursor:pointer}
+.cl{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--steel-soft);color:var(--steel);font:700 13px var(--f-mono)}
+.ct{min-width:0}
+.hint{padding:10px 14px;border-radius:10px;background:var(--steel-soft);font-size:15px}
+.olist{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.oslot,.ostep{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:11px 12px;border-radius:12px;border:2px dashed var(--line);background:var(--panel2);cursor:pointer;color:var(--muted)}
+.oslot.filled{border-style:solid;border-color:var(--steel);background:var(--panel);color:var(--ink)}
+.oslot.ok{border-color:var(--good);background:var(--good-soft);color:var(--ink);cursor:default}
+.onum{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--steel);color:var(--panel);font:700 13px var(--f-mono)}
+.ostep{border:2px solid var(--steel);border-style:solid;background:var(--panel);color:var(--ink)}
+.pool{display:grid;gap:8px}
+.explain{padding:12px 14px;border-radius:12px;background:var(--good-soft);border:1px solid var(--good)}
+.debrief{background:var(--panel);border:2px solid var(--good);border-radius:16px;padding:18px;display:grid;gap:12px}
+.stars{display:flex;gap:4px}.stars svg{width:30px;height:30px}
+.star{fill:none;stroke:var(--line);stroke-width:2}.star.on{fill:var(--star);stroke:var(--ink);animation:pop .5s both}
+.say{padding:12px 14px;border-radius:12px;background:var(--steel-soft);display:grid;gap:8px}
+
+/* Results */
+.rank{text-align:center;display:grid;gap:8px;padding:10px 0}
+.rank h2{font-size:2.6rem;color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{padding:12px;border-radius:12px;background:var(--panel2);text-align:center}
+.stat b{display:block;font:700 1.8rem var(--f-display)}
+.pegs{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:10px}
+.peg{display:grid;justify-items:center;gap:4px;padding:10px 6px;border-radius:12px;border:2px dashed var(--line);color:var(--muted);font-size:12px;text-align:center}
+.peg.on{border:2px solid var(--steel);color:var(--steel);background:var(--panel)}
+.peg .stars svg{width:14px;height:14px}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
+.badge{padding:12px;border-radius:12px;border:2px dashed var(--line);color:var(--muted);display:grid;gap:2px}
+.badge b{font:700 1.1rem var(--f-display);text-transform:uppercase}
+.badge.on{border:2px solid var(--accent);background:var(--accent-soft);color:var(--ink)}
+.badge.on b{color:var(--accent)}
+.talk{margin:0;padding-left:20px;display:grid;gap:8px}
+
+/* Toasts & Animations */
+#toasts{position:fixed;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom,0px));display:grid;gap:6px;justify-items:center;pointer-events:none;z-index:20}
+.toast{padding:8px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:700;animation:rise .3s both}
+.toast.level{background:var(--accent);color:var(--on-accent)}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:440px){
+ h1{font-size:1.9rem}
+ .mgrid{grid-template-columns:1fr 1.35fr}
+ .slot,.tile{width:30px;height:38px;font-size:1.2rem}
+ .rail{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="inner">
+ <div class="toprow">
+  <div class="brand">
+   <svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true">
+    <path d="M24 4l17 10v20L24 44 7 34V14z"/>
+    <path d="M7 14l17 10 17-10M24 24v20"/>
+    <circle cx="24" cy="24" r="5" fill="var(--panel)"/>
+   </svg>
+   Supply Chain Consulting English
+  </div>
+  <div class="hud" aria-label="Your progress">
+   <span class="chip-h" id="hud-level">Junior Analyst</span>
+   <span class="chip-h"><span id="hud-xp">0</span> XP</span>
+   <span class="chip-h" title="Current streak"><svg width="16" height="16" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M24 4c2 8 12 12 12 24a12 12 0 0 1-24 0c0-6 4-8 5-13 3 2 4 5 4 7 4-4 4-12 3-18z"/></svg><span id="hud-streak">0</span></span>
+  </div>
+ </div>
+ <div class="xprow"><div class="xpbar"><div class="xpfill" id="xpfill"></div></div><span id="xpnext"></span></div>
+</div></header>
+
+<main class="main"><div class="inner">
+ <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+ <div id="app"></div>
+</div></main>
+
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Utility Helpers ---------- */
+var $=function(s,el){return (el||document).querySelector(s)};
+var $$=function(s,el){return Array.prototype.slice.call((el||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var SPEAK='speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined';
+function speak(t){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+
+/* ---------- 48x48 Geometric Architectural SVG Icons ---------- */
+function icon(k,s){s=s||44;return '<svg class="ico" width="'+s+'" height="'+s+'" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[k]+'</svg>'}
+var CHECK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+function starsHTML(n){var o='';for(var i=0;i<3;i++)o+='<svg viewBox="0 0 48 48" aria-hidden="true"><polygon class="star '+(i<n?'on':'')+'" points="24,4 30,18 45,19 33,29 37,44 24,36 11,44 15,29 3,19 18,18"/></svg>';return '<div class="stars" role="img" aria-label="'+n+' of 3 stars">'+o+'</div>'}
+
+var IC={
+ workflow:'<rect x="4" y="10" width="12" height="10" rx="2"/><rect x="32" y="10" width="12" height="10" rx="2"/><rect x="18" y="30" width="12" height="10" rx="2"/><path d="M16 15h14M27 11l4 4-4 4"/><path d="M38 20v15h-6M10 20v15h6"/>',
+ bottleneck:'<path d="M6 10h36l-13 13v8l-10 7V23z"/><path d="M24 4v4M24 40v4M17 6l2 2M31 6l-2 2"/>',
+ wms:'<rect x="6" y="7" width="36" height="25" rx="2.5"/><path d="M16 39h16M24 32v7"/><path d="M13 14h9v6h-9zM26 14h9v6h-9zM13 24h22"/>',
+ slotting:'<path d="M8 6v36M40 6v36M8 16h32M8 28h32M8 38h32"/><rect x="13" y="9" width="9" height="7" rx="1"/><rect x="26" y="20" width="9" height="8" rx="1" fill="currentColor" fill-opacity=".22"/><rect x="13" y="31" width="9" height="7" rx="1"/>',
+ kpi:'<path d="M6 40h36M10 40V26h6v14M21 40V19h6v21M32 40V12h6v28"/><path d="M9 18l11-7 8 4 11-9"/><path d="M33 6h6v6"/>',
+ specifications:'<path d="M11 5h19l8 8v30H11z"/><path d="M30 5v8h8"/><path d="M17 20l2 2 4-4M26 20h6M17 28l2 2 4-4M26 28h6M17 36h15"/>',
+ throughput:'<path d="M4 34h40"/><circle cx="10" cy="38" r="2.5"/><circle cx="24" cy="38" r="2.5"/><circle cx="38" cy="38" r="2.5"/><rect x="8" y="18" width="12" height="12" rx="1.5"/><rect x="24" y="18" width="12" height="12" rx="1.5"/><path d="M14 10h24M33 6l5 4-5 4"/>',
+ accuracy:'<rect x="6" y="22" width="14" height="14" rx="1.5"/><rect x="6" y="10" width="14" height="12" rx="1.5"/><path d="M25 11h17v29H25z"/><path d="M30 8h7v5h-7z"/><path d="M29 24l3 3 6-6M29 33h9"/>',
+ uat:'<circle cx="17" cy="15" r="6"/><path d="M7 38c0-6 4.5-10 10-10s10 4 10 10"/><path d="M34 16l8 3v8c0 6-3.5 10-8 12-4.5-2-8-6-8-12v-8z"/><path d="M31 27l2.5 2.5 5-5"/>',
+ golive:'<path d="M24 6c7 5 10 13 10 22H14c0-9 3-17 10-22z"/><circle cx="24" cy="18" r="3"/><path d="M14 23l-6 6h6M34 23l6 6h-6M19 28v8l5-3 5 3v-8"/>'
+};
+
+/* ---------- 20 Strong B1 Supply Chain Consulting Vocabulary Items ---------- */
+var V=[
+ {w:'workflow',t:'tool',k:'workflow',d:'The sequence of steps and tasks needed to complete a warehouse or supply chain operation from start to finish.',e:'We mapped the inbound workflow to see where pallets wait too long.'},
+ {w:'bottleneck',t:'tool',k:'bottleneck',d:'A point in a process where work slows down or stops because capacity is too low.',e:'The single packing station creates a bottleneck every afternoon.'},
+ {w:'WMS',t:'tool',k:'wms',d:'Warehouse Management System: software that controls inventory, storage locations, picking, and shipping.',e:'The new WMS directs pickers along the shortest route.'},
+ {w:'slotting',t:'tool',k:'slotting',d:'Organizing products in the best warehouse locations based on size, weight, and order frequency.',e:'Smart slotting puts fast-moving items near the packing area.'},
+ {w:'KPI',t:'tool',k:'kpi',d:'Key Performance Indicator: a measurable value used to check how well a process is performing.',e:'Order accuracy and picking speed are two essential warehouse KPIs.'},
+ {w:'specifications',t:'tool',k:'specifications',d:'A detailed document describing the exact functional and technical requirements for a new solution.',e:'The client signed off on the functional specifications before configuration began.'},
+ {w:'throughput',t:'tool',k:'throughput',d:'The total volume of goods or orders a warehouse can process within a specific period.',e:'Reorganizing the layout increased daily throughput by twenty percent.'},
+ {w:'inventory accuracy',t:'tool',k:'accuracy',d:'How closely the physical stock in the warehouse matches the stock numbers recorded in the system.',e:'Regular cycle counts keep inventory accuracy above ninety-nine percent.'},
+ {w:'user acceptance testing',t:'tool',k:'uat',d:'Final testing where client staff check that the new system works properly in real scenarios before launch.',e:'Operators discovered a label printing bug during user acceptance testing.'},
+ {w:'go-live',t:'tool',k:'golive',d:'The official moment when a new system or warehouse process starts operating in real daily production.',e:'Our consulting team stayed on-site for a week after go-live to support staff.'},
+ {w:'assess',t:'verb',d:'To examine a situation, process, or business need carefully in order to understand its strengths and weaknesses.',e:'First, we assess the client’s current warehouse operations.'},
+ {w:'map',t:'verb',d:'To draw or document every step of an existing process so everyone can see how it actually works.',e:'We spent two days on the floor to map the returns process.'},
+ {w:'streamline',t:'verb',d:'To make a process faster, simpler, and more efficient by removing unnecessary steps.',e:'Barcode scanning helped streamline the goods-in check.'},
+ {w:'design',t:'verb',d:'To plan and create a tailored solution, layout, or workflow that meets the client’s needs.',e:'We design a storage layout adapted to seasonal peaks.'},
+ {w:'configure',t:'verb',d:'To set up software parameters and rules so a system matches the client’s specific operations.',e:'The team will configure the WMS picking rules next week.'},
+ {w:'integrate',t:'verb',d:'To connect two or more software systems so they share data automatically without manual entry.',e:'We must integrate the warehouse system with the client’s ERP.'},
+ {w:'validate',t:'verb',d:'To confirm officially that a design, process, or test result is accurate and ready for the next stage.',e:'The warehouse manager needs to validate the new layout plan.'},
+ {w:'train',t:'verb',d:'To teach client teams and operators how to use a new tool or follow a new procedure.',e:'We train shift leaders first so they can coach their teams.'},
+ {w:'roll out',t:'verb',d:'To introduce and launch a new system or process across a team, site, or company.',e:'They plan to roll out the new picking process in three phases.'},
+ {w:'troubleshoot',t:'verb',d:'To find the root cause of an operational or technical problem and fix it quickly.',e:'During go-live, consultants help troubleshoot scanning errors on the floor.'}
+];
+var VI={};V.forEach(function(v,i){VI[v.w]=i});
+
+var ROUNDS=[[0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19]];
+
+var FILL=[
+ {t:'Before proposing changes, we analyze the current ___ from goods-in to dispatch.',a:'workflow'},
+ {t:'Because only one staff member checks returns, that desk is a major ___.',a:'bottleneck'},
+ {t:'Better ___ places heavy, fast-moving items closer to the packing benches.',a:'slotting'},
+ {t:'The project team wrote clear functional ___ before configuring the software.',a:'specifications'},
+ {t:'Higher daily ___ allowed the warehouse to handle peak season without overtime.',a:'throughput'},
+ {t:'During ___, warehouse supervisors test every scenario with real barcode scanners.',a:'user acceptance testing'},
+ {t:'Consultants ___ the client’s existing operations during a two-day site audit.',a:'assess'},
+ {t:'Removing duplicate paper forms will ___ the goods-receiving process.',a:'streamline'},
+ {t:'We must ___ the warehouse software with the ERP so orders transfer automatically.',a:'integrate'},
+ {t:'After key users ___ the test results, we can schedule the operational launch.',a:'validate'}
+];
+
+var SPELL=['workflow','bottleneck','slotting','specifications','throughput','inventory accuracy','user acceptance testing','streamline','configure','troubleshoot'];
+
+var LEVELS=[
+ {n:'Junior Analyst',at:0},
+ {n:'Process Consultant',at:200},
+ {n:'Supply Chain Architect',at:450},
+ {n:'Lead Solutions Consultant',at:700}
+];
+
+/* ---------- 12 Client Consulting Cases ---------- */
+var SC=[
+ {title:'Discovery at the Regional Hub',car:'Needs Analysis',cust:'Claire, Operations Director',pri:'Normal',tool:'workflow',
+  sit:'A mid-sized distributor wants to modernize its regional warehouse. Before recommending any software or layout changes, you visit the site to observe how goods arrive, move into storage, and leave for delivery.',
+  quote:'We know our dispatch is slow, but everyone describes the daily routine differently.',
+  think:'Before designing a solution, you need a clear picture of how operations currently run from start to finish.',
+  q1:'What do you need to analyze and document first?',
+  o:[
+   {k:'workflow',ok:1,w:'Yes. Studying the current workflow shows every step, handoff, and delay from goods-in to shipping.'},
+   {k:'golive',w:'No. Go-live is the final launch phase at the end of the project, not the first step.'},
+   {k:'uat',w:'No. User acceptance testing happens after a solution is built and configured.'},
+   {k:'slotting',w:'No. Slotting optimizes storage locations, which comes after you understand the overall process.'}
+  ],
+  h1:'The end-to-end sequence of warehouse tasks.',
+  t2:'order',q2:'Put the discovery steps in the right order.',
+  steps:[
+   'Map existing flows from goods-in to dispatch.',
+   'Measure order volumes and picking times.',
+   'Identify bottlenecks and manual workarounds.',
+   'Present findings and improvement areas to the client.'
+  ],
+  why2:'First observe and map reality, then back it up with data, diagnose pain points, and share clear findings with the client.',
+  h2:'Observe first, measure second, diagnose third.',
+  model:'First, I map the existing workflows and measure order volumes. Then I identify key bottlenecks and present my findings to the client.'},
+
+ {title:'The Afternoon Packing Jam',car:'Process Audit',cust:'Marc, Warehouse Manager',pri:'Urgent',tool:'bottleneck',
+  sit:'Pickers collect orders quickly all morning, yet trucks leave late every afternoon. Pallets of picked items pile up in front of three packing benches while carriers wait outside.',
+  quote:'Our pickers are fast, so why are trucks still leaving an hour late?',
+  think:'When goods move quickly through one stage and pile up before the next stage, what is slowing the whole chain down?',
+  q1:'What operational problem is causing the late departures?',
+  o:[
+   {k:'bottleneck',ok:1,w:'Yes. The packing area has lower capacity than picking, creating a bottleneck that delays dispatch.'},
+   {k:'accuracy',w:'No. Inventory accuracy measures whether stock counts match the system, not packing speed.'},
+   {k:'specifications',w:'No. Specifications are project requirements, not a physical slowdown on the floor.'},
+   {k:'kpi',w:'No. KPIs measure performance, whereas the pile-up at packing is a capacity constraint.'}
+  ],
+  h1:'A narrow point where work piles up.',
+  t2:'choice',q2:'What is the best consulting recommendation?',
+  c:[
+   {t:'Analyze cycle times at the packing benches, streamline packing steps, and cross-train staff to reinforce packing during afternoon peaks.',ok:1,w:'Yes. Measuring cycle time and balancing capacity removes the constraint without unnecessary spending.'},
+   {t:'Ask pickers to work faster in the morning so more boxes reach the packing zone earlier.',w:'No. Sending even more items to an overloaded station only makes the pile-up worse.'},
+   {t:'Immediately buy an expensive automated sorter before measuring packing times.',w:'No. Good consultants diagnose root causes and optimize processes before recommending heavy investments.'}
+  ],
+  h2:'Balance capacity where work piles up.',
+  model:'I analyze cycle times at the packing benches, streamline the packing tasks, and reassign trained staff during afternoon peaks.'},
+
+ {title:'Phantom Stock on the Shelves',car:'Inventory Audit',cust:'Sophie, Supply Chain Lead',pri:'Scope Risk',tool:'accuracy',
+  sit:'The ERP shows 40 units of a popular spare part in stock, so customer service confirms an urgent order. On the warehouse floor, however, the bin is completely empty.',
+  quote:'Our system says we have stock, yet pickers keep reporting empty locations.',
+  think:'If physical stock on the shelves does not match the digital records, a new system alone will fail.',
+  q1:'Which warehouse metric is failing here?',
+  o:[
+   {k:'accuracy',ok:1,w:'Yes. Low inventory accuracy means physical stock and system records do not match.'},
+   {k:'throughput',w:'No. Throughput measures processing volume over time, not whether stock counts are right.'},
+   {k:'golive',w:'No. Go-live is the launch date of a project.'},
+   {k:'workflow',w:'No. Workflow is the sequence of tasks; the specific metric here is stock reliability.'}
+  ],
+  h1:'How closely physical stock matches system records.',
+  t2:'gap',q2:'Complete the improvement plan. Tap a word, then tap a gap.',
+  gap:{
+   s:[
+    {t:'First, we ___ how stock movements and adjustments are currently recorded.',a:['assess']},
+    {t:'Next, we ___ every transaction from goods-in to cycle counting to find where errors happen.',a:['map']},
+    {t:'Finally, we introduce barcode scans at each move to ___ stock updates.',a:['streamline']}
+   ],
+   b:['assess','map','streamline','delay']
+  },
+  why2:'You must assess current practices, map where stock data gets lost, and streamline updates with real-time scanning.',
+  h2:'Assess first, map errors, then streamline.',
+  model:'First, I assess how stock is recorded and map every movement. Then I streamline updates with mandatory barcode scans.'},
+
+ {title:'Too Many Steps for Fast Sellers',car:'Layout Design',cust:'Karim, Picking Supervisor',pri:'Normal',tool:'slotting',
+  sit:'Analysis of six months of order data shows that 20% of SKUs generate 75% of all order lines. Right now, those fast-moving products are stored at the far back of the building.',
+  quote:'Our operators walk nearly fifteen kilometers per shift just to pick standard orders.',
+  think:'Where should high-frequency items live so pickers spend less time walking and more time fulfilling orders?',
+  q1:'Which warehouse optimization method solves this layout issue?',
+  o:[
+   {k:'slotting',ok:1,w:'Yes. Slotting places products in optimal bays based on order frequency, size, and weight.'},
+   {k:'uat',w:'No. User acceptance testing checks software readiness before launch.'},
+   {k:'specifications',w:'No. Specifications document system requirements, not storage location rules.'},
+   {k:'bottleneck',w:'No. A bottleneck is a slowdown point, not the method used to organize storage bays.'}
+  ],
+  h1:'Placing products in the smartest rack locations.',
+  t2:'choice',q2:'How do you redesign the storage zone?',
+  c:[
+   {t:'Move the top-20% fast movers to ergonomic golden-zone bays near the packing area, and group items often ordered together.',ok:1,w:'Yes. Putting high-velocity SKUs close to packing dramatically cuts travel time and fatigue.'},
+   {t:'Sort all products strictly in alphabetical order so locations are easy to remember.',w:'No. Alphabetical storage ignores order velocity and forces excessive walking.'},
+   {t:'Store the heaviest fast-moving cartons on the highest rack levels to save floor space.',w:'No. Heavy fast movers belong at waist height for speed and operator safety.'}
+  ],
+  h2:'Put fast movers close and at waist height.',
+  model:'I move the top fast-moving items into ergonomic golden-zone locations near the packing area to reduce walking distance.'},
+
+ {title:'Paper Lists in a Growing Warehouse',car:'Solution Design',cust:'Elena, IT & Logistics Sponsor',pri:'Normal',tool:'wms',
+  sit:'A rapidly growing e-commerce brand still prints paper pick lists from spreadsheets. As daily orders double, mispicks and manual data entry errors are climbing fast.',
+  quote:'Spreadsheets worked when we shipped two hundred parcels a day, not two thousand.',
+  think:'When order volume scales tenfold, which core operational software guides pickers, tracks bins, and controls stock in real time?',
+  q1:'Which solution do you recommend implementing?',
+  o:[
+   {k:'wms',ok:1,w:'Yes. A Warehouse Management System controls locations, directs picking routes, and updates inventory in real time.'},
+   {k:'bottleneck',w:'No. A bottleneck is a problem in a flow, not a software solution.'},
+   {k:'throughput',w:'No. Throughput is a performance measure, not a software platform.'},
+   {k:'kpi',w:'No. KPIs measure results, whereas a WMS executes daily warehouse operations.'}
+  ],
+  h1:'Software that manages inventory and picking.',
+  t2:'gap',q2:'Complete the implementation roadmap. Tap a word, then tap a gap.',
+  gap:{
+   s:[
+    {t:'First, we ___ target warehouse workflows adapted to the client’s order profile.',a:['design']},
+    {t:'Next, our specialists ___ the picking rules, zones, and barcode labels in the software.',a:['configure']},
+    {t:'Finally, we ___ the new warehouse software with the client’s online store and ERP.',a:['integrate']}
+   ],
+   b:['design','configure','integrate','troubleshoot']
+  },
+  why2:'A structured rollout always follows this sequence: design the target process, configure the tool, and integrate it with surrounding systems.',
+  h2:'Design the process, set up the rules, connect the systems.',
+  model:'First, I design the target workflows. Then we configure the WMS rules and integrate the platform with the client’s ERP.'},
+
+ {title:'Moving Goalposts Before Build',car:'Design Sign-off',cust:'David, Project Sponsor',pri:'Scope Risk',tool:'specifications',
+  sit:'During the design phase, the client’s sales director asks to add a complex custom kitting module two days before configuration starts—without changing the deadline or budget.',
+  quote:'It is just a small extra feature. Can your team include it without changing the launch date?',
+  think:'Uncontrolled scope changes during design cause delays and misunderstandings later. What formal reference document protects both sides?',
+  q1:'Which project document defines the agreed scope and requirements?',
+  o:[
+   {k:'specifications',ok:1,w:'Yes. The functional specifications record every agreed requirement and serve as the baseline for budget and schedule.'},
+   {k:'slotting',w:'No. Slotting is warehouse bin optimization, not a project scope document.'},
+   {k:'accuracy',w:'No. Inventory accuracy is a stock metric, not a design baseline.'},
+   {k:'golive',w:'No. Go-live is the operational launch phase.'}
+  ],
+  h1:'The document describing functional requirements.',
+  t2:'choice',q2:'How do you handle this late request professionally?',
+  c:[
+   {t:'Log the change request, assess its impact on timeline and budget, and ask the sponsor to validate updated specifications or move it to Phase 2.',ok:1,w:'Yes. Transparent impact analysis protects delivery quality and keeps client expectations realistic.'},
+   {t:'Say yes immediately and ask developers to work weekends so nobody notices the extra workload.',w:'No. Hidden scope creep leads to rushed configuration, bugs, and burnout.'},
+   {t:'Refuse the request flatly without explaining why or offering a Phase 2 option.',w:'No. A consultant stays constructive by evaluating trade-offs and offering phased options.'}
+  ],
+  h2:'Assess impact, document the change, and get formal sign-off.',
+  model:'I document the change request, evaluate its impact on schedule and cost, and ask the sponsor to validate updated specifications or plan a Phase 2.'},
+
+ {title:'Proving the New Layout Works',car:'Pilot Evaluation',cust:'Claire, Operations Director',pri:'Normal',tool:'kpi',
+  sit:'You redesigned the zone-picking process for one product family as a pilot test. Before rolling it out across the entire warehouse, the operations director wants objective proof of improvement.',
+  quote:'The team says the new layout feels smoother, but the board needs hard numbers.',
+  think:'Subjective impressions are not enough to justify a full rollout. What measurable indicators prove operational gains?',
+  q1:'What do you track to evaluate the pilot objectively?',
+  o:[
+   {k:'kpi',ok:1,w:'Yes. Tracking clear KPIs such as lines picked per hour and order accuracy proves whether the pilot works.'},
+   {k:'uat',w:'No. User acceptance testing verifies software bugs, not business return on investment.'},
+   {k:'bottleneck',w:'No. A bottleneck is a flow constraint, not a performance measurement framework.'},
+   {k:'wms',w:'No. A WMS is the warehouse software, whereas KPIs are the metrics used to judge performance.'}
+  ],
+  h1:'Measurable performance indicators.',
+  t2:'order',q2:'Put the pilot validation steps in the right order.',
+  steps:[
+   'Record baseline metrics before making any changes.',
+   'Run a two-week pilot in one dedicated warehouse zone.',
+   'Compare before-and-after data with the client team.',
+   'Validate the business case and approve full rollout.'
+  ],
+  why2:'Without a clean baseline before the test, you cannot prove how much performance actually improved during the pilot.',
+  h2:'Measure before, test, compare, then validate.',
+  model:'First, I record baseline KPIs. Then we run a two-week pilot, compare the before-and-after results, and validate the rollout.'},
+
+ {title:'Peak Season Capacity Crunch',car:'Capacity Planning',cust:'Marc, Warehouse Manager',pri:'Urgent',tool:'throughput',
+  sit:'Historical data shows that order volume triples during the November promotional week. With the current single-order picking setup, the warehouse will fall 4,000 parcels behind by Wednesday.',
+  quote:'We cannot expand the building before November, so we must ship far more orders with the same floor space.',
+  think:'You cannot increase square meters before peak week. Which operational output metric must increase per hour?',
+  q1:'Which operational metric must you increase to absorb peak volume?',
+  o:[
+   {k:'throughput',ok:1,w:'Yes. Increasing throughput means processing more orders per hour within the existing facility.'},
+   {k:'specifications',w:'No. Specifications are design documents, not an operational capacity metric.'},
+   {k:'accuracy',w:'No. Stock accuracy is essential, but the specific bottleneck here is processing volume per hour.'},
+   {k:'golive',w:'No. Go-live is a launch milestone, not a capacity metric.'}
+  ],
+  h1:'The volume of orders processed per hour or day.',
+  t2:'choice',q2:'Which combination of operational improvements increases peak output?',
+  c:[
+   {t:'Introduce multi-order batch picking, pre-pack top promotional bundles in advance, and open dedicated express packing lanes.',ok:1,w:'Yes. Batch picking and pre-packing cut travel and handling time per order, boosting hourly output.'},
+   {t:'Keep single-order picking and simply extend shift hours to 16 hours per day for all staff.',w:'No. Extreme overtime causes fatigue, higher error rates, and safety risks without fixing workflow inefficiency.'},
+   {t:'Turn off barcode scanning checks during peak week to save a few seconds per parcel.',w:'No. Skipping scans creates shipping mistakes and expensive customer returns.'}
+  ],
+  h2:'Group orders and prepare bestsellers ahead of peak.',
+  model:'To increase throughput, I introduce batch picking, pre-pack top promotional bundles ahead of time, and open dedicated express packing lanes.'},
+
+ {title:'One Week Before Launch',car:'Pre-Launch Testing',cust:'Nadia, Key User Lead',pri:'Go-Live',tool:'uat',
+  sit:'Configuration and ERP integration are complete, and launch is scheduled for next Monday. Shift supervisors need to verify that receiving, picking, returns, and carrier labels work under real conditions.',
+  quote:'How do we make sure there are no nasty surprises on Monday morning?',
+  think:'Before switching off the old process, client operators must test real end-to-end scenarios themselves.',
+  q1:'Which critical project phase is taking place this week?',
+  o:[
+   {k:'uat',ok:1,w:'Yes. User acceptance testing lets key users validate real workflows and catch issues before launch.'},
+   {k:'slotting',w:'No. Slotting optimizes shelf positions, whereas this phase tests end-to-end system readiness.'},
+   {k:'bottleneck',w:'No. A bottleneck is a process slowdown, not a testing milestone.'},
+   {k:'throughput',w:'No. Throughput measures output volume, not pre-launch verification.'}
+  ],
+  h1:'Real-scenario testing by client staff before launch.',
+  t2:'order',q2:'Put the testing steps in the right order.',
+  steps:[
+   'Write realistic test scenarios covering normal and edge cases.',
+   'Execute end-to-end tests on the floor with key users.',
+   'Log and fix critical bugs or label formatting issues.',
+   'Sign off launch readiness with the project sponsor.'
+  ],
+  why2:'Structured test scripts ensure every operational case is checked with real users before formal go-live approval.',
+  h2:'Prepare scenarios, test with users, fix bugs, sign off.',
+  model:'First, we write realistic test scenarios and run end-to-end tests with key users. Then we fix critical issues and sign off launch readiness.'},
+
+ {title:'Cutover Weekend on the Floor',car:'Operational Launch',cust:'Karim, Shift Supervisor',pri:'Go-Live',tool:'golive',
+  sit:'It is Monday 6:00 AM, the first morning of live operations with the new WMS and redesigned picking zones. Operators are nervous, and the first wave of urgent customer orders drops into the system.',
+  quote:'Everyone has been trained, but this is our first real shift with live customer orders.',
+  think:'The transition from project build to real daily production requires close on-site coaching and fast issue resolution.',
+  q1:'Which major milestone has the project just reached?',
+  o:[
+   {k:'golive',ok:1,w:'Yes. Go-live is the moment the new solution starts operating in real daily production.'},
+   {k:'specifications',w:'No. Specifications were written and signed off back in the design phase.'},
+   {k:'slotting',w:'No. Slotting is a storage layout activity, not the launch milestone.'},
+   {k:'accuracy',w:'No. Inventory accuracy is an operational KPI, not the launch event.'}
+  ],
+  h1:'The official start of real daily operations.',
+  t2:'choice',q2:'How does your consulting team support the client during launch week?',
+  c:[
+   {t:'Deploy consultants on the floor for hands-on coaching, troubleshoot issues immediately, and hold short daily stand-ups with shift leaders.',ok:1,w:'Yes. Visible floor support and daily check-ins build operator confidence and resolve minor glitches fast.'},
+   {t:'Stay in the meeting room watching dashboards and wait for operators to submit email tickets.',w:'No. Floor operators need immediate, side-by-side guidance during their first live shifts.'},
+   {t:'Hand over the user manual at 6:00 AM and close the consulting project the same afternoon.',w:'No. Post-launch hypercare is essential to stabilize operations.'}
+  ],
+  h2:'Stay visible on the floor and review progress daily.',
+  model:'During go-live, our team stays on the floor to coach operators, troubleshoot issues immediately, and run short daily stand-ups.'},
+
+ {title:'Orders Stuck Between ERP and Warehouse',car:'System Integration',cust:'Elena, IT & Logistics Sponsor',pri:'Urgent',tool:'wms',
+  sit:'Customer orders entered in the ERP are not appearing on the warehouse scanners. Meanwhile, shipped parcels are not updating stock levels back in the ERP.',
+  quote:'Sales keeps taking orders in the ERP, but the warehouse floor cannot see them.',
+  think:'Two software platforms are failing to exchange order and stock messages automatically.',
+  q1:'Which core warehouse system must communicate smoothly with the ERP?',
+  o:[
+   {k:'wms',ok:1,w:'Yes. The WMS executes warehouse orders and sends stock confirmations back to the ERP.'},
+   {k:'slotting',w:'No. Slotting is a bin organization method, not a software platform.'},
+   {k:'bottleneck',w:'No. A bottleneck is a flow constraint, not a software system.'},
+   {k:'kpi',w:'No. KPIs are performance metrics, not the operational software.'}
+  ],
+  h1:'The warehouse software that receives orders from the ERP.',
+  t2:'gap',q2:'Complete the technical action plan. Tap a word, then tap a gap.',
+  gap:{
+   s:[
+    {t:'First, we ___ the ERP and warehouse software using a reliable API interface.',a:['integrate']},
+    {t:'Next, we ___ that order creation and shipment confirmations transfer accurately in both directions.',a:['validate']},
+    {t:'Finally, we set up error alerts so IT teams can ___ failed messages in minutes.',a:['troubleshoot']}
+   ],
+   b:['integrate','validate','troubleshoot','assess']
+  },
+  why2:'Connect the two systems cleanly, verify two-way data accuracy, and build alerts to catch transmission errors fast.',
+  h2:'Connect both systems, verify data flow, monitor errors.',
+  model:'We integrate the WMS with the ERP, validate two-way order and stock messages, and set up alerts to troubleshoot failed transfers quickly.'},
+
+ {title:'Handover and Continuous Improvement',car:'Post-Launch Review',cust:'David, Project Sponsor',pri:'Normal',tool:'workflow',
+  sit:'Four weeks after launch, daily operations are stable and order accuracy has reached 99.6%. It is time to transition full ownership to the client’s internal team and plan ongoing optimization.',
+  quote:'Operations run smoothly now. How do we make sure our internal team keeps improving after you leave?',
+  think:'A successful consulting engagement ends with self-sufficient client teams, clear documentation, and a continuous improvement routine.',
+  q1:'What must remain clearly documented and owned by the client team after handover?',
+  o:[
+   {k:'workflow',ok:1,w:'Yes. Documented standard workflows ensure new and existing staff follow best practices consistently.'},
+   {k:'bottleneck',w:'No. You want to eliminate bottlenecks, not preserve them after handover.'},
+   {k:'uat',w:'No. User acceptance testing happened before go-live.'},
+   {k:'specifications',w:'No. Specifications guided the build phase; daily operations rely on live standard workflows and KPIs.'}
+  ],
+  h1:'The documented sequence of daily warehouse processes.',
+  t2:'choice',q2:'What is the best closing handover plan?',
+  c:[
+   {t:'Train internal super-users, hand over updated standard operating procedures, and schedule a 30-day KPI review.',ok:1,w:'Yes. Empowering internal champions and reviewing KPIs sustains long-term performance.'},
+   {t:'Keep administrator passwords with the consulting firm so the client must call for every minor rule change.',w:'No. Good consultants build client autonomy rather than dependency.'},
+   {t:'Delete test environments and leave without reviewing post-launch performance metrics.',w:'No. A structured post-launch KPI review confirms return on investment and highlights next-step improvements.'}
+  ],
+  h2:'Empower internal champions and review KPIs.',
+  model:'To ensure a smooth handover, I train internal super-users, deliver updated procedures, and schedule a 30-day KPI review.'}
+];
+
+/* ---------- Game State Management ---------- */
+var G,W,C,view,pendingScroll=null;
+function newMatch(){return {round:0,sel:null,matched:{},mist:{},roundMist:false,flash:[],orders:ROUNDS.map(function(r){return shuffle(r)})}}
+function reset(){
+ G={xp:0,streak:0,best:0,hints:0};
+ W={
+  step:0,
+  done:[false,false,false,false],
+  opened:{},
+  nOpened:0,
+  open:null,
+  match:newMatch(),
+  fill:gapNew(FILL.map(function(f){return {t:f.t,a:[f.a]}}),FILL.map(function(f){return f.a})),
+  spell:{i:0,cur:null,fin:false}
+ };
+ C={i:0,r:[]};
+ view='warm';
+}
+function lvl(){var k=0;LEVELS.forEach(function(l,j){if(G.xp>=l.at)k=j});return k}
+function renderHUD(){
+ var k=lvl(),L=LEVELS[k],N=LEVELS[k+1];
+ $('#hud-level').textContent=L.n;
+ $('#hud-xp').textContent=G.xp;
+ $('#hud-streak').textContent=G.streak;
+ $('#xpfill').style.width=(N?Math.min(100,(G.xp-L.at)/(N.at-L.at)*100):100)+'%';
+ $('#xpnext').textContent=N?(N.at-G.xp)+' XP to '+N.n:'Top rank achieved!';
+}
+function toast(msg,kind){
+ var box=$('#toasts'),d=document.createElement('div');
+ d.className='toast '+(kind||'');
+ d.textContent=msg;
+ box.appendChild(d);
+ while(box.children.length>3)box.removeChild(box.firstChild);
+ setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},1850);
+}
+function addXP(n,silent){
+ var before=lvl();
+ G.xp=Math.max(0,G.xp+n);
+ if(!silent&&n)toast((n>0?'+':'−')+Math.abs(n)+' XP');
+ if(lvl()>before)toast('Level up! You are a '+LEVELS[lvl()].n,'level');
+ renderHUD();
+}
+function tick(){
+ G.streak++;
+ G.best=Math.max(G.best,G.streak);
+ if(G.streak>=3){addXP(3,true);toast('Streak x'+G.streak+'! +3 XP','level')}
+}
+function brk(){G.streak=0}
+
+/* ---------- Gap-Fill Component ---------- */
+function gapNew(sentences,bank){
+ var gaps=[];
+ sentences.forEach(function(s,si){s.a.forEach(function(a){gaps.push({si:si,a:a,chip:null,locked:false})})});
+ return {sentences:sentences,gaps:gaps,chips:shuffle(bank.map(function(w,id){return {id:id,w:w}})),sel:null,active:null,checks:0,flash:[],msg:'',done:false};
+}
+function gapRender(g,key){
+ var gi=0;
+ var list=g.sentences.map(function(s){
+  var parts=s.t.split('___'),out='';
+  parts.forEach(function(p,pi){
+   out+=esc(p);
+   if(pi<parts.length-1){
+    var idx=gi++,gap=g.gaps[idx],chip=gap.chip!==null?g.chips.filter(function(c){return c.id===gap.chip})[0]:null;
+    out+='<button class="gap'+(gap.locked?' ok':'')+(chip?' filled':'')+(g.active===idx?' active':'')+(g.flash.indexOf(idx)>-1?' shake bad':'')+'" data-act="gapclick" data-g="'+key+'" data-i="'+idx+'" aria-label="Gap '+(idx+1)+(chip?': '+chip.w:' empty')+'">'+(chip?esc(chip.w):'&nbsp;')+'</button>';
+   }
+  });
+  return '<li class="sent">'+out+'</li>';
+ }).join('');
+ var used={};g.gaps.forEach(function(x){if(x.chip!==null)used[x.chip]=1});
+ var bank=g.chips.map(function(c){
+  return '<button class="chip'+(used[c.id]?' used':'')+(g.sel===c.id?' sel':'')+'" data-act="gapchip" data-g="'+key+'" data-id="'+c.id+'"'+(used[c.id]?' disabled':'')+'>'+esc(c.w)+'</button>';
+ }).join('');
+ var full=g.gaps.every(function(x){return x.chip!==null});
+ g.flash=[];
+ return '<div class="bank" aria-label="Word bank">'+bank+'</div><ol class="sents">'+list+'</ol>'+
+  (g.done?'':'<div class="row"><button class="btn primary" data-act="gapcheck" data-g="'+key+'"'+(full?'':' disabled')+'>Check</button><span class="msg">'+esc(g.msg)+'</span></div>');
+}
+function gapCheck(g){
+ var first=g.checks===0,right=0,wrong=0;g.checks++;g.flash=[];g.sel=null;
+ g.gaps.forEach(function(gap,i){
+  if(gap.locked||gap.chip===null)return;
+  var chip=g.chips.filter(function(c){return c.id===gap.chip})[0];
+  if(chip.w===gap.a){gap.locked=true;right++}else{gap.chip=null;wrong++;g.flash.push(i)}
+ });
+ g.done=g.gaps.every(function(x){return x.locked});
+ g.msg=g.done?'All correct!':right+' correct. Fix the highlighted gaps.';
+ return {first:first,right:right,wrong:wrong,done:g.done};
+}
+function gapChip(g,id){
+ if(g.done)return;
+ var a=g.active!==null?g.gaps[g.active]:null;
+ if(a&&a.chip===null&&!a.locked){a.chip=id;g.active=null;g.sel=null}else g.sel=(g.sel===id)?null:id;
+}
+function gapClick(g,i){
+ var gap=g.gaps[i];if(gap.locked||g.done)return;
+ if(g.sel!==null){gap.chip=g.sel;g.sel=null;g.active=null}
+ else if(gap.chip!==null)gap.chip=null;
+ else g.active=(g.active===i)?null:i;
+}
+
+/* ---------- Order Component ---------- */
+function ordNew(steps){
+ var items=steps.map(function(t,i){return {id:i,t:t}}),sh;
+ do{sh=shuffle(items)}while(sh.every(function(x,i){return x.id===i}));
+ return {items:sh,slots:steps.map(function(){return null}),locked:steps.map(function(){return false}),flash:[],checks:0,done:false,msg:''};
+}
+function ordRender(o){
+ var used={};o.slots.forEach(function(x){if(x!==null)used[x]=1});
+ var slots=o.slots.map(function(id,i){
+  var it=id!==null?o.items.filter(function(x){return x.id===id})[0]:null;
+  return '<li><button class="oslot'+(it?' filled':'')+(o.locked[i]?' ok':'')+(o.flash.indexOf(i)>-1?' shake bad':'')+'" data-act="oslot" data-i="'+i+'"><span class="onum">'+(i+1)+'</span><span>'+(it?esc(it.t):'Tap a step below')+'</span></button></li>';
+ }).join('');
+ var pool=o.items.filter(function(x){return !used[x.id]}).map(function(x){return '<button class="ostep" data-act="ostep" data-id="'+x.id+'">'+esc(x.t)+'</button>'}).join('');
+ var full=o.slots.every(function(x){return x!==null});
+ o.flash=[];
+ return '<ol class="olist">'+slots+'</ol>'+(o.done?'':'<div class="pool">'+pool+'</div><div class="row"><button class="btn primary" data-act="ocheck"'+(full?'':' disabled')+'>Check</button><span class="msg">'+esc(o.msg)+'</span></div>');
+}
+function ordCheck(o){
+ var first=o.checks===0,wrong=0;o.checks++;o.flash=[];
+ o.slots.forEach(function(id,i){
+  if(o.locked[i]||id===null)return;
+  if(id===i)o.locked[i]=true;else{o.slots[i]=null;o.flash.push(i);wrong++}
+ });
+ o.done=o.locked.every(Boolean);
+ o.msg=o.done?'Perfect sequence!':'Some steps are out of order. Try again.';
+ return {first:first,wrong:wrong,done:o.done};
+}
+
+/* ---------- Tab 1: Warm-Up Views ---------- */
+function panelWords(){
+ var cards=V.map(function(v,i){
+  var open=W.open===i,seen=!!W.opened[i];
+  return '<div class="wcard '+v.t+(open?' open':'')+(seen?' seen':'')+'">'+
+   '<button class="whead" data-act="wopen" data-i="'+i+'" aria-expanded="'+open+'">'+
+   (v.t==='tool'?icon(v.k,40):'<span class="vtag">verb</span>')+
+   '<span class="wword">'+esc(v.w)+'</span><span class="seen-dot" title="'+(seen?'Seen':'Not opened yet')+'"></span></button>'+
+   (open?'<div class="wbody"><p>'+esc(v.d)+'</p><p class="wex">“'+esc(v.e)+'”</p>'+
+   (SPEAK?'<div><button class="btn small" data-act="speak" data-i="'+i+'">Listen</button></div>':'')+'</div>':'')+
+   '</div>';
+ }).join('');
+ return '<p class="lead">Tap a card to study its definition and consulting context. Listen and repeat aloud. <b>'+W.nOpened+' / 20</b> words seen.</p>'+
+  '<div class="wgrid">'+cards+'</div>'+
+  '<div class="row"><span></span><button class="btn primary" data-act="wstep" data-i="1">Next: Match</button></div>';
+}
+function panelMatch(){
+ var m=W.match,ids=ROUNDS[m.round],fl=m.flash||[];
+ var left=ids.map(function(i){
+  var ok=m.matched[i];
+  return '<button class="mitem'+(ok?' ok':'')+(m.sel===i?' sel':'')+(fl[0]===i?' shake bad':'')+'" data-act="mL" data-i="'+i+'"'+(ok?' disabled':'')+'>'+esc(V[i].w)+(ok?' '+CHECK:'')+'</button>';
+ }).join('');
+ var right=m.orders[m.round].map(function(i){
+  var ok=m.matched[i];
+  return '<button class="mdef'+(ok?' ok':'')+(fl[1]===i?' shake bad':'')+'" data-act="mR" data-i="'+i+'"'+(ok?' disabled':'')+'>'+esc(V[i].d)+'</button>';
+ }).join('');
+ m.flash=[];
+ var complete=ids.every(function(i){return m.matched[i]});
+ var last=m.round===ROUNDS.length-1;
+ return '<div class="row"><h3>Round '+(m.round+1)+' / 4 · '+(m.round<2?'Consulting Terms':'Action Verbs')+'</h3></div>'+
+  '<p class="lead">Tap a word on the left, then tap its matching definition on the right.</p>'+
+  '<div class="mgrid"><div class="mcol">'+left+'</div><div class="mcol">'+right+'</div></div>'+
+  (complete?'<div class="row"><b>Round complete!</b><button class="btn primary" data-act="mnext">'+(last?'Next: Fill the gaps':'Next round')+'</button></div>':'');
+}
+function panelFill(){
+ var g=W.fill;
+ return '<p class="lead">Tap a word in the bank, then tap a gap in the sentence. Press Check when ready.</p>'+gapRender(g,'fill')+
+  (g.done?'<div class="row"><b>All 10 sentences complete!</b><button class="btn primary" data-act="wstep" data-i="3">Next: Spell it</button></div>':'');
+}
+function spellInit(i){
+ var word=SPELL[i],letters=word.replace(/ /g,'').split(''),tiles=letters.map(function(c,id){return {id:id,c:c}}),sh,n=0;
+ do{sh=shuffle(tiles);n++}while(n<20&&sh.map(function(t){return t.c}).join('')===letters.join(''));
+ return {word:word,tiles:sh,slots:letters.map(function(){return null}),locked:letters.map(function(){return false}),tries:0,hint:false,solved:false,flash:false};
+}
+function panelSpell(){
+ var S=W.spell;
+ if(S.fin){
+  return '<div class="rank"><h2>Warm-up complete</h2><p class="lead">You have mastered the 20 core terms and action verbs. Now solve 12 client consulting cases.</p></div>'+
+   '<div class="row" style="justify-content:center"><button class="btn primary" data-act="tab" data-v="chal">Start consulting cases</button></div>';
+ }
+ if(!S.cur)S.cur=spellInit(S.i);
+ var c=S.cur,v=V[VI[c.word]],used={};
+ c.slots.forEach(function(x){if(x!==null)used[x]=1});
+ var pos=0,groups=c.word.split(' ').map(function(w){
+  var s='';
+  for(var k=0;k<w.length;k++){
+   var idx=pos++,id=c.slots[idx],t=id!==null?c.tiles.filter(function(x){return x.id===id})[0]:null;
+   s+='<button class="slot'+(t?' f':'')+(c.locked[idx]?' lock':'')+(c.solved?' ok':'')+(c.flash&&!c.locked[idx]?' shake bad':'')+'" data-act="sslot" data-i="'+idx+'" aria-label="Letter '+(idx+1)+'">'+(t?esc(t.c):'')+'</button>';
+  }
+  return '<div class="slotgrp">'+s+'</div>';
+ }).join('');
+ c.flash=false;
+ var tiles=c.tiles.map(function(t){return '<button class="tile'+(used[t.id]?' used':'')+'" data-act="stile" data-id="'+t.id+'"'+(used[t.id]?' disabled':'')+'>'+esc(t.c)+'</button>'}).join('');
+ return '<div class="row"><h3>Word '+(S.i+1)+' / 10</h3><span class="chip-h">'+(v.t==='tool'?'Term':'Verb')+'</span></div>'+
+  '<div class="clue">'+(v.t==='tool'?icon(v.k,48):'')+'<p>'+esc(v.d)+'</p></div>'+
+  '<div class="slots" aria-label="Your spelling">'+groups+'</div>'+(c.solved?'':'<div class="tiles">'+tiles+'</div>')+
+  (c.solved?'<div class="row"><b>Correct! '+esc(c.word)+'</b><button class="btn primary" data-act="snext">'+(S.i===9?'Finish warm-up':'Next word')+'</button></div>'
+   :'<div class="row"><button class="btn small ghost" data-act="shint"'+(c.hint?' disabled':'')+'>First letter (less XP)</button><button class="btn small ghost" data-act="sclear">Clear</button></div>');
+}
+function viewWarm(){
+ var names=['Words','Match','Fill the gaps','Spell it'];
+ var nav=names.map(function(n,i){return '<button class="sub'+(W.step===i?' on':'')+(W.done[i]?' done':'')+'" data-act="wstep" data-i="'+i+'"><span class="subn">'+(W.done[i]?CHECK:i+1)+'</span>'+n+'</button>'}).join('');
+ var body=[panelWords,panelMatch,panelFill,panelSpell][W.step]();
+ return '<div class="intro"><h1>Warm up your vocabulary</h1><p>Master 20 logistics &amp; warehouse consulting terms and verbs, then guide 12 client projects from discovery to operational go-live.</p></div>'+
+  '<nav class="subnav" id="subnav" aria-label="Warm-up steps">'+nav+'</nav><section class="panel" id="panel">'+body+'</section>';
+}
+
+/* ---------- Tab 2: Consulting Cases ---------- */
+function ensureRes(i){
+ if(!C.r[i]){
+  var sc=SC[i];
+  C.r[i]={q1:{wrong:0,hint:false,picked:[],done:false},q2:{wrong:0,hint:false,picked:[],done:false,g:null,o:null,opts:null},xp:0,done:false,stars:0,opts:shuffle(sc.o)};
+  if(sc.t2==='gap')C.r[i].q2.g=gapNew(sc.gap.s,sc.gap.b);
+  if(sc.t2==='order')C.r[i].q2.o=ordNew(sc.steps);
+  if(sc.t2==='choice')C.r[i].q2.opts=shuffle(sc.c);
+ }
+ return C.r[i];
+}
+function curRes(){return ensureRes(C.i)}
+function gain(r,n){addXP(n);r.xp+=n}
+function finishJob(r){
+ r.done=true;
+ var pen=r.q1.wrong+r.q2.wrong+(r.q1.hint?1:0)+(r.q2.hint?1:0);
+ r.stars=pen===0?3:pen<=2?2:1;
+ pendingScroll='#debrief';
+}
+function award(r,q){
+ var w=r[q].wrong,base=w===0?20:w===1?10:5;
+ r[q].done=true;gain(r,base);
+ if(w===0)tick();
+ if(q==='q1')pendingScroll='#q2';else finishJob(r);
+}
+function hintBtn(r,q){
+ if(r[q].done)return '';
+ if(r[q].hint)return '<div class="hint"><b>Hint:</b> '+esc(SC[C.i][q==='q1'?'h1':'h2'])+'</div>';
+ return '<div><button class="btn small ghost" data-act="hint" data-q="'+q+'">Need a hint? −5 XP</button></div>';
+}
+function priClass(p){return 'pri pri-'+p.toLowerCase().replace(/\s+/g,'-')}
+function viewChal(){
+ var i=C.i,sc=SC[i],r=ensureRes(i);
+ var rail=SC.map(function(s,j){
+  var rr=C.r[j];
+  return '<button class="rn'+(j===i?' cur':'')+(rr&&rr.done?' done':'')+'" data-act="goto" data-i="'+j+'" aria-label="Case '+(j+1)+': '+esc(s.title)+'">'+(j+1)+'</button>';
+ }).join('');
+ var opts=r.opts.map(function(o){
+  var picked=r.q1.picked.indexOf(o.k)>-1,st=picked?(o.ok?' good':' bad'):'',show=picked||r.q1.done;
+  var termObj=V.filter(function(v){return v.k===o.k})[0];
+  return '<button class="opt'+st+'" data-act="pick1" data-t="'+o.k+'"'+((r.q1.done||picked)?' disabled':'')+'>'+icon(o.k,46)+'<b>'+esc(termObj.w)+'</b>'+(show?'<span class="why">'+esc(o.w)+'</span>':'')+'</button>';
+ }).join('');
+ var q2='';
+ if(r.q1.done){
+  var body='';
+  if(sc.t2==='choice'){
+   body='<div class="stack" style="gap:8px">'+r.q2.opts.map(function(o,j){
+    var picked=r.q2.picked.indexOf(j)>-1,st=picked?(o.ok?' good':' bad'):'',show=picked||r.q2.done;
+    return '<button class="copt'+st+'" data-act="pick2" data-i="'+j+'"'+((r.q2.done||picked)?' disabled':'')+'><span class="cl">'+'ABC'.charAt(j)+'</span><span class="ct">'+esc(o.t)+(show?'<span class="why">'+esc(o.w)+'</span>':'')+'</span></button>';
+   }).join('')+'</div>';
+  }else if(sc.t2==='order'){body=ordRender(r.q2.o)}
+  else{body=gapRender(r.q2.g,'sc')}
+  q2='<section class="step" id="q2"><h3><span class="stepn">STEP 2</span>'+esc(sc.q2)+'</h3>'+body+hintBtn(r,'q2')+
+   (r.q2.done&&sc.why2?'<div class="explain"><b>Consultant takeaway:</b> '+esc(sc.why2)+'</div>':'')+'</section>';
+ }
+ var deb='';
+ if(r.done){
+  var last=i===SC.length-1;
+  deb='<section class="debrief" id="debrief"><div class="row"><h3>Case closed!</h3>'+starsHTML(r.stars)+'</div><p><b>'+r.xp+' XP</b> earned on this project ticket.</p>'+
+   '<div class="say"><span class="mono">Say it out loud</span><p>“'+esc(sc.model)+'”</p>'+
+   (SPEAK?'<div><button class="btn small" data-act="speakm">Listen</button></div>':'')+
+   '<p class="lead">Now explain your recommendation in your own words to your partner or trainer.</p></div>'+
+   '<div class="row"><span></span><button class="btn primary" data-act="next">'+(last?'See my results':'Next case')+'</button></div></section>';
+ }
+ return '<div class="rail" role="navigation" aria-label="Consulting cases">'+rail+'</div>'+
+  '<div class="stack"><article class="job"><header class="jobhead mono"><span>Project ticket</span><span>#'+(2040+i+1)+(i===SC.length-1?' · Final case':'')+'</span></header>'+
+  '<div class="jobbody"><h2>'+esc(sc.title)+'</h2><dl class="fields"><div><dt>Phase</dt><dd>'+esc(sc.car)+'</dd></div><div><dt>Client</dt><dd>'+esc(sc.cust)+'</dd></div><div><dt>Priority</dt><dd><span class="'+priClass(sc.pri)+'">'+esc(sc.pri)+'</span></dd></div></dl>'+
+  '<p>'+esc(sc.sit)+'</p><blockquote class="quote">'+esc(sc.quote)+'</blockquote></div>'+
+  '<div class="think"><b>Think first</b><span>'+esc(sc.think)+'</span></div></article>'+
+  '<section class="step" id="q1"><h3><span class="stepn">STEP 1</span>'+esc(sc.q1)+'</h3><div class="opts">'+opts+'</div>'+hintBtn(r,'q1')+'</section>'+
+  q2+deb+'</div>';
+}
+
+/* ---------- Tab 3: Results & Speaking Reflection ---------- */
+function viewRes(){
+ var done=C.r.filter(function(r){return r&&r.done}).length;
+ var stars=C.r.reduce(function(a,r){return a+(r&&r.done?r.stars:0)},0);
+ var three=C.r.filter(function(r){return r&&r.done&&r.stars===3}).length;
+ try{var b=+localStorage.getItem('scc_best')||0;if(G.xp>b)localStorage.setItem('scc_best',G.xp)}catch(e){}
+ function clean(j){var r=C.r[j];return !!(r&&r.done&&r.q1.wrong+r.q2.wrong===0)}
+ var badges=[
+  {n:'Vocabulary Architect',d:'Finish all 4 warm-up steps',ok:W.done.every(Boolean)},
+  {n:'Full Delivery',d:'Finish all 12 cases',ok:done===12},
+  {n:'Go-Live Ready',d:'Cases 9, 10 and 11 right first time',ok:clean(8)&&clean(9)&&clean(10)},
+  {n:'No Hints',d:'All 12 cases without a hint',ok:done===12&&G.hints===0},
+  {n:'Triple Star',d:'3 stars on 8 or more cases',ok:three>=8}
+ ];
+ var pegs=SC.map(function(s,j){
+  var r=C.r[j],ok=r&&r.done;
+  return '<div class="peg'+(ok?' on':'')+'">'+(ok?icon(s.tool,34):'<span class="mono">'+(j+1)+'</span>')+'<span>'+esc(s.title)+'</span>'+(ok?starsHTML(r.stars):'')+'</div>';
+ }).join('');
+ return '<div class="panel"><div class="rank"><span class="mono">Your consulting rank</span><h2>'+LEVELS[lvl()].n+'</h2></div>'+
+  '<div class="stats"><div class="stat"><b>'+G.xp+'</b>XP</div><div class="stat"><b>'+done+' / 12</b>Cases solved</div><div class="stat"><b>'+stars+' / 36</b>Stars</div></div>'+
+  '<h3>Your project portfolio</h3><div class="pegs">'+pegs+'</div>'+
+  '<h3>Badges</h3><div class="badges">'+badges.map(function(x){return '<div class="badge'+(x.ok?' on':'')+'"><b>'+x.n+'</b><span>'+x.d+'</span></div>'}).join('')+'</div>'+
+  '<h3>Speak like a consultant (Partner Discussion)</h3>'+
+  '<ol class="talk">'+
+   '<li>Which consulting phase is the most challenging in your experience: needs analysis, solution design, or go-live? Why?</li>'+
+   '<li>Describe a warehouse or supply chain bottleneck you have seen. How could you streamline that workflow?</li>'+
+   '<li>Explain how you guide a client team from initial process mapping to operational go-live. Use sequencing linkers: <em>first, next, after that, finally</em>.</li>'+
+  '</ol>'+
+  '<div class="row"><button class="btn" data-act="tab" data-v="chal">Back to cases</button><button class="btn primary" data-act="again">Play again</button></div></div>';
+}
+
+/* ---------- Render Loop & Event Delegation ---------- */
+function keyOf(e){return ['act','i','id','g','t','q'].map(function(k){return e.dataset[k]||''}).join('|')}
+function render(){
+ renderHUD();
+ var tabs=[['warm','Warm-up','20 words'],['chal','Consulting cases','12 cases'],['res','Results','Your rank']];
+ $('#tabs').innerHTML=tabs.map(function(t,i){return '<button class="tab'+(view===t[0]?' on':'')+'" data-act="tab" data-v="'+t[0]+'"><small>'+(i+1)+'</small>'+t[1]+'</button>'}).join('');
+ var a=document.activeElement,fk=(a&&a.dataset&&a.dataset.act)?keyOf(a):null;
+ $('#app').innerHTML=view==='warm'?viewWarm():view==='chal'?viewChal():viewRes();
+ if(fk){var el=$$('[data-act]').filter(function(e){return keyOf(e)===fk})[0];if(el&&!el.disabled)el.focus({preventScroll:true})}
+ if(pendingScroll){var t=$(pendingScroll);pendingScroll=null;if(t)t.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})}
+}
+function go(v,sel){view=v;pendingScroll=sel||'.tabs';render()}
+function getG(k){return k==='fill'?W.fill:curRes().q2.g}
+function placeTile(c,id){
+ var idx=c.slots.findIndex(function(x,i){return x===null&&!c.locked[i]});
+ if(idx>-1)c.slots[idx]=id;
+}
+function spellCheck(c){
+ var g=c.slots.map(function(id){return c.tiles.filter(function(t){return t.id===id})[0].c}).join('');
+ if(g===c.word.replace(/ /g,'')){
+  c.solved=true;
+  var base=(c.tries===0&&!c.hint)?10:5;
+  addXP(base);
+  if(base===10)tick();
+ }else{
+  c.tries++;
+  c.flash=true;
+  if(c.tries===1)brk();
+  toast('Not quite right. Check the letters and try again.');
+ }
+}
+
+document.addEventListener('click',function(e){
+ var b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+ var d=b.dataset,i=+d.i,r;
+ switch(d.act){
+  case 'tab':go(d.v);return;
+  case 'again':reset();go('warm');return;
+  case 'wstep':W.step=i;pendingScroll='#subnav';break;
+  case 'wopen':
+   W.open=W.open===i?null:i;
+   if(!W.opened[i]){
+    W.opened[i]=1;W.nOpened++;addXP(1,true);
+    if(W.nOpened===20&&!W.done[0]){W.done[0]=true;toast('All 20 words studied!')}
+   }
+   break;
+  case 'speak':speak(V[i].w+'. '+V[i].e);return;
+  case 'speakm':speak(SC[C.i].model);return;
+  case 'mL':if(!W.match.matched[i])W.match.sel=i;break;
+  case 'mR':{
+   var m=W.match;if(m.matched[i])break;
+   if(m.sel===null){toast('Tap a word on the left first');return}
+   if(m.sel===i){
+    var cl=!m.mist[i];m.matched[i]=1;addXP(cl?5:2);m.sel=null;
+    if(ROUNDS[m.round].every(function(x){return m.matched[x]})){
+     if(!m.roundMist)tick();
+     if(m.round===3)W.done[1]=true;
+    }
+   }else{
+    m.mist[m.sel]=(m.mist[m.sel]||0)+1;m.flash=[m.sel,i];
+    if(!m.roundMist)brk();m.roundMist=true;m.sel=null;
+   }
+   break;
+  }
+  case 'mnext':{
+   var mm=W.match;
+   if(mm.round<3){mm.round++;mm.sel=null;mm.roundMist=false}else{W.step=2}
+   pendingScroll='#subnav';
+   break;
+  }
+  case 'gapchip':gapChip(getG(d.g),+d.id);break;
+  case 'gapclick':gapClick(getG(d.g),i);break;
+  case 'gapcheck':{
+   var g=getG(d.g),res=gapCheck(g);
+   if(d.g==='fill'){
+    addXP(res.right*(res.first?10:5));
+    if(res.first){if(res.wrong===0)tick();else brk()}
+    if(res.done)W.done[2]=true;
+   }else{
+    r=curRes();
+    if(res.wrong>0){r.q2.wrong++;brk()}
+    if(res.done)award(r,'q2');
+   }
+   break;
+  }
+  case 'ostep':{var o=curRes().q2.o;if(!o.done)placeTile(o,+d.id);break}
+  case 'oslot':{var o2=curRes().q2.o;if(!o2.locked[i]&&o2.slots[i]!==null&&!o2.done)o2.slots[i]=null;break}
+  case 'ocheck':{r=curRes();var rs=ordCheck(r.q2.o);if(rs.wrong>0){r.q2.wrong++;brk()}if(rs.done)award(r,'q2');break}
+  case 'stile':{var S=W.spell,c=S.cur;if(c.solved)break;placeTile(c,+d.id);if(c.slots.every(function(x){return x!==null}))spellCheck(c);break}
+  case 'sslot':{var c2=W.spell.cur;if(c2.solved||c2.locked[i]||c2.slots[i]===null)break;c2.slots[i]=null;break}
+  case 'sclear':{var c3=W.spell.cur;c3.slots=c3.slots.map(function(x,k){return c3.locked[k]?x:null});break}
+  case 'shint':{
+   var c4=W.spell.cur;if(c4.hint||c4.solved)break;c4.hint=true;
+   var first=c4.word.charAt(0),used={};
+   c4.slots.forEach(function(x,k){if(x!==null&&k!==0)used[x]=1});
+   var t=c4.tiles.filter(function(x){return x.c===first&&!used[x.id]})[0];
+   c4.slots[0]=t.id;c4.locked[0]=true;
+   c4.slots=c4.slots.map(function(x,k){return (k>0&&x===t.id)?null:x});
+   break;
+  }
+  case 'snext':{
+   var S2=W.spell;
+   if(S2.i===9){S2.fin=true;W.done[3]=true}else{S2.i++;S2.cur=spellInit(S2.i)}
+   pendingScroll='#subnav';
+   break;
+  }
+  case 'goto':C.i=i;pendingScroll='.rail';break;
+  case 'next':if(C.i<SC.length-1){C.i++;pendingScroll='.rail'}else{view='res';pendingScroll='.tabs'}break;
+  case 'hint':r=curRes();r[d.q].hint=true;G.hints++;gain(r,-5);break;
+  case 'pick1':{
+   r=curRes();
+   var opt=SC[C.i].o.filter(function(x){return x.k===d.t})[0];
+   r.q1.picked.push(d.t);
+   if(opt.ok)award(r,'q1');else{r.q1.wrong++;brk()}
+   break;
+  }
+  case 'pick2':{
+   r=curRes();
+   var op=r.q2.opts[i];
+   r.q2.picked.push(i);
+   if(op.ok)award(r,'q2');else{r.q2.wrong++;brk()}
+   break;
+  }
+ }
+ render();
+});
+
+reset();
+render();
+})();
+</script>
+</body>
+</html>
