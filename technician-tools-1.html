@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical English for Maintenance &amp; Service Technicians (A1/A2)</title>
+  <style>
+    :root {
+      --bg: #f5f5f4;
+      --surface: #ffffff;
+      --surface-alt: #fafaf9;
+      --primary: #1c1917;
+      --secondary-dark: #292524;
+      --accent: #d97706;
+      --accent-hover: #b45309;
+      --accent-light: #fef3c7;
+      --accent-border: #fcd34d;
+      --border: #d6d3d1;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --success-border: #86efac;
+      --good: #0369a1;
+      --good-bg: #e0f2fe;
+      --warn: #b45309;
+      --warn-bg: #fef3c7;
+      --warn-border: #fcd34d;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --danger-border: #fca5a5;
+      --radius: 12px;
+      --shadow: 0 4px 14px rgba(28, 25, 23, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 64px;
+    }
+
+    /* Header & Industrial Hazard Accent */
+    header {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 60%, #44403c 100%);
+      color: #ffffff;
+      padding: 28px 20px 24px;
+      border-bottom: 5px solid var(--accent);
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(245, 158, 11, 0.18);
+      color: #fde68a;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      line-height: 1.25;
+    }
+
+    header p {
+      margin: 0;
+      color: #e7e5e4;
+      max-width: 780px;
+      font-size: 1rem;
+    }
+
+    /* Sticky Navigation & Score Bar */
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(28, 25, 23, 0.06);
+    }
+
+    .sticky-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.83rem;
+      font-weight: 600;
+      padding: 5px 9px;
+      border-radius: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent-hover);
+    }
+
+    .score-pill {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--accent-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    section.card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--bg);
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      margin: -8px 0 18px;
+      color: var(--text-muted);
+      font-size: 0.96rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface-alt);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e7e5e4;
+    }
+
+    .btn-sm {
+      padding: 5px 11px;
+      font-size: 0.82rem;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .feedback-banner {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback-banner.show {
+      display: block;
+    }
+
+    .feedback-banner.success {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .feedback-banner.partial {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid var(--warn-border);
+    }
+
+    /* Part 1: Vocabulary Grid */
+    .vocab-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 14px;
+    }
+
+    .vocab-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .vocab-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .vocab-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      color: var(--accent-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .vocab-word {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    .vocab-alt {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .vocab-def {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .vocab-ex {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 2px 0 0;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border);
+    }
+
+    body.hide-meanings .vocab-def,
+    body.hide-meanings .vocab-ex {
+      filter: blur(5px);
+      user-select: none;
+      cursor: pointer;
+    }
+
+    body.hide-meanings .vocab-card:hover .vocab-def,
+    body.hide-meanings .vocab-card:hover .vocab-ex {
+      filter: none;
+    }
+
+    /* Exercise 1A: Matching */
+    .match-container {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 720px) {
+      .match-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .match-col-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .match-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 14px;
+      background: var(--surface-alt);
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 0.94rem;
+      transition: all 0.15s ease;
+      text-align: left;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .match-item:hover {
+      border-color: var(--accent);
+      background: #fffbeb;
+    }
+
+    .match-item.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+    }
+
+    .match-item.paired {
+      border-color: #78716c;
+      background: #e7e5e4;
+    }
+
+    .match-item.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .match-item.incorrect {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .pair-tag {
+      display: inline-block;
+      min-width: 28px;
+      text-align: center;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--primary);
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    /* Word Bank & Drag/Click Gap Fill (Ex 1B & Part 3) */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px;
+      background: #fafaf9;
+      border: 2px dashed #a8a29e;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      min-height: 58px;
+    }
+
+    .word-chip {
+      padding: 6px 13px;
+      background: #ffffff;
+      border: 1.5px solid var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.92rem;
+      border-radius: 7px;
+      cursor: grab;
+      user-select: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: all 0.15s ease;
+    }
+
+    .word-chip:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+    }
+
+    .word-chip.selected-chip {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.25);
+    }
+
+    .word-chip.used {
+      opacity: 0.35;
+      pointer-events: none;
+      border-style: dashed;
+    }
+
+    .gap-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .gap-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px 14px;
+      background: var(--surface-alt);
+      border-radius: 8px;
+      border: 1px solid #e7e5e4;
+      font-size: 0.97rem;
+    }
+
+    .gap-num {
+      font-weight: 700;
+      color: var(--accent-hover);
+      margin-right: 4px;
+    }
+
+    .drop-slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 122px;
+      height: 31px;
+      padding: 0 10px;
+      margin: 0 3px;
+      vertical-align: middle;
+      background: #ffffff;
+      border: 2px dashed #a8a29e;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .drop-slot:hover,
+    .drop-slot.drag-over {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .drop-slot.filled {
+      border-style: solid;
+      border-color: var(--accent);
+      background: #fef3c7;
+    }
+
+    .drop-slot.slot-correct {
+      border-style: solid;
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .drop-slot.slot-incorrect {
+      border-style: solid;
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .slot-index {
+      font-size: 0.75rem;
+      color: #78716c;
+      font-weight: 600;
+    }
+
+    /* Exercise 1C: Quick Tool & Part Selector */
+    .tool-quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 540px) {
+      .tool-quiz-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tq-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .tq-prompt {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .tq-choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tq-btn {
+      padding: 6px 12px;
+      border-radius: 7px;
+      border: 1.5px solid var(--border);
+      background: #ffffff;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+    }
+
+    .tq-btn:hover {
+      border-color: var(--accent);
+      background: #fffbeb;
+    }
+
+    .tq-btn.tq-selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .tq-btn.tq-correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .tq-btn.tq-incorrect {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    /* Part 2: Scenarios */
+    .scenario-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 20px;
+      background: var(--surface-alt);
+    }
+
+    .scenario-box:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .day-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fde68a;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .scenario-title {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+      color: var(--primary);
+    }
+
+    .scenario-desc {
+      margin: 0 0 14px;
+      background: #ffffff;
+      padding: 12px 14px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .option-card {
+      text-align: left;
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.94rem;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: #fffbeb;
+    }
+
+    .option-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e7e5e4;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .opt-feedback {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.9rem;
+    }
+
+    .option-card.revealed .opt-feedback {
+      display: block;
+    }
+
+    .rating-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .option-card.revealed.rate-excellent {
+      border-color: var(--success);
+      background: var(--success-bg);
+    }
+    .rate-excellent .rating-pill {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .option-card.revealed.rate-good {
+      border-color: var(--good);
+      background: var(--good-bg);
+    }
+    .rate-good .rating-pill {
+      background: var(--good);
+      color: #ffffff;
+    }
+
+    .option-card.revealed.rate-average {
+      border-color: var(--warn);
+      background: var(--warn-bg);
+    }
+    .rate-average .rating-pill {
+      background: var(--warn);
+      color: #ffffff;
+    }
+
+    .option-card.revealed.rate-poor {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+    }
+    .rate-poor .rating-pill {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    /* Part 3: Service Report Document */
+    .report-sheet {
+      background: #ffffff;
+      border: 2px solid #78716c;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: inset 0 0 0 4px #fafaf9;
+    }
+
+    .report-header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .report-header h3 {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.08rem;
+      letter-spacing: 0.03em;
+      color: var(--primary);
+    }
+
+    .report-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .report-body p {
+      margin: 0 0 16px;
+      line-height: 2.15;
+      font-size: 0.98rem;
+    }
+
+    .report-status {
+      margin-top: 16px;
+      padding: 10px 14px;
+      background: #f5f5f4;
+      border-left: 4px solid var(--success);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .helper-tip {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      background: #fafaf9;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #e7e5e4;
+      margin-bottom: 12px;
+    }
+
+    @media print {
+      .sticky-bar, .controls-row, .vocab-tabs, .helper-tip {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+      }
+      section.card {
+        box-shadow: none;
+        border: 1px solid #d6d3d1;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="badge-row">
+        <span class="badge">English for Specific Purposes</span>
+        <span class="badge">CEFR Level A1 / A2</span>
+        <span class="badge">Maintenance &amp; Field Service Technicians</span>
+      </div>
+      <h1>Technical English: Tools, Parts &amp; Equipment Maintenance</h1>
+      <p>Practice the essential hand tools, mechanical fasteners, and workshop action verbs used to install, inspect, and repair industrial equipment across any sector.</p>
+    </div>
+  </header>
+
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <nav class="nav-links" aria-label="Lesson Sections">
+        <a href="#part1">1. Vocabulary</a>
+        <a href="#ex1a">Ex 1A: Matching</a>
+        <a href="#ex1b">Ex 1B: All 10 Verbs</a>
+        <a href="#ex1c">Ex 1C: Tool Check</a>
+        <a href="#part2">2. Four Days on the Job</a>
+        <a href="#part3">3. Service Report</a>
+      </nav>
+      <div class="score-pill">
+        <span>Total Score: <span id="total-score">0</span> / 50</span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetAll()">Reset All</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">Print</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- PART 1: VOCABULARY REVIEW -->
+    <section class="card" id="part1">
+      <div class="section-header">
+        <h2>Part 1: Vocabulary Review — Tools, Parts &amp; Action Verbs</h2>
+        <button type="button" class="btn btn-secondary btn-sm" id="toggle-study-btn" onclick="toggleStudyMode()">
+          Self-Study Mode: Hide Meanings
+        </button>
+      </div>
+      <p class="section-subtitle">Review the 12 core tools/parts and 10 essential action verbs used across manufacturing, hydraulics, HVAC, packaging, and plant maintenance.</p>
+
+      <div class="vocab-tabs">
+        <button type="button" class="tab-btn active" onclick="switchVocabTab('tools', this)">Tools &amp; Machine Parts (12)</button>
+        <button type="button" class="tab-btn" onclick="switchVocabTab('verbs', this)">Essential Action Verbs (10)</button>
+      </div>
+
+      <div id="vocab-tools" class="vocab-grid"></div>
+      <div id="vocab-verbs" class="vocab-grid" style="display: none;"></div>
+    </section>
+
+    <!-- EXERCISE 1A: MATCHING -->
+    <section class="card" id="ex1a">
+      <div class="section-header">
+        <h2>Exercise 1A: Match the Tool or Part to its Definition</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Click a tool or part on the left (<strong>1–8</strong>), then click its matching definition on the right (<strong>A–H</strong>). Click a paired item again to unpair it.</p>
+
+      <div class="match-container">
+        <div class="match-col" id="match-left">
+          <div class="match-col-title">Tools &amp; Parts (1–8)</div>
+        </div>
+        <div class="match-col" id="match-right">
+          <div class="match-col-title">Definitions (A–H)</div>
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkMatching()">Check Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="showMatchingAnswers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetMatching()">Reset</button>
+      </div>
+      <div id="match-feedback" class="feedback-banner"></div>
+    </section>
+
+    <!-- EXERCISE 1B: ALL 10 ACTION VERBS GAP FILL -->
+    <section class="card" id="ex1b">
+      <div class="section-header">
+        <h2>Exercise 1B: Action Verbs — Fill in the Gap (All 10 Verbs)</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Drag a verb from the word bank into a blank, <strong>or</strong> click a verb chip and then click the blank where it belongs. Click a filled blank to return the word.</p>
+
+      <div class="word-bank" id="ex1b-bank" aria-label="Action Verbs Word Bank"></div>
+      <div class="gap-list" id="ex1b-sentences"></div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkEx1B()">Check Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="showEx1BAnswers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetEx1B()">Reset</button>
+      </div>
+      <div id="ex1b-feedback" class="feedback-banner"></div>
+    </section>
+
+    <!-- EXERCISE 1C: RIGHT TOOL FOR THE JOB -->
+    <section class="card" id="ex1c">
+      <div class="section-header">
+        <h2>Exercise 1C: Choose the Right Tool or Part for the Job</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Read each workshop task and select the best tool or part (**8 questions**).</p>
+
+      <div class="tool-quiz-grid" id="ex1c-grid"></div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkEx1C()">Check Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="showEx1CAnswers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetEx1C()">Reset</button>
+      </div>
+      <div id="ex1c-feedback" class="feedback-banner"></div>
+    </section>
+
+    <!-- PART 2: FOUR DAYS ON THE JOB -->
+    <section class="card" id="part2">
+      <div class="section-header">
+        <h2>Part 2: Four Days on the Job (Multi-Industry Problem-Solving)</h2>
+      </div>
+      <p class="section-subtitle">You work as a plant &amp; field service technician at <strong>Apex Industrial Services</strong>. Read each daily problem and click the best response (<strong>A, B, C, or D</strong>) to see your evaluation.</p>
+
+      <div id="scenarios-container"></div>
+    </section>
+
+    <!-- PART 3: WEEKLY SERVICE REPORT -->
+    <section class="card" id="part3">
+      <div class="section-header">
+        <h2>Part 3: Weekly Maintenance Service Report (12-Gap Challenge)</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Complete Alex's end-of-week maintenance report using <strong>12 words</strong> from the <strong>16-word bank</strong>. Four words are extra distractors and will not be used.</p>
+
+      <div class="word-bank" id="part3-bank" aria-label="Service Report Word Bank"></div>
+
+      <div class="report-sheet">
+        <div class="report-header">
+          <h3>SERVICE REPORT — PRODUCTION LINE #4</h3>
+          <div class="report-meta">
+            <span>Date: Thursday</span>
+            <span>Technician: Alex</span>
+            <span>Client: Apex Manufacturing Plant</span>
+          </div>
+        </div>
+        <div class="report-body" id="part3-text"></div>
+        <div class="report-status">
+          Status: All machines on Production Line #4 now run safely at normal pressure.
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkPart3()">Check Report</button>
+        <button type="button" class="btn btn-secondary" onclick="showPart3Answers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetPart3()">Reset</button>
+      </div>
+      <div id="part3-feedback" class="feedback-banner"></div>
+    </section>
+  </main>
+
+  <script>
+    /* =========================================================================
+       DATA DEFINITIONS
+       ========================================================================= */
+    const toolsData = [
+      {
+        word: "hammer",
+        alt: "hand tool",
+        def: "A tool with a heavy metal or rubber head used to hit or tap parts.",
+        ex: "Use a soft-face hammer gently so you do not damage the bearing housing.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12l-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15L22 10.64"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>`
+      },
+      {
+        word: "wrench",
+        alt: "spanner",
+        def: "A metal tool used to turn nuts and bolts.",
+        ex: "Use a 17 mm wrench to tighten the hydraulic fitting.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
+      },
+      {
+        word: "pliers",
+        alt: "gripping tool",
+        def: "A tool with two handles used to hold, bend, or pull small parts.",
+        ex: "Pull the old retaining pin out of the bracket with pliers.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3l3 7 3-7"/><path d="M12 10v4"/><path d="M8 21l4-7 4 7"/></svg>`
+      },
+      {
+        word: "nut",
+        alt: "fastener",
+        def: "A small metal ring with a hole inside that turns onto a bolt.",
+        ex: "Turn the nut clockwise onto the end of the bolt.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2"/><circle cx="12" cy="12" r="4"/></svg>`
+      },
+      {
+        word: "bolt",
+        alt: "fastener",
+        def: "A strong metal pin with threads that connects heavy parts with a nut.",
+        ex: "Four large bolts hold the drive motor onto the steel frame.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="3" width="12" height="5" rx="1"/><path d="M9 8v13h6V8"/><path d="M9 12h6M9 16h6"/></svg>`
+      },
+      {
+        word: "screw",
+        alt: "fastener",
+        def: "A small pointed metal fastener with a line or cross on its head.",
+        ex: "Remove the four small screws on the electrical control box.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4h10l-2 3H9L7 4z"/><path d="M10 7v11l2 3 2-3V7"/><path d="M10 11h4M10 15h4"/></svg>`
+      },
+      {
+        word: "screwdriver",
+        alt: "flat / Phillips",
+        def: "A tool with a flat or cross tip used to turn screws.",
+        ex: "Use a cross-head screwdriver to close the panel cover.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-3 3-6-6 3-3z"/><path d="M11 7L4 14l-1 4 4-1 7-7"/></svg>`
+      },
+      {
+        word: "Allen key",
+        alt: "hex key",
+        def: "An L-shaped metal tool used to turn bolts with a six-sided hole.",
+        ex: "Open the cylinder cover with a 6 mm Allen key.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 20V7a2 2 0 0 1 2-2h10"/></svg>`
+      },
+      {
+        word: "O-ring",
+        alt: "rubber seal",
+        def: "A small rubber ring that stops fluid or air from leaking out of a joint.",
+        ex: "Always inspect the O-ring for cracks before you reconnect a pipe.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg>`
+      },
+      {
+        word: "hose",
+        alt: "flexible pipe / line",
+        def: "A strong flexible tube that carries water, oil, or compressed air.",
+        ex: "Check the hydraulic hose for leaks every morning.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17c0-6 16-4 16-10"/><rect x="2" y="15" width="4" height="4" rx="1"/><rect x="18" y="5" width="4" height="4" rx="1"/></svg>`
+      },
+      {
+        word: "pressure gauge",
+        alt: "bar / PSI meter",
+        def: "A round meter that shows the fluid or air pressure inside a system.",
+        ex: "Look at the pressure gauge to check if the pump reaches normal bar.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1.5"/></svg>`
+      },
+      {
+        word: "washer",
+        alt: "flat ring",
+        def: "A thin flat metal or rubber ring placed under a nut or bolt.",
+        ex: "Put a metal washer under each bolt head to protect the frame.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>`
+      }
+    ];
+
+    const verbsData = [
+      { word: "tighten", def: "Turn a bolt, nut, or screw to make it firm and safe.", ex: "Tighten the bolts firmly after you align the motor." },
+      { word: "loosen", def: "Turn a bolt, nut, or screw to make it less tight before taking it off.", ex: "Loosen the four nuts before you lift the machine guard." },
+      { word: "turn", def: "Move a tool, valve, or switch in a circle.", ex: "Turn the main supply valve to the OFF position." },
+      { word: "hit", def: "Strike something carefully with a hammer.", ex: "Never hit a pressurized pipe or sensor with a metal hammer." },
+      { word: "pull", def: "Move a part, pin, or cable toward you.", ex: "Pull the worn seal straight out of the groove." },
+      { word: "push", def: "Press a part or rubber seal firmly into place.", ex: "Push the new O-ring gently into the fitting." },
+      { word: "cut", def: "Divide metal, a tube, or a cable tie into pieces.", ex: "Cut the old plastic cable ties before removing the wire." },
+      { word: "replace", def: "Take out an old or broken part and put in a new one.", ex: "We must replace the damaged filter every 500 operating hours." },
+      { word: "check", def: "Look carefully at a machine or gauge to see if it works safely.", ex: "Check the oil level and pressure gauge before starting the line." },
+      { word: "connect / disconnect", def: "Join two hoses or cables together, or take them apart.", ex: "Disconnect the main power before opening the control cabinet." }
+    ];
+
+    const ex1aLeft = [
+      { id: 1, word: "wrench", answer: "F" },
+      { id: 2, word: "O-ring", answer: "C" },
+      { id: 3, word: "pliers", answer: "B" },
+      { id: 4, word: "pressure gauge", answer: "A" },
+      { id: 5, word: "bolt", answer: "H" },
+      { id: 6, word: "screwdriver", answer: "D" },
+      { id: 7, word: "hammer", answer: "E" },
+      { id: 8, word: "nut", answer: "G" }
+    ];
+
+    const ex1aRight = [
+      { letter: "A", text: "A round dial that shows how strong the fluid or air pressure is." },
+      { letter: "B", text: "A tool with two handles used to hold or pull small metal parts." },
+      { letter: "C", text: "A small rubber circle that prevents fluid or air leaks." },
+      { letter: "D", text: "A tool used to turn screws." },
+      { letter: "E", text: "A tool with a heavy head used for hitting or tapping." },
+      { letter: "F", text: "A metal tool used to tighten or loosen nuts and bolts." },
+      { letter: "G", text: "A small metal piece with a hole that screws onto the end of a bolt." },
+      { letter: "H", text: "A strong metal fastener used with a nut to hold machine parts together." }
+    ];
+
+    const ex1bWords = ["tighten", "loosen", "replace", "check", "hit", "pull", "push", "cut", "Connect", "turn"];
+
+    const ex1bItems = [
+      { before: "First,", answer: "turn", after: "the main supply valve to stop the flow." },
+      { before: "Use a wrench to", answer: "loosen", after: "the rusty nuts before you remove the machine cover." },
+      { before: "", answer: "Connect", after: "the flexible hose to the outlet port on the pump." },
+      { before: "Always", answer: "check", after: "the pressure gauge before you start the production line." },
+      { before: "This rubber O-ring is cracked, so we must", answer: "replace", after: "it with a new one." },
+      { before: "Use your pliers to", answer: "pull", after: "the old retaining pin out of the roller shaft." },
+      { before: "Gently", answer: "push", after: "the new rubber seal into place with your fingers." },
+      { before: "Use sharp snips to", answer: "cut", after: "the old plastic cable ties on the frame." },
+      { before: "After you put the new bolts in,", answer: "tighten", after: "them firmly with a wrench." },
+      { before: "Do not", answer: "hit", after: "the brass valve with a hammer, or you will break it." }
+    ];
+
+    const ex1cItems = [
+      {
+        q: "1. You need to turn a bolt that has a six-sided hole inside its head. Which tool do you use?",
+        options: ["Allen key", "screwdriver", "hammer"],
+        answer: "Allen key"
+      },
+      {
+        q: "2. You want to stop oil, air, or water from leaking inside a pipe connection. Which part do you install?",
+        options: ["washer", "O-ring", "nut"],
+        answer: "O-ring"
+      },
+      {
+        q: "3. You place this thin flat metal ring under a nut or bolt head to protect the machine frame.",
+        options: ["screw", "hose", "washer"],
+        answer: "washer"
+      },
+      {
+        q: "4. You need to grip and pull out a small bent metal pin from a tight space.",
+        options: ["pliers", "Allen key", "pressure gauge"],
+        answer: "pliers"
+      },
+      {
+        q: "5. You want to see if the system pressure is at 6 bar or too low.",
+        options: ["pressure gauge", "wrench", "bolt"],
+        answer: "pressure gauge"
+      },
+      {
+        q: "6. You need to open an electrical panel cover held by four small cross-head fasteners.",
+        options: ["hammer", "screwdriver", "pliers"],
+        answer: "screwdriver"
+      },
+      {
+        q: "7. You need to hold a hex nut steady while turning the bolt on the other side.",
+        options: ["hose", "O-ring", "wrench"],
+        answer: "wrench"
+      },
+      {
+        q: "8. You need to tap a stuck steel pin gently out of a heavy metal bracket.",
+        options: ["hammer", "screwdriver", "washer"],
+        answer: "hammer"
+      }
+    ];
+
+    const scenariosData = [
+      {
+        day: "Day 1 • Monday",
+        title: "Fluid Leak at a Hydraulic Hose Connection",
+        problem: "You install a new pump unit on a production machine. When you start the system, fluid sprays out from the connection between the manifold and the flexible hose.",
+        options: [
+          {
+            letter: "A",
+            text: "Hit the metal hose nut hard with a hammer while the system is still running.",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Never hit a pressurized connection with a hammer. The hose can burst and cause serious injury."
+          },
+          {
+            letter: "B",
+            text: "Turn off the system, release the pressure, disconnect the hose, check the O-ring, and tighten the nut with a wrench.",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "Safety comes first. Turning off the unit and releasing pressure prevents injury, and checking the O-ring solves the real cause of the leak."
+          },
+          {
+            letter: "C",
+            text: "Put a thick cloth around the hose and tell the operator to run the machine slowly.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "You avoid an immediate mess, but a cloth cannot stop pressurized fluid, and the machine is still unsafe."
+          },
+          {
+            letter: "D",
+            text: "Turn off the system and tighten the hose nut with a wrench, without checking the rubber O-ring inside.",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "Turning off the machine is safe, and tightening the nut might stop a small leak, but a damaged O-ring will leak again soon."
+          }
+        ]
+      },
+      {
+        day: "Day 2 • Tuesday",
+        title: "Low System Pressure & Knocking Sound",
+        problem: "A pneumatic and fluid actuator line is moving too slowly today. You look at the pressure gauge—the reading is very low, and the pump unit makes a loud knocking sound.",
+        options: [
+          {
+            letter: "A",
+            text: "Open the housing with an Allen key and replace the worn seals, but forget to check the pressure gauge during a test run.",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "You fix the mechanical problem with the right tool, but a technician must always verify the pressure gauge after a repair."
+          },
+          {
+            letter: "B",
+            text: "Turn the pressure regulator up to maximum and hope the machine runs faster.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "Increasing the regulator does not fix blocked filters or broken seals, and it puts extra stress on the equipment."
+          },
+          {
+            letter: "C",
+            text: "Leave the machine running all shift and write a note to check it next week.",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Running a noisy, low-pressure unit all day can destroy internal components and stop the whole line."
+          },
+          {
+            letter: "D",
+            text: "Stop the machine, check the filter and seals, use an Allen key and pliers to replace the damaged O-ring, and check the pressure gauge during a test run.",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "You diagnose the problem step by step, use the right tools to replace the worn parts, and confirm normal pressure on the gauge."
+          }
+        ]
+      },
+      {
+        day: "Day 3 • Wednesday",
+        title: "Vibrating Drive Motor & Stuck Panel Screw",
+        problem: "During your morning inspection, a conveyor drive motor shakes violently. You see two loose bolts on the motor base. Also, one small screw on the electrical control box is stuck and its head is damaged.",
+        options: [
+          {
+            letter: "A",
+            text: "Tighten the two base bolts with a wrench, and leave the electrical control box cover open.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "Fixing the base bolts stops the shaking, but an open electrical box on the factory floor is a serious safety hazard."
+          },
+          {
+            letter: "B",
+            text: "Turn off the main power, tighten the base bolts and washers with a wrench, carefully pull out the damaged screw with pliers, and put in a new screw with a screwdriver.",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "You isolate the electrical power, secure the motor base properly, and use the right tools (pliers and screwdriver) to replace the damaged screw safely."
+          },
+          {
+            letter: "C",
+            text: "Hit the base bolts with a screwdriver and put tape over the electrical box.",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Using a screwdriver as a hammer breaks the tool, and tape does not protect electrical parts from dust or moisture."
+          },
+          {
+            letter: "D",
+            text: "Turn off the main power and tighten the base bolts with a wrench, then ask a senior technician to help remove the damaged screw.",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "You make the motor safe and ask for help instead of damaging the electrical box further."
+          }
+        ]
+      },
+      {
+        day: "Day 4 • Thursday",
+        title: "Jammed Roller Pin & Loose Safety Guard",
+        problem: "On a packaging conveyor, a metal safety guard is loose because one nut fell off its bolt. Behind the guard, a steel roller pin is stuck in its bracket, and an old plastic strap is wrapped around the shaft.",
+        options: [
+          {
+            letter: "A",
+            text: "Stop and lock out the machine, cut the plastic strap, tap the stuck pin out carefully with a hammer, push in a new pin, and tighten a new nut and washer on the guard bolt.",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "Complete, safe maintenance work: you isolate the machine, clear the obstruction, use a hammer safely on the pin, and secure the safety guard with a washer and nut."
+          },
+          {
+            letter: "B",
+            text: "Stop the machine, cut the plastic strap, and put the safety guard back on without replacing the missing nut.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "Clearing the strap helps, but an unbolted safety guard will vibrate loose again immediately."
+          },
+          {
+            letter: "C",
+            text: "Reach behind the moving guard with pliers to pull the plastic strap out while the conveyor is still running.",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Never put hands or tools near a moving conveyor belt. Always stop and lock out the machine first."
+          },
+          {
+            letter: "D",
+            text: "Stop the machine, cut the plastic strap, and secure the guard with a new washer and nut, then test the roller before deciding if the pin needs replacement.",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "Safe and practical—securing the guard and removing the strap protects the operator, though checking the stuck pin prevents future wear."
+          }
+        ]
+      }
+    ];
+
+    const part3Words = [
+      "wrench", "hammer", "pliers", "screwdriver",
+      "Allen key", "bolts", "nut", "screw",
+      "O-ring", "pressure gauge", "hose", "washers",
+      "tightened", "loosened", "replaced", "checked"
+    ];
+
+    const part3Answers = [
+      "hose", "checked", "O-ring", "replaced",
+      "wrench", "pressure gauge", "Allen key", "tightened",
+      "bolts", "pliers", "screw", "screwdriver"
+    ];
+
+    /* =========================================================================
+       STATE MANAGEMENT
+       ========================================================================= */
+    let scores = {
+      ex1a: 0,
+      ex1b: 0,
+      ex1c: 0,
+      part2: [0, 0, 0, 0],
+      part3: 0
+    };
+
+    function updateTotalScore() {
+      const p2Total = scores.part2.reduce((a, b) => a + b, 0);
+      const total = scores.ex1a + scores.ex1b + scores.ex1c + p2Total + scores.part3;
+      document.getElementById("total-score").textContent = total;
+    }
+
+    /* =========================================================================
+       PART 1: VOCABULARY RENDERING
+       ========================================================================= */
+    function renderVocab() {
+      const toolsEl = document.getElementById("vocab-tools");
+      toolsEl.innerHTML = toolsData.map(item => `
+        <div class="vocab-card">
+          <div class="vocab-top">
+            <div class="vocab-icon">${item.svg}</div>
+            <div>
+              <div class="vocab-word">${item.word}</div>
+              <div class="vocab-alt">${item.alt}</div>
+            </div>
+          </div>
+          <p class="vocab-def">${item.def}</p>
+          <p class="vocab-ex">"${item.ex}"</p>
+        </div>
+      `).join("");
+
+      const verbsEl = document.getElementById("vocab-verbs");
+      verbsEl.innerHTML = verbsData.map(item => `
+        <div class="vocab-card">
+          <div class="vocab-top">
+            <div class="vocab-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div>
+              <div class="vocab-word">${item.word}</div>
+              <div class="vocab-alt">action verb</div>
+            </div>
+          </div>
+          <p class="vocab-def">${item.def}</p>
+          <p class="vocab-ex">"${item.ex}"</p>
+        </div>
+      `).join("");
+    }
+
+    function switchVocabTab(tab, btn) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("vocab-tools").style.display = tab === "tools" ? "grid" : "none";
+      document.getElementById("vocab-verbs").style.display = tab === "verbs" ? "grid" : "none";
+    }
+
+    function toggleStudyMode() {
+      document.body.classList.toggle("hide-meanings");
+      const active = document.body.classList.contains("hide-meanings");
+      document.getElementById("toggle-study-btn").textContent = active
+        ? "Self-Study Mode: Show Meanings"
+        : "Self-Study Mode: Hide Meanings";
+    }
+
+    /* =========================================================================
+       EXERCISE 1A: INTERACTIVE MATCHING
+       ========================================================================= */
+    let selectedLeftId = null;
+    let userMatches = {};
+
+    function renderMatching() {
+      const leftCol = document.getElementById("match-left");
+      const rightCol = document.getElementById("match-right");
+
+      leftCol.innerHTML = `<div class="match-col-title">Tools &amp; Parts (1–8)</div>` +
+        ex1aLeft.map(item => {
+          const pairedLetter = userMatches[item.id];
+          const isSelected = selectedLeftId === item.id;
+          return `
+            <button type="button" class="match-item ${isSelected ? 'selected' : ''} ${pairedLetter ? 'paired' : ''}"
+              data-id="${item.id}" onclick="selectLeft(${item.id})">
+              <span><strong>${item.id}.</strong> ${item.word}</span>
+              ${pairedLetter ? `<span class="pair-tag">${pairedLetter}</span>` : `<span class="slot-index">Select</span>`}
+            </button>
+          `;
+        }).join("");
+
+      const letterToLeft = {};
+      Object.entries(userMatches).forEach(([id, letter]) => {
+        letterToLeft[letter] = id;
+      });
+
+      rightCol.innerHTML = `<div class="match-col-title">Definitions (A–H)</div>` +
+        ex1aRight.map(item => {
+          const pairedId = letterToLeft[item.letter];
+          return `
+            <button type="button" class="match-item ${pairedId ? 'paired' : ''}"
+              data-letter="${item.letter}" onclick="selectRight('${item.letter}')">
+              <span><strong>${item.letter}.</strong> ${item.text}</span>
+              ${pairedId ? `<span class="pair-tag">${pairedId}</span>` : ``}
+            </button>
+          `;
+        }).join("");
+    }
+
+    function selectLeft(id) {
+      clearFeedback("match-feedback");
+      if (userMatches[id]) {
+        delete userMatches[id];
+        selectedLeftId = id;
+      } else {
+        selectedLeftId = (selectedLeftId === id) ? null : id;
+      }
+      renderMatching();
+    }
+
+    function selectRight(letter) {
+      clearFeedback("match-feedback");
+      const existingId = Object.keys(userMatches).find(k => userMatches[k] === letter);
+      if (existingId && selectedLeftId === null) {
+        delete userMatches[existingId];
+        renderMatching();
+        return;
+      }
+      if (selectedLeftId !== null) {
+        if (existingId) delete userMatches[existingId];
+        userMatches[selectedLeftId] = letter;
+        selectedLeftId = null;
+        renderMatching();
+      }
+    }
+
+    function checkMatching() {
+      let correctCount = 0;
+      ex1aLeft.forEach(item => {
+        const leftBtn = document.querySelector(`#match-left .match-item[data-id="${item.id}"]`);
+        const chosen = userMatches[item.id];
+        leftBtn.classList.remove("correct", "incorrect", "selected");
+        if (chosen === item.answer) {
+          leftBtn.classList.add("correct");
+          correctCount++;
+        } else {
+          leftBtn.classList.add("incorrect");
+        }
+      });
+
+      scores.ex1a = correctCount;
+      updateTotalScore();
+      showFeedback("match-feedback", correctCount, 8);
+    }
+
+    function showMatchingAnswers() {
+      ex1aLeft.forEach(item => {
+        userMatches[item.id] = item.answer;
+      });
+      selectedLeftId = null;
+      renderMatching();
+      checkMatching();
+    }
+
+    function resetMatching() {
+      userMatches = {};
+      selectedLeftId = null;
+      scores.ex1a = 0;
+      updateTotalScore();
+      clearFeedback("match-feedback");
+      renderMatching();
+    }
+
+    /* =========================================================================
+       SHARED DRAG & DROP / CLICK-TO-FILL ENGINE (EX 1B & PART 3)
+       ========================================================================= */
+    function initGapExercise(config) {
+      const bankEl = document.getElementById(config.bankId);
+      const state = config.state;
+
+      function renderBank() {
+        bankEl.innerHTML = config.words.map((word, idx) => {
+          const isUsed = Object.values(state.slots).includes(idx);
+          const isSelected = state.selectedWordIdx === idx;
+          return `
+            <div class="word-chip ${isUsed ? 'used' : ''} ${isSelected ? 'selected-chip' : ''}"
+                 draggable="${!isUsed}"
+                 data-word-idx="${idx}">
+              ${word}
+            </div>
+          `;
+        }).join("");
+
+        bankEl.querySelectorAll(".word-chip").forEach(chip => {
+          const idx = parseInt(chip.dataset.wordIdx, 10);
+          chip.addEventListener("click", () => {
+            if (Object.values(state.slots).includes(idx)) return;
+            state.selectedWordIdx = (state.selectedWordIdx === idx) ? null : idx;
+            renderBank();
+          });
+
+          chip.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", JSON.stringify({
+              exercise: config.name,
+              wordIdx: idx
+            }));
+          });
+        });
+      }
+
+      function attachSlotEvents() {
+        document.querySelectorAll(`#${config.containerId} .drop-slot`).forEach(slot => {
+          const slotIdx = parseInt(slot.dataset.slotIdx, 10);
+
+          slot.addEventListener("click", () => {
+            clearFeedback(config.feedbackId);
+            slot.classList.remove("slot-correct", "slot-incorrect");
+
+            if (state.selectedWordIdx !== null) {
+              state.slots[slotIdx] = state.selectedWordIdx;
+              state.selectedWordIdx = null;
+              syncSlots();
+              renderBank();
+            } else if (state.slots[slotIdx] !== undefined) {
+              delete state.slots[slotIdx];
+              syncSlots();
+              renderBank();
+            }
+          });
+
+          slot.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            slot.classList.add("drag-over");
+          });
+
+          slot.addEventListener("dragleave", () => {
+            slot.classList.remove("drag-over");
+          });
+
+          slot.addEventListener("drop", (e) => {
+            e.preventDefault();
+            slot.classList.remove("drag-over");
+            clearFeedback(config.feedbackId);
+            slot.classList.remove("slot-correct", "slot-incorrect");
+            try {
+              const payload = JSON.parse(e.dataTransfer.getData("text/plain"));
+              if (payload.exercise === config.name) {
+                state.slots[slotIdx] = payload.wordIdx;
+                state.selectedWordIdx = null;
+                syncSlots();
+                renderBank();
+              }
+            } catch (_) {}
+          });
+        });
+      }
+
+      function syncSlots() {
+        document.querySelectorAll(`#${config.containerId} .drop-slot`).forEach(slot => {
+          const slotIdx = parseInt(slot.dataset.slotIdx, 10);
+          const wordIdx = state.slots[slotIdx];
+          slot.classList.remove("slot-correct", "slot-incorrect");
+          if (wordIdx !== undefined) {
+            slot.textContent = config.words[wordIdx];
+            slot.classList.add("filled");
+          } else {
+            slot.innerHTML = `<span class="slot-index">[${slotIdx + 1}]</span>`;
+            slot.classList.remove("filled");
+          }
+        });
+      }
+
+      renderBank();
+      attachSlotEvents();
+      syncSlots();
+
+      return { renderBank, syncSlots };
+    }
+
+    /* =========================================================================
+       EXERCISE 1B: ALL 10 VERBS GAP FILL
+       ========================================================================= */
+    const ex1bState = { selectedWordIdx: null, slots: {} };
+    let ex1bEngine = null;
+
+    function buildEx1B() {
+      const container = document.getElementById("ex1b-sentences");
+      container.innerHTML = ex1bItems.map((item, idx) => `
+        <div class="gap-row">
+          <span class="gap-num">${idx + 1}.</span>
+          ${item.before ? `<span>${item.before}</span>` : ""}
+          <span class="drop-slot" data-slot-idx="${idx}"><span class="slot-index">[${idx + 1}]</span></span>
+          <span>${item.after}</span>
+        </div>
+      `).join("");
+
+      ex1bEngine = initGapExercise({
+        name: "ex1b",
+        bankId: "ex1b-bank",
+        containerId: "ex1b-sentences",
+        feedbackId: "ex1b-feedback",
+        words: ex1bWords,
+        state: ex1bState
+      });
+    }
+
+    function checkEx1B() {
+      let correctCount = 0;
+      document.querySelectorAll("#ex1b-sentences .drop-slot").forEach(slot => {
+        const idx = parseInt(slot.dataset.slotIdx, 10);
+        const wordIdx = ex1bState.slots[idx];
+        const chosenWord = wordIdx !== undefined ? ex1bWords[wordIdx] : "";
+        slot.classList.remove("slot-correct", "slot-incorrect");
+        if (chosenWord.toLowerCase() === ex1bItems[idx].answer.toLowerCase()) {
+          slot.classList.add("slot-correct");
+          correctCount++;
+        } else {
+          slot.classList.add("slot-incorrect");
+        }
+      });
+      scores.ex1b = correctCount;
+      updateTotalScore();
+      showFeedback("ex1b-feedback", correctCount, 10);
+    }
+
+    function showEx1BAnswers() {
+      ex1bItems.forEach((item, idx) => {
+        const wIdx = ex1bWords.findIndex(w => w.toLowerCase() === item.answer.toLowerCase());
+        ex1bState.slots[idx] = wIdx;
+      });
+      ex1bState.selectedWordIdx = null;
+      ex1bEngine.renderBank();
+      ex1bEngine.syncSlots();
+      checkEx1B();
+    }
+
+    function resetEx1B() {
+      ex1bState.slots = {};
+      ex1bState.selectedWordIdx = null;
+      scores.ex1b = 0;
+      updateTotalScore();
+      clearFeedback("ex1b-feedback");
+      ex1bEngine.renderBank();
+      ex1bEngine.syncSlots();
+    }
+
+    /* =========================================================================
+       EXERCISE 1C: RIGHT TOOL OR PART FOR THE JOB
+       ========================================================================= */
+    let ex1cSelections = {};
+
+    function renderEx1C() {
+      const grid = document.getElementById("ex1c-grid");
+      grid.innerHTML = ex1cItems.map((item, qIdx) => `
+        <div class="tq-card" id="tq-card-${qIdx}">
+          <p class="tq-prompt">${item.q}</p>
+          <div class="tq-choices">
+            ${item.options.map(opt => {
+              const isSelected = ex1cSelections[qIdx] === opt;
+              return `
+                <button type="button" class="tq-btn ${isSelected ? 'tq-selected' : ''}"
+                        data-q="${qIdx}" data-opt="${opt}"
+                        onclick="selectEx1C(${qIdx}, '${opt}')">
+                  ${opt}
+                </button>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function selectEx1C(qIdx, opt) {
+      clearFeedback("ex1c-feedback");
+      ex1cSelections[qIdx] = opt;
+      renderEx1C();
+    }
+
+    function checkEx1C() {
+      let correctCount = 0;
+      ex1cItems.forEach((item, qIdx) => {
+        const chosen = ex1cSelections[qIdx];
+        const btns = document.querySelectorAll(`#tq-card-${qIdx} .tq-btn`);
+        btns.forEach(btn => {
+          btn.classList.remove("tq-selected", "tq-correct", "tq-incorrect");
+          const val = btn.dataset.opt;
+          if (val === chosen) {
+            if (chosen === item.answer) {
+              btn.classList.add("tq-correct");
+              correctCount++;
+            } else {
+              btn.classList.add("tq-incorrect");
+            }
+          }
+        });
+      });
+      scores.ex1c = correctCount;
+      updateTotalScore();
+      showFeedback("ex1c-feedback", correctCount, 8);
+    }
+
+    function showEx1CAnswers() {
+      ex1cItems.forEach((item, qIdx) => {
+        ex1cSelections[qIdx] = item.answer;
+      });
+      renderEx1C();
+      checkEx1C();
+    }
+
+    function resetEx1C() {
+      ex1cSelections = {};
+      scores.ex1c = 0;
+      updateTotalScore();
+      clearFeedback("ex1c-feedback");
+      renderEx1C();
+    }
+
+    /* =========================================================================
+       PART 2: SCENARIOS RENDERING & INTERACTION
+       ========================================================================= */
+    function renderScenarios() {
+      const container = document.getElementById("scenarios-container");
+      container.innerHTML = scenariosData.map((sc, sIdx) => `
+        <div class="scenario-box" id="scenario-${sIdx}">
+          <span class="day-badge">${sc.day}</span>
+          <h3 class="scenario-title">${sc.title}</h3>
+          <div class="scenario-desc"><strong>The Problem:</strong> ${sc.problem}</div>
+          <div class="options-grid">
+            ${sc.options.map((opt, oIdx) => `
+              <button type="button" class="option-card ${opt.rateClass}" id="sc-${sIdx}-opt-${oIdx}"
+                      onclick="selectScenarioOption(${sIdx}, ${oIdx})">
+                <div class="option-top">
+                  <span class="opt-letter">${opt.letter}</span>
+                  <span>${opt.text}</span>
+                </div>
+                <div class="opt-feedback">
+                  <span class="rating-pill">${opt.rating}</span>
+                  <span>${opt.feedback}</span>
+                </div>
+              </button>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function selectScenarioOption(sIdx, oIdx) {
+      const card = document.getElementById(`sc-${sIdx}-opt-${oIdx}`);
+      card.classList.add("revealed");
+      const pts = scenariosData[sIdx].options[oIdx].points;
+      if (pts > scores.part2[sIdx]) {
+        scores.part2[sIdx] = pts;
+        updateTotalScore();
+      }
+    }
+
+    /* =========================================================================
+       PART 3: SERVICE REPORT (12 GAPS FROM 16 WORDS)
+       ========================================================================= */
+    const part3State = { selectedWordIdx: null, slots: {} };
+    let part3Engine = null;
+
+    function buildPart3() {
+      const textEl = document.getElementById("part3-text");
+      textEl.innerHTML = `
+        <p>This week, I repaired and serviced the production equipment on Line #4.</p>
+        <p>
+          On Monday, fluid leaked from the main hydraulic
+          <span class="drop-slot" data-slot-idx="0"><span class="slot-index">[1]</span></span>.
+          I turned off the system and
+          <span class="drop-slot" data-slot-idx="1"><span class="slot-index">[2]</span></span>
+          the connection. The rubber
+          <span class="drop-slot" data-slot-idx="2"><span class="slot-index">[3]</span></span>
+          inside was broken, so I
+          <span class="drop-slot" data-slot-idx="3"><span class="slot-index">[4]</span></span>
+          it with a new one. Then I used a
+          <span class="drop-slot" data-slot-idx="4"><span class="slot-index">[5]</span></span>
+          to make the metal fitting tight.
+        </p>
+        <p>
+          On Tuesday, the actuator line moved too slowly. I looked at the
+          <span class="drop-slot" data-slot-idx="5"><span class="slot-index">[6]</span></span>,
+          and the pressure level was too low. I opened the pump housing with an
+          <span class="drop-slot" data-slot-idx="6"><span class="slot-index">[7]</span></span>
+          and cleaned the intake filter.
+        </p>
+        <p>
+          On Wednesday morning, the conveyor drive motor shook during operation. First, I turned off the main power. Next, I
+          <span class="drop-slot" data-slot-idx="7"><span class="slot-index">[8]</span></span>
+          two loose
+          <span class="drop-slot" data-slot-idx="8"><span class="slot-index">[9]</span></span>
+          on the motor base. Finally, I used
+          <span class="drop-slot" data-slot-idx="9"><span class="slot-index">[10]</span></span>
+          to pull out a damaged
+          <span class="drop-slot" data-slot-idx="10"><span class="slot-index">[11]</span></span>
+          on the control box, and I put in a new one with a
+          <span class="drop-slot" data-slot-idx="11"><span class="slot-index">[12]</span></span>.
+        </p>
+      `;
+
+      part3Engine = initGapExercise({
+        name: "part3",
+        bankId: "part3-bank",
+        containerId: "part3-text",
+        feedbackId: "part3-feedback",
+        words: part3Words,
+        state: part3State
+      });
+    }
+
+    function checkPart3() {
+      let correctCount = 0;
+      document.querySelectorAll("#part3-text .drop-slot").forEach(slot => {
+        const idx = parseInt(slot.dataset.slotIdx, 10);
+        const wordIdx = part3State.slots[idx];
+        const chosenWord = wordIdx !== undefined ? part3Words[wordIdx] : "";
+        slot.classList.remove("slot-correct", "slot-incorrect");
+        if (chosenWord === part3Answers[idx]) {
+          slot.classList.add("slot-correct");
+          correctCount++;
+        } else {
+          slot.classList.add("slot-incorrect");
+        }
+      });
+      scores.part3 = correctCount;
+      updateTotalScore();
+      showFeedback("part3-feedback", correctCount, 12);
+    }
+
+    function showPart3Answers() {
+      part3Answers.forEach((ans, idx) => {
+        const wIdx = part3Words.indexOf(ans);
+        part3State.slots[idx] = wIdx;
+      });
+      part3State.selectedWordIdx = null;
+      part3Engine.renderBank();
+      part3Engine.syncSlots();
+      checkPart3();
+    }
+
+    function resetPart3() {
+      part3State.slots = {};
+      part3State.selectedWordIdx = null;
+      scores.part3 = 0;
+      updateTotalScore();
+      clearFeedback("part3-feedback");
+      part3Engine.renderBank();
+      part3Engine.syncSlots();
+    }
+
+    /* =========================================================================
+       HELPERS & GLOBAL RESET
+       ========================================================================= */
+    function showFeedback(elId, score, total) {
+      const el = document.getElementById(elId);
+      el.className = "feedback-banner show " + (score === total ? "success" : "partial");
+      el.textContent = score === total
+        ? `Excellent work! You got ${score} / ${total} correct.`
+        : `You got ${score} / ${total} correct. Review the red boxes and try again!`;
+    }
+
+    function clearFeedback(elId) {
+      const el = document.getElementById(elId);
+      el.className = "feedback-banner";
+      el.textContent = "";
+    }
+
+    function resetAll() {
+      resetMatching();
+      resetEx1B();
+      resetEx1C();
+      resetPart3();
+      scores.part2 = [0, 0, 0, 0];
+      renderScenarios();
+      updateTotalScore();
+    }
+
+    /* Initialize Lesson */
+    renderVocab();
+    renderMatching();
+    buildEx1B();
+    renderEx1C();
+    renderScenarios();
+    buildPart3();
+    updateTotalScore();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English for Technicians: International Company Conference (A1/A2)</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --primary: #0f172a;
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-light: #e0f2fe;
+      --border: #cbd5e1;
+      --text: #1e293b;
+      --text-muted: #475569;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --success-border: #86efac;
+      --good: #0369a1;
+      --good-bg: #e0f2fe;
+      --warn: #b45309;
+      --warn-bg: #fef3c7;
+      --warn-border: #fcd34d;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --danger-border: #fca5a5;
+      --radius: 12px;
+      --shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* Header & Sticky Progress Bar */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: #ffffff;
+      padding: 28px 20px 24px;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .header-inner {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.14);
+      color: #e0f2fe;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      line-height: 1.25;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+      max-width: 760px;
+      font-size: 1rem;
+    }
+
+    .sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .sticky-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent-hover);
+    }
+
+    .score-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--accent-light);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #bae6fd;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    section.card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--bg);
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      margin: -8px 0 18px;
+      color: var(--text-muted);
+      font-size: 0.96rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface-alt);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-sm {
+      padding: 5px 11px;
+      font-size: 0.82rem;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .feedback-banner {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback-banner.show {
+      display: block;
+    }
+
+    .feedback-banner.success {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .feedback-banner.partial {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid var(--warn-border);
+    }
+
+    /* Part 1: Vocabulary & Phrase Bank */
+    .vocab-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 14px;
+    }
+
+    .vocab-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .vocab-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .vocab-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vocab-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      color: var(--accent-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .vocab-word {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    .vocab-alt {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .vocab-def {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .vocab-ex {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 2px 0 0;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+
+    .phrase-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .phrase-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .phrase-card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 0.91rem;
+      color: var(--text);
+    }
+
+    body.hide-meanings .vocab-def,
+    body.hide-meanings .vocab-ex,
+    body.hide-meanings .phrase-card ul {
+      filter: blur(5px);
+      user-select: none;
+      cursor: pointer;
+    }
+
+    body.hide-meanings .vocab-card:hover .vocab-def,
+    body.hide-meanings .vocab-card:hover .vocab-ex,
+    body.hide-meanings .phrase-card:hover ul {
+      filter: none;
+    }
+
+    /* Exercise 1A: Matching */
+    .match-container {
+      display: grid;
+      grid-template-columns: 1.35fr 1.25fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 760px) {
+      .match-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .match-col-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .match-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 14px;
+      background: var(--surface-alt);
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 0.93rem;
+      transition: all 0.15s ease;
+      text-align: left;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .match-item:hover {
+      border-color: var(--accent);
+      background: #f0f9ff;
+    }
+
+    .match-item.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+
+    .match-item.paired {
+      border-color: #64748b;
+      background: #e2e8f0;
+    }
+
+    .match-item.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .match-item.incorrect {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .pair-tag {
+      display: inline-block;
+      min-width: 28px;
+      text-align: center;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--primary);
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    /* Word Bank & Drag/Click Gap Fill (Ex 1B & Part 3) */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px;
+      background: #f8fafc;
+      border: 2px dashed #94a3b8;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      min-height: 58px;
+    }
+
+    .word-chip {
+      padding: 6px 13px;
+      background: #ffffff;
+      border: 1.5px solid var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.92rem;
+      border-radius: 7px;
+      cursor: grab;
+      user-select: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: all 0.15s ease;
+    }
+
+    .word-chip:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+    }
+
+    .word-chip.selected-chip {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+    }
+
+    .word-chip.used {
+      opacity: 0.35;
+      pointer-events: none;
+      border-style: dashed;
+    }
+
+    .dialogue-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dialogue-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 11px 14px;
+      background: var(--surface-alt);
+      border-radius: 9px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.96rem;
+      line-height: 1.85;
+    }
+
+    .dialogue-row.sarah-row {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
+
+    .speaker-badge {
+      display: inline-block;
+      min-width: 64px;
+      text-align: center;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--primary);
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .speaker-badge.sarah {
+      background: var(--accent-hover);
+    }
+
+    .drop-slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 118px;
+      height: 31px;
+      padding: 0 10px;
+      margin: 0 3px;
+      vertical-align: middle;
+      background: #ffffff;
+      border: 2px dashed #94a3b8;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .drop-slot:hover,
+    .drop-slot.drag-over {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .drop-slot.filled {
+      border-style: solid;
+      border-color: var(--accent);
+      background: #e0f2fe;
+    }
+
+    .drop-slot.slot-correct {
+      border-style: solid;
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .drop-slot.slot-incorrect {
+      border-style: solid;
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .slot-index {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* Part 2: Scenarios */
+    .scenario-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 20px;
+      background: var(--surface-alt);
+    }
+
+    .scenario-box:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .day-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .scenario-title {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+      color: var(--primary);
+    }
+
+    .scenario-desc {
+      margin: 0 0 14px;
+      background: #ffffff;
+      padding: 12px 14px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.96rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .option-card {
+      text-align: left;
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.94rem;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: #f0f9ff;
+    }
+
+    .option-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .opt-feedback {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 0.9rem;
+    }
+
+    .option-card.revealed .opt-feedback {
+      display: block;
+    }
+
+    .rating-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .option-card.revealed.rate-excellent {
+      border-color: var(--success);
+      background: var(--success-bg);
+    }
+    .rate-excellent .rating-pill {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .option-card.revealed.rate-good {
+      border-color: var(--good);
+      background: var(--good-bg);
+    }
+    .rate-good .rating-pill {
+      background: var(--good);
+      color: #ffffff;
+    }
+
+    .option-card.revealed.rate-average {
+      border-color: var(--warn);
+      background: var(--warn-bg);
+    }
+    .rate-average .rating-pill {
+      background: var(--warn);
+      color: #ffffff;
+    }
+
+    .option-card.revealed.rate-poor {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+    }
+    .rate-poor .rating-pill {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    /* Part 3: Email Message Box */
+    .email-sheet {
+      background: #ffffff;
+      border: 2px solid #94a3b8;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .email-header {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .email-label {
+      font-weight: 700;
+      color: var(--text-muted);
+      min-width: 68px;
+    }
+
+    .email-body {
+      padding: 22px 24px;
+    }
+
+    .email-body p {
+      margin: 0 0 15px;
+      line-height: 2.15;
+      font-size: 0.98rem;
+    }
+
+    .email-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .helper-tip {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 12px;
+    }
+
+    @media print {
+      .sticky-bar, .controls-row, .vocab-tabs, .helper-tip {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+      }
+      section.card {
+        box-shadow: none;
+        border: 1px solid #cbd5e1;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="badge-row">
+        <span class="badge">English for Specific Purposes</span>
+        <span class="badge">CEFR Level A1 / A2</span>
+        <span class="badge">International Company Conference</span>
+      </div>
+      <h1>Technical English: International Company Conference</h1>
+      <p>Practice introducing yourself, describing your technical job, making small talk, and asking for clarification when meeting overseas colleagues.</p>
+    </div>
+  </header>
+
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <nav class="nav-links" aria-label="Lesson Sections">
+        <a href="#part1">1. Vocabulary &amp; Phrases</a>
+        <a href="#ex1a">Ex 1A: Matching</a>
+        <a href="#ex1b">Ex 1B: Conversation</a>
+        <a href="#part2">2. Conference Scenarios</a>
+        <a href="#part3">3. Follow-Up Email</a>
+      </nav>
+      <div class="score-pill">
+        <span>Total Score: <span id="total-score">0</span> / 37</span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetAll()">Reset All</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">Print</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- PART 1: VOCABULARY & PHRASES -->
+    <section class="card" id="part1">
+      <div class="section-header">
+        <h2>Part 1: Conference Vocabulary &amp; Socio-Professional Phrases</h2>
+        <button type="button" class="btn btn-secondary btn-sm" id="toggle-study-btn" onclick="toggleStudyMode()">
+          Self-Study Mode: Hide Meanings
+        </button>
+      </div>
+      <p class="section-subtitle">Review key conference words and polite everyday expressions for technicians across all industries.</p>
+
+      <div class="vocab-tabs">
+        <button type="button" class="tab-btn active" onclick="switchVocabTab('words', this)">Conference &amp; Workplace Words (10)</button>
+        <button type="button" class="tab-btn" onclick="switchVocabTab('phrases', this)">Socio-Professional Phrase Bank (5)</button>
+      </div>
+
+      <div id="vocab-words" class="vocab-grid"></div>
+      <div id="vocab-phrases" class="phrase-grid" style="display: none;"></div>
+    </section>
+
+    <!-- EXERCISE 1A: MATCHING -->
+    <section class="card" id="ex1a">
+      <div class="section-header">
+        <h2>Exercise 1A: Match the Phrase to Its Purpose</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Click a sentence on the left (<strong>1–8</strong>), then click what the speaker is doing on the right (<strong>A–H</strong>). Click a paired item again to unpair it.</p>
+
+      <div class="match-container">
+        <div class="match-col" id="match-left">
+          <div class="match-col-title">Conference Sentences (1–8)</div>
+        </div>
+        <div class="match-col" id="match-right">
+          <div class="match-col-title">Communicative Purpose (A–H)</div>
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkMatching()">Check Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="showMatchingAnswers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetMatching()">Reset</button>
+      </div>
+      <div id="match-feedback" class="feedback-banner"></div>
+    </section>
+
+    <!-- EXERCISE 1B: COFFEE BREAK CONVERSATION -->
+    <section class="card" id="ex1b">
+      <div class="section-header">
+        <h2>Exercise 1B: Coffee Break Conversation (Fill in the Gap)</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Complete the conversation between <strong>David</strong> (Spain) and <strong>Sarah</strong> (Canada). Drag a word into a blank, <strong>or</strong> click a word chip and then click the blank where it belongs.</p>
+
+      <div class="word-bank" id="ex1b-bank" aria-label="Conversation Word Bank"></div>
+      <div class="dialogue-list" id="ex1b-dialogue"></div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkEx1B()">Check Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="showEx1BAnswers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetEx1B()">Reset</button>
+      </div>
+      <div id="ex1b-feedback" class="feedback-banner"></div>
+    </section>
+
+    <!-- PART 2: SOCIO-PROFESSIONAL SCENARIOS -->
+    <section class="card" id="part2">
+      <div class="section-header">
+        <h2>Part 2: At the Conference — Socio-Professional Scenarios</h2>
+      </div>
+      <p class="section-subtitle">Read each real-life conference situation and click the best response (<strong>A, B, C, or D</strong>) to see your evaluation and communication tips.</p>
+
+      <div id="scenarios-container"></div>
+    </section>
+
+    <!-- PART 3: POST-CONFERENCE FOLLOW-UP MESSAGE -->
+    <section class="card" id="part3">
+      <div class="section-header">
+        <h2>Part 3: Post-Conference Follow-Up Message (12-Gap Challenge)</h2>
+      </div>
+      <p class="helper-tip"><strong>How to play:</strong> Two days after the conference, Alex emails a new colleague from Sweden. Complete the message using <strong>12 words</strong> from the <strong>16-word bank</strong> (4 words are extra distractors).</p>
+
+      <div class="word-bank" id="part3-bank" aria-label="Follow-Up Email Word Bank"></div>
+
+      <div class="email-sheet">
+        <div class="email-header">
+          <div class="email-row"><span class="email-label">To:</span><span>Elena Lindqvist &lt;elena.lindqvist@company-global.com&gt;</span></div>
+          <div class="email-row"><span class="email-label">From:</span><span>Alex Martin &lt;alex.martin@company-global.com&gt;</span></div>
+          <div class="email-row"><span class="email-label">Subject:</span><span><strong>Great meeting you at the Annual Conference!</strong></span></div>
+        </div>
+        <div class="email-body" id="part3-text"></div>
+      </div>
+
+      <div class="controls-row">
+        <button type="button" class="btn btn-primary" onclick="checkPart3()">Check Message</button>
+        <button type="button" class="btn btn-secondary" onclick="showPart3Answers()">Show Answers</button>
+        <button type="button" class="btn btn-secondary" onclick="resetPart3()">Reset</button>
+      </div>
+      <div id="part3-feedback" class="feedback-banner"></div>
+    </section>
+  </main>
+
+  <script>
+    /* =========================================================================
+       DATA DEFINITIONS
+       ========================================================================= */
+    const conferenceWordsData = [
+      {
+        word: "headquarters (HQ)",
+        alt: "location",
+        def: "The main office of a company.",
+        ex: "Our company headquarters is in Munich, Germany.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg>`
+      },
+      {
+        word: "branch / site",
+        alt: "location",
+        def: "A local factory, office, or workshop in another city or country.",
+        ex: "I work at our service branch in Lyon.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`
+      },
+      {
+        word: "colleague",
+        alt: "person",
+        def: "A person who works for the same company as you.",
+        ex: "At the conference, I met colleagues from Spain, Canada, and Japan.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+      },
+      {
+        word: "name badge",
+        alt: "conference item",
+        def: "A small card on your shirt with your name, job title, and country.",
+        ex: "Please wear your name badge during all conference sessions.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M14 10h4M14 14h4"/></svg>`
+      },
+      {
+        word: "keynote speech",
+        alt: "event",
+        def: "The main presentation for everyone at the start of a conference.",
+        ex: "The CEO's keynote speech starts at 9:00 AM in the main hall.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`
+      },
+      {
+        word: "workshop / session",
+        alt: "event",
+        def: "A smaller group meeting to learn or discuss one topic.",
+        ex: "I am going to the safety and maintenance workshop this afternoon.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
+      },
+      {
+        word: "coffee break",
+        alt: "networking",
+        def: "A short rest between meetings to drink coffee and talk with colleagues.",
+        ex: "The coffee break is a great time to introduce yourself to new people.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`
+      },
+      {
+        word: "equipment / machinery",
+        alt: "technical",
+        def: "The machines and tools used in a factory or workshop.",
+        ex: "Our team installs and tests heavy industrial equipment.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+      },
+      {
+        word: "on-site",
+        alt: "work style",
+        def: "Working directly at a factory or customer location, not in an office.",
+        ex: "Most of my work is on-site at customer production plants.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20"/><path d="M5 20V8l5 4V8l5 4V4h4v16"/></svg>`
+      },
+      {
+        word: "preventive maintenance",
+        alt: "technical",
+        def: "Checking and servicing machines regularly before they break.",
+        ex: "Preventive maintenance reduces unexpected machine stops.",
+        svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`
+      }
+    ];
+
+    const phraseCategories = [
+      {
+        title: "1. Meeting & Introducing Yourself",
+        phrases: [
+          "\"Hello, I'm [Name]. Nice to meet you.\"",
+          "\"I'm based at our branch in [City / Country].\"",
+          "\"This is my first time at the annual conference.\""
+        ]
+      },
+      {
+        title: "2. Describing Your Technical Job",
+        phrases: [
+          "\"I work as a maintenance / field service / installation technician.\"",
+          "\"I install, test, and repair industrial equipment.\"",
+          "\"I work mostly on-site with production machines and control systems.\"",
+          "\"What part of the company do you work in?\""
+        ]
+      },
+      {
+        title: "3. Conference Small Talk",
+        phrases: [
+          "\"Did you have a good flight / trip?\"",
+          "\"Where are you staying?\"",
+          "\"What do you think of the conference so far?\"",
+          "\"Which workshop are you going to next?\""
+        ]
+      },
+      {
+        title: "4. Asking for Clarification",
+        phrases: [
+          "\"Sorry, could you repeat that, please?\"",
+          "\"Could you speak a little more slowly, please?\"",
+          "\"Sorry, I didn't catch your name / company site.\"",
+          "\"What does [abbreviation / word] mean?\""
+        ]
+      },
+      {
+        title: "5. Ending a Conversation Politely",
+        phrases: [
+          "\"It was great talking to you.\"",
+          "\"Excuse me, I need to go to the next session.\"",
+          "\"Here is my business card. Let's stay in touch!\""
+        ]
+      }
+    ];
+
+    const ex1aLeft = [
+      { id: 1, text: "\"Could you speak a little more slowly, please?\"", answer: "E" },
+      { id: 2, text: "\"I work as a service technician at our plant in Lyon.\"", answer: "C" },
+      { id: 3, text: "\"Did you have a good flight from Tokyo?\"", answer: "B" },
+      { id: 4, text: "\"Excuse me, I have to get to the safety workshop now.\"", answer: "G" },
+      { id: 5, text: "\"What kind of equipment do you work with?\"", answer: "D" },
+      { id: 6, text: "\"Hi, I'm Marco. I don't think we've met.\"", answer: "A" },
+      { id: 7, text: "\"Let's connect on email after the conference.\"", answer: "H" },
+      { id: 8, text: "\"Sorry, what does 'KPI' stand for?\"", answer: "F" }
+    ];
+
+    const ex1aRight = [
+      { letter: "A", text: "Starting a conversation with someone new." },
+      { letter: "B", text: "Asking about a colleague's journey." },
+      { letter: "C", text: "Explaining your job title and work location." },
+      { letter: "D", text: "Asking about a colleague's technical work." },
+      { letter: "E", text: "Asking someone to slow down so you can understand." },
+      { letter: "F", text: "Asking the meaning of an abbreviation." },
+      { letter: "G", text: "Ending a conversation politely to go to a meeting." },
+      { letter: "H", text: "Suggesting keeping in contact later." }
+    ];
+
+    const ex1bWords = ["based", "equipment", "flight", "first", "meet", "repeat", "session", "work"];
+
+    const ex1bDialogue = [
+      {
+        speaker: "David",
+        isSarah: false,
+        parts: ["Hello! I'm David. Nice to ", { slot: 0, answer: "meet" }, " you."]
+      },
+      {
+        speaker: "Sarah",
+        isSarah: true,
+        parts: ["Hi David, I'm Sarah. Where are you ", { slot: 1, answer: "based" }, "?"]
+      },
+      {
+        speaker: "David",
+        isSarah: false,
+        parts: ["I work at our service center in Madrid. How about you?"]
+      },
+      {
+        speaker: "Sarah",
+        isSarah: true,
+        parts: ["I'm from the Toronto branch. Is this your ", { slot: 2, answer: "first" }, " annual conference?"]
+      },
+      {
+        speaker: "David",
+        isSarah: false,
+        parts: ["Yes, it is! Everything is very big. Did you have a good ", { slot: 3, answer: "flight" }, " from Canada?"]
+      },
+      {
+        speaker: "Sarah",
+        isSarah: true,
+        parts: ["Yes, thanks, it was smooth. So, what do you do in Madrid?"]
+      },
+      {
+        speaker: "David",
+        isSarah: false,
+        parts: ["I ", { slot: 4, answer: "work" }, " as a maintenance technician. I repair and test ", { slot: 5, answer: "equipment" }, " on customer sites."]
+      },
+      {
+        speaker: "Sarah",
+        isSarah: true,
+        parts: ["Oh, great! I do preventive maintenance on our automated lines in Toronto."]
+      },
+      {
+        speaker: "David",
+        isSarah: false,
+        parts: ["Sorry, could you ", { slot: 6, answer: "repeat" }, " that last part? Automated what?"]
+      },
+      {
+        speaker: "Sarah",
+        isSarah: true,
+        parts: ["Automated production lines—robots and conveyor machines."]
+      },
+      {
+        speaker: "David",
+        isSarah: false,
+        parts: ["Ah, I understand! Well, it was nice talking to you. I'm going to the afternoon ", { slot: 7, answer: "session" }, " now. See you later!"]
+      }
+    ];
+
+    const scenariosData = [
+      {
+        day: "Situation 1 • Day 1 Morning",
+        title: "Welcome Coffee & Name Badges",
+        problem: "You are standing near the coffee machine before the keynote speech. A colleague from the German office looks at your name badge, smiles, and says: \"Good morning! I see you're from the maintenance team. How's business at your site?\"",
+        options: [
+          {
+            letter: "A",
+            text: "Say \"Fine,\" look at your phone, and walk away quickly.",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Looking at your phone and walking away seems rude in an international networking setting."
+          },
+          {
+            letter: "B",
+            text: "Say \"Good morning! Yes, I'm [Name]. Things are very busy at our site right now—we are installing new machines. Which team are you in?\"",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "Warm, clear, and balanced. You introduce yourself, give a simple, positive update about your work, and return the question to keep the conversation going."
+          },
+          {
+            letter: "C",
+            text: "Give a 10-minute technical explanation about every broken machine you fixed last month without asking him any questions.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "Friendly, but talking too long without pausing or asking questions makes small talk one-sided."
+          },
+          {
+            letter: "D",
+            text: "Say \"Good morning! Yes, I'm [Name]. Very busy, thanks. How are things in Germany?\"",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "Polite and friendly, and you ask a good question back, though adding one short sentence about your work makes the conversation easier to continue."
+          }
+        ]
+      },
+      {
+        day: "Situation 2 • Day 1 Afternoon",
+        title: "Fast English & Technical Acronyms",
+        problem: "During a workshop break, an engineer from Headquarters speaks very fast and uses several company acronyms you do not know: \"So next quarter we're rolling out the new CMMS across all EMEA branches before the Q3 audit.\"",
+        options: [
+          {
+            letter: "A",
+            text: "Nod your head, smile, and say \"Yes, yes, I completely agree,\" even though you understood nothing.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "You stay polite, but pretending to understand can cause confusion later if you need to use the new system."
+          },
+          {
+            letter: "B",
+            text: "Interrupt loudly and say \"Your English is too fast. Nobody can understand you.\"",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Blaming the other speaker sounds aggressive and creates an uncomfortable atmosphere."
+          },
+          {
+            letter: "C",
+            text: "Smile politely and say \"Sorry, could you repeat that a little more slowly? Also, what does 'CMMS' mean?\"",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "Direct, polite, and confident. Asking someone to slow down and explain an acronym is normal and respected in international workplaces."
+          },
+          {
+            letter: "D",
+            text: "Say \"Sorry, I didn't catch all of that. Do you mean new maintenance software for our branches?\"",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "Checking your understanding by guessing the main idea is a great communication strategy, though asking directly about the acronym ensures you don't miss details."
+          }
+        ]
+      },
+      {
+        day: "Situation 3 • Day 2 Evening",
+        title: "Joining a Group at the Conference Dinner",
+        problem: "At the evening buffet, you see three colleagues from Brazil and Singapore talking and laughing together. You want to join their table and introduce yourself.",
+        options: [
+          {
+            letter: "A",
+            text: "Stand silently right behind one person's chair for five minutes without saying anything.",
+            rating: "Average",
+            rateClass: "rate-average",
+            points: 1,
+            feedback: "You want to be polite and not interrupt, but standing silently behind someone can feel awkward."
+          },
+          {
+            letter: "B",
+            text: "Sit down at the empty chair, start eating immediately, and talk over them about your flight delay.",
+            rating: "Poor",
+            rateClass: "rate-poor",
+            points: 0,
+            feedback: "Sitting down without asking and interrupting their conversation is impolite across all cultures."
+          },
+          {
+            letter: "C",
+            text: "Walk up, smile, and say \"Hello everyone, is this seat free?\" When they say yes, add: \"Thanks! I'm [Name], a technician from [City/Country].\"",
+            rating: "Excellent",
+            rateClass: "rate-excellent",
+            points: 3,
+            feedback: "Polite, natural, and clear. Asking if the seat is free and immediately sharing your name, role, and location makes it easy for the group to welcome you."
+          },
+          {
+            letter: "D",
+            text: "Walk up, smile, and say \"Hi, mind if I join you?\" and wait for them to finish their sentence before introducing yourself.",
+            rating: "Good",
+            rateClass: "rate-good",
+            points: 2,
+            feedback: "Very polite and respectful of their ongoing conversation; just make sure to introduce yourself once they welcome you."
+          }
+        ]
+      }
+    ];
+
+    const part3Words = [
+      "colleague", "branch", "headquarters", "workshop",
+      "equipment", "maintenance", "on-site", "badge",
+      "meet", "talking", "share", "stay",
+      "trip", "flight", "card", "question"
+    ];
+
+    const part3Answers = [
+      "meet", "talking", "workshop", "maintenance",
+      "branch", "on-site", "equipment", "card",
+      "flight", "question", "share", "stay"
+    ];
+
+    /* =========================================================================
+       STATE MANAGEMENT
+       ========================================================================= */
+    let scores = {
+      ex1a: 0,
+      ex1b: 0,
+      part2: [0, 0, 0],
+      part3: 0
+    };
+
+    function updateTotalScore() {
+      const p2Total = scores.part2.reduce((a, b) => a + b, 0);
+      const total = scores.ex1a + scores.ex1b + p2Total + scores.part3;
+      document.getElementById("total-score").textContent = total;
+    }
+
+    /* =========================================================================
+       PART 1: VOCABULARY & PHRASES RENDERING
+       ========================================================================= */
+    function renderVocab() {
+      const wordsEl = document.getElementById("vocab-words");
+      wordsEl.innerHTML = conferenceWordsData.map(item => `
+        <div class="vocab-card">
+          <div class="vocab-top">
+            <div class="vocab-icon">${item.svg}</div>
+            <div>
+              <div class="vocab-word">${item.word}</div>
+              <div class="vocab-alt">${item.alt}</div>
+            </div>
+          </div>
+          <p class="vocab-def">${item.def}</p>
+          <p class="vocab-ex">"${item.ex}"</p>
+        </div>
+      `).join("");
+
+      const phrasesEl = document.getElementById("vocab-phrases");
+      phrasesEl.innerHTML = phraseCategories.map(cat => `
+        <div class="phrase-card">
+          <h3>${cat.title}</h3>
+          <ul>
+            ${cat.phrases.map(p => `<li>${p}</li>`).join("")}
+          </ul>
+        </div>
+      `).join("");
+    }
+
+    function switchVocabTab(tab, btn) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("vocab-words").style.display = tab === "words" ? "grid" : "none";
+      document.getElementById("vocab-phrases").style.display = tab === "phrases" ? "grid" : "none";
+    }
+
+    function toggleStudyMode() {
+      document.body.classList.toggle("hide-meanings");
+      const active = document.body.classList.contains("hide-meanings");
+      document.getElementById("toggle-study-btn").textContent = active
+        ? "Self-Study Mode: Show Meanings"
+        : "Self-Study Mode: Hide Meanings";
+    }
+
+    /* =========================================================================
+       EXERCISE 1A: INTERACTIVE MATCHING
+       ========================================================================= */
+    let selectedLeftId = null;
+    let userMatches = {};
+
+    function renderMatching() {
+      const leftCol = document.getElementById("match-left");
+      const rightCol = document.getElementById("match-right");
+
+      leftCol.innerHTML = `<div class="match-col-title">Conference Sentences (1–8)</div>` +
+        ex1aLeft.map(item => {
+          const pairedLetter = userMatches[item.id];
+          const isSelected = selectedLeftId === item.id;
+          return `
+            <button type="button" class="match-item ${isSelected ? 'selected' : ''} ${pairedLetter ? 'paired' : ''}"
+              data-id="${item.id}" onclick="selectLeft(${item.id})">
+              <span><strong>${item.id}.</strong> ${item.text}</span>
+              ${pairedLetter ? `<span class="pair-tag">${pairedLetter}</span>` : `<span class="slot-index">Select</span>`}
+            </button>
+          `;
+        }).join("");
+
+      const letterToLeft = {};
+      Object.entries(userMatches).forEach(([id, letter]) => {
+        letterToLeft[letter] = id;
+      });
+
+      rightCol.innerHTML = `<div class="match-col-title">Communicative Purpose (A–H)</div>` +
+        ex1aRight.map(item => {
+          const pairedId = letterToLeft[item.letter];
+          return `
+            <button type="button" class="match-item ${pairedId ? 'paired' : ''}"
+              data-letter="${item.letter}" onclick="selectRight('${item.letter}')">
+              <span><strong>${item.letter}.</strong> ${item.text}</span>
+              ${pairedId ? `<span class="pair-tag">${pairedId}</span>` : ``}
+            </button>
+          `;
+        }).join("");
+    }
+
+    function selectLeft(id) {
+      clearFeedback("match-feedback");
+      if (userMatches[id]) {
+        delete userMatches[id];
+        selectedLeftId = id;
+      } else {
+        selectedLeftId = (selectedLeftId === id) ? null : id;
+      }
+      renderMatching();
+    }
+
+    function selectRight(letter) {
+      clearFeedback("match-feedback");
+      const existingId = Object.keys(userMatches).find(k => userMatches[k] === letter);
+      if (existingId && selectedLeftId === null) {
+        delete userMatches[existingId];
+        renderMatching();
+        return;
+      }
+      if (selectedLeftId !== null) {
+        if (existingId) delete userMatches[existingId];
+        userMatches[selectedLeftId] = letter;
+        selectedLeftId = null;
+        renderMatching();
+      }
+    }
+
+    function checkMatching() {
+      let correctCount = 0;
+      ex1aLeft.forEach(item => {
+        const leftBtn = document.querySelector(`#match-left .match-item[data-id="${item.id}"]`);
+        const chosen = userMatches[item.id];
+        leftBtn.classList.remove("correct", "incorrect", "selected");
+        if (chosen === item.answer) {
+          leftBtn.classList.add("correct");
+          correctCount++;
+        } else {
+          leftBtn.classList.add("incorrect");
+        }
+      });
+
+      scores.ex1a = correctCount;
+      updateTotalScore();
+      showFeedback("match-feedback", correctCount, 8);
+    }
+
+    function showMatchingAnswers() {
+      ex1aLeft.forEach(item => {
+        userMatches[item.id] = item.answer;
+      });
+      selectedLeftId = null;
+      renderMatching();
+      checkMatching();
+    }
+
+    function resetMatching() {
+      userMatches = {};
+      selectedLeftId = null;
+      scores.ex1a = 0;
+      updateTotalScore();
+      clearFeedback("match-feedback");
+      renderMatching();
+    }
+
+    /* =========================================================================
+       SHARED DRAG & DROP / CLICK-TO-FILL ENGINE (EX 1B & PART 3)
+       ========================================================================= */
+    function initGapExercise(config) {
+      const bankEl = document.getElementById(config.bankId);
+      const state = config.state;
+
+      function renderBank() {
+        bankEl.innerHTML = config.words.map((word, idx) => {
+          const isUsed = Object.values(state.slots).includes(idx);
+          const isSelected = state.selectedWordIdx === idx;
+          return `
+            <div class="word-chip ${isUsed ? 'used' : ''} ${isSelected ? 'selected-chip' : ''}"
+                 draggable="${!isUsed}"
+                 data-word-idx="${idx}">
+              ${word}
+            </div>
+          `;
+        }).join("");
+
+        bankEl.querySelectorAll(".word-chip").forEach(chip => {
+          const idx = parseInt(chip.dataset.wordIdx, 10);
+          chip.addEventListener("click", () => {
+            if (Object.values(state.slots).includes(idx)) return;
+            state.selectedWordIdx = (state.selectedWordIdx === idx) ? null : idx;
+            renderBank();
+          });
+
+          chip.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", JSON.stringify({
+              exercise: config.name,
+              wordIdx: idx
+            }));
+          });
+        });
+      }
+
+      function attachSlotEvents() {
+        document.querySelectorAll(`#${config.containerId} .drop-slot`).forEach(slot => {
+          const slotIdx = parseInt(slot.dataset.slotIdx, 10);
+
+          slot.addEventListener("click", () => {
+            clearFeedback(config.feedbackId);
+            slot.classList.remove("slot-correct", "slot-incorrect");
+
+            if (state.selectedWordIdx !== null) {
+              state.slots[slotIdx] = state.selectedWordIdx;
+              state.selectedWordIdx = null;
+              syncSlots();
+              renderBank();
+            } else if (state.slots[slotIdx] !== undefined) {
+              delete state.slots[slotIdx];
+              syncSlots();
+              renderBank();
+            }
+          });
+
+          slot.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            slot.classList.add("drag-over");
+          });
+
+          slot.addEventListener("dragleave", () => {
+            slot.classList.remove("drag-over");
+          });
+
+          slot.addEventListener("drop", (e) => {
+            e.preventDefault();
+            slot.classList.remove("drag-over");
+            clearFeedback(config.feedbackId);
+            slot.classList.remove("slot-correct", "slot-incorrect");
+            try {
+              const payload = JSON.parse(e.dataTransfer.getData("text/plain"));
+              if (payload.exercise === config.name) {
+                state.slots[slotIdx] = payload.wordIdx;
+                state.selectedWordIdx = null;
+                syncSlots();
+                renderBank();
+              }
+            } catch (_) {}
+          });
+        });
+      }
+
+      function syncSlots() {
+        document.querySelectorAll(`#${config.containerId} .drop-slot`).forEach(slot => {
+          const slotIdx = parseInt(slot.dataset.slotIdx, 10);
+          const wordIdx = state.slots[slotIdx];
+          slot.classList.remove("slot-correct", "slot-incorrect");
+          if (wordIdx !== undefined) {
+            slot.textContent = config.words[wordIdx];
+            slot.classList.add("filled");
+          } else {
+            slot.innerHTML = `<span class="slot-index">[${slotIdx + 1}]</span>`;
+            slot.classList.remove("filled");
+          }
+        });
+      }
+
+      renderBank();
+      attachSlotEvents();
+      syncSlots();
+
+      return { renderBank, syncSlots };
+    }
+
+    /* =========================================================================
+       EXERCISE 1B: COFFEE BREAK CONVERSATION
+       ========================================================================= */
+    const ex1bState = { selectedWordIdx: null, slots: {} };
+    let ex1bEngine = null;
+    const ex1bAnswersMap = ["meet", "based", "first", "flight", "work", "equipment", "repeat", "session"];
+
+    function buildEx1B() {
+      const container = document.getElementById("ex1b-dialogue");
+      container.innerHTML = ex1bDialogue.map(line => {
+        const htmlParts = line.parts.map(p => {
+          if (typeof p === "string") return p;
+          return `<span class="drop-slot" data-slot-idx="${p.slot}"><span class="slot-index">[${p.slot + 1}]</span></span>`;
+        }).join("");
+        return `
+          <div class="dialogue-row ${line.isSarah ? 'sarah-row' : ''}">
+            <span class="speaker-badge ${line.isSarah ? 'sarah' : ''}">${line.speaker}</span>
+            <div>${htmlParts}</div>
+          </div>
+        `;
+      }).join("");
+
+      ex1bEngine = initGapExercise({
+        name: "ex1b",
+        bankId: "ex1b-bank",
+        containerId: "ex1b-dialogue",
+        feedbackId: "ex1b-feedback",
+        words: ex1bWords,
+        state: ex1bState
+      });
+    }
+
+    function checkEx1B() {
+      let correctCount = 0;
+      document.querySelectorAll("#ex1b-dialogue .drop-slot").forEach(slot => {
+        const idx = parseInt(slot.dataset.slotIdx, 10);
+        const wordIdx = ex1bState.slots[idx];
+        const chosenWord = wordIdx !== undefined ? ex1bWords[wordIdx] : "";
+        slot.classList.remove("slot-correct", "slot-incorrect");
+        if (chosenWord.toLowerCase() === ex1bAnswersMap[idx].toLowerCase()) {
+          slot.classList.add("slot-correct");
+          correctCount++;
+        } else {
+          slot.classList.add("slot-incorrect");
+        }
+      });
+      scores.ex1b = correctCount;
+      updateTotalScore();
+      showFeedback("ex1b-feedback", correctCount, 8);
+    }
+
+    function showEx1BAnswers() {
+      ex1bAnswersMap.forEach((ans, idx) => {
+        const wIdx = ex1bWords.findIndex(w => w.toLowerCase() === ans.toLowerCase());
+        ex1bState.slots[idx] = wIdx;
+      });
+      ex1bState.selectedWordIdx = null;
+      ex1bEngine.renderBank();
+      ex1bEngine.syncSlots();
+      checkEx1B();
+    }
+
+    function resetEx1B() {
+      ex1bState.slots = {};
+      ex1bState.selectedWordIdx = null;
+      scores.ex1b = 0;
+      updateTotalScore();
+      clearFeedback("ex1b-feedback");
+      ex1bEngine.renderBank();
+      ex1bEngine.syncSlots();
+    }
+
+    /* =========================================================================
+       PART 2: SCENARIOS RENDERING & INTERACTION
+       ========================================================================= */
+    function renderScenarios() {
+      const container = document.getElementById("scenarios-container");
+      container.innerHTML = scenariosData.map((sc, sIdx) => `
+        <div class="scenario-box" id="scenario-${sIdx}">
+          <span class="day-badge">${sc.day}</span>
+          <h3 class="scenario-title">${sc.title}</h3>
+          <div class="scenario-desc"><strong>The Situation:</strong> ${sc.problem}</div>
+          <div class="options-grid">
+            ${sc.options.map((opt, oIdx) => `
+              <button type="button" class="option-card ${opt.rateClass}" id="sc-${sIdx}-opt-${oIdx}"
+                      onclick="selectScenarioOption(${sIdx}, ${oIdx})">
+                <div class="option-top">
+                  <span class="opt-letter">${opt.letter}</span>
+                  <span>${opt.text}</span>
+                </div>
+                <div class="opt-feedback">
+                  <span class="rating-pill">${opt.rating}</span>
+                  <span>${opt.feedback}</span>
+                </div>
+              </button>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function selectScenarioOption(sIdx, oIdx) {
+      const card = document.getElementById(`sc-${sIdx}-opt-${oIdx}`);
+      card.classList.add("revealed");
+      const pts = scenariosData[sIdx].options[oIdx].points;
+      if (pts > scores.part2[sIdx]) {
+        scores.part2[sIdx] = pts;
+        updateTotalScore();
+      }
+    }
+
+    /* =========================================================================
+       PART 3: FOLLOW-UP MESSAGE (12 GAPS FROM 16 WORDS)
+       ========================================================================= */
+    const part3State = { selectedWordIdx: null, slots: {} };
+    let part3Engine = null;
+
+    function buildPart3() {
+      const textEl = document.getElementById("part3-text");
+      textEl.innerHTML = `
+        <p>Hi Elena,</p>
+        <p>
+          It was very nice to
+          <span class="drop-slot" data-slot-idx="0"><span class="slot-index">[1]</span></span>
+          you at the conference in Munich last week. I really enjoyed
+          <span class="drop-slot" data-slot-idx="1"><span class="slot-index">[2]</span></span>
+          with you during the coffee breaks and at the safety
+          <span class="drop-slot" data-slot-idx="2"><span class="slot-index">[3]</span></span>
+          on Tuesday.
+        </p>
+        <p>
+          As I mentioned, I work as a
+          <span class="drop-slot" data-slot-idx="3"><span class="slot-index">[4]</span></span>
+          technician at our
+          <span class="drop-slot" data-slot-idx="4"><span class="slot-index">[5]</span></span>
+          in Lyon. Most of my work is
+          <span class="drop-slot" data-slot-idx="5"><span class="slot-index">[6]</span></span>,
+          where I install and test industrial
+          <span class="drop-slot" data-slot-idx="6"><span class="slot-index">[7]</span></span>
+          for our customers.
+        </p>
+        <p>
+          Thank you for giving me your business
+          <span class="drop-slot" data-slot-idx="7"><span class="slot-index">[8]</span></span>.
+          I hope you had a safe
+          <span class="drop-slot" data-slot-idx="8"><span class="slot-index">[9]</span></span>
+          back home to Sweden!
+        </p>
+        <p>
+          I also have one quick
+          <span class="drop-slot" data-slot-idx="9"><span class="slot-index">[10]</span></span>
+          about the spare parts catalog you showed me. Could you
+          <span class="drop-slot" data-slot-idx="10"><span class="slot-index">[11]</span></span>
+          the link by email when you have time?
+        </p>
+        <p>
+          Let's
+          <span class="drop-slot" data-slot-idx="11"><span class="slot-index">[12]</span></span>
+          in touch!
+        </p>
+        <p>Best regards,<br><strong>Alex</strong></p>
+      `;
+
+      part3Engine = initGapExercise({
+        name: "part3",
+        bankId: "part3-bank",
+        containerId: "part3-text",
+        feedbackId: "part3-feedback",
+        words: part3Words,
+        state: part3State
+      });
+    }
+
+    function checkPart3() {
+      let correctCount = 0;
+      document.querySelectorAll("#part3-text .drop-slot").forEach(slot => {
+        const idx = parseInt(slot.dataset.slotIdx, 10);
+        const wordIdx = part3State.slots[idx];
+        const chosenWord = wordIdx !== undefined ? part3Words[wordIdx] : "";
+        slot.classList.remove("slot-correct", "slot-incorrect");
+        if (chosenWord === part3Answers[idx]) {
+          slot.classList.add("slot-correct");
+          correctCount++;
+        } else {
+          slot.classList.add("slot-incorrect");
+        }
+      });
+      scores.part3 = correctCount;
+      updateTotalScore();
+      showFeedback("part3-feedback", correctCount, 12);
+    }
+
+    function showPart3Answers() {
+      part3Answers.forEach((ans, idx) => {
+        const wIdx = part3Words.indexOf(ans);
+        part3State.slots[idx] = wIdx;
+      });
+      part3State.selectedWordIdx = null;
+      part3Engine.renderBank();
+      part3Engine.syncSlots();
+      checkPart3();
+    }
+
+    function resetPart3() {
+      part3State.slots = {};
+      part3State.selectedWordIdx = null;
+      scores.part3 = 0;
+      updateTotalScore();
+      clearFeedback("part3-feedback");
+      part3Engine.renderBank();
+      part3Engine.syncSlots();
+    }
+
+    /* =========================================================================
+       HELPERS & GLOBAL RESET
+       ========================================================================= */
+    function showFeedback(elId, score, total) {
+      const el = document.getElementById(elId);
+      el.className = "feedback-banner show " + (score === total ? "success" : "partial");
+      el.textContent = score === total
+        ? `Excellent work! You got ${score} / ${total} correct.`
+        : `You got ${score} / ${total} correct. Review the red boxes and try again!`;
+    }
+
+    function clearFeedback(elId) {
+      const el = document.getElementById(elId);
+      el.className = "feedback-banner";
+      el.textContent = "";
+    }
+
+    function resetAll() {
+      resetMatching();
+      resetEx1B();
+      resetPart3();
+      scores.part2 = [0, 0, 0];
+      renderScenarios();
+      updateTotalScore();
+    }
+
+    /* Initialize Lesson */
+    renderVocab();
+    renderMatching();
+    buildEx1B();
+    renderScenarios();
+    buildPart3();
+    updateTotalScore();
+  </script>
+</body>
+</html>
